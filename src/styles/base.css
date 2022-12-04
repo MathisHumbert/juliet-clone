@@ -1,0 +1,102 @@
+:root {
+  --vw: 1vw;
+  --vh: 1vh;
+  --grid: calc((var(--vw) * 100) - (var(--margin) * 2));
+  --col: calc((var(--grid) + var(--gutter)) / var(--columns));
+  --vh100: calc(var(--vh) * 100);
+  --vw100: calc(var(--vw) * 100);
+  --col1: calc((var(--col) * 1));
+  --col1-g: calc(var(--col1) - var(--gutter));
+  --col1g: calc(var(--col1) + var(--gutter));
+  --col2: calc((var(--col) * 2));
+  --col2-g: calc(var(--col2) - var(--gutter));
+  --col2g: calc(var(--col2) + var(--gutter));
+  --col3: calc((var(--col) * 3));
+  --col3-g: calc(var(--col3) - var(--gutter));
+  --col3g: calc(var(--col3) + var(--gutter));
+  --col4: calc((var(--col) * 4));
+  --col4-g: calc(var(--col4) - var(--gutter));
+  --col4g: calc(var(--col4) + var(--gutter));
+  --col5: calc((var(--col) * 5));
+  --col5-g: calc(var(--col5) - var(--gutter));
+  --col5g: calc(var(--col5) + var(--gutter));
+  --col6: calc((var(--col) * 6));
+  --col6-g: calc(var(--col6) - var(--gutter));
+  --col6g: calc(var(--col6) + var(--gutter));
+  --col7: calc((var(--col) * 7));
+  --col7-g: calc(var(--col7) - var(--gutter));
+  --col7g: calc(var(--col7) + var(--gutter));
+  --col8: calc((var(--col) * 8));
+  --col8-g: calc(var(--col8) - var(--gutter));
+  --col8g: calc(var(--col8) + var(--gutter));
+  --col9: calc((var(--col) * 9));
+  --col9-g: calc(var(--col9) - var(--gutter));
+  --col9g: calc(var(--col9) + var(--gutter));
+  --col10: calc((var(--col) * 10));
+  --col10-g: calc(var(--col10) - var(--gutter));
+  --col10g: calc(var(--col10) + var(--gutter));
+  --col11: calc((var(--col) * 11));
+  --col11-g: calc(var(--col11) - var(--gutter));
+  --col11g: calc(var(--col11) + var(--gutter));
+  --col12: calc((var(--col) * 12));
+  --col12-g: calc(var(--col12) - var(--gutter));
+  --col12g: calc(var(--col12) + var(--gutter));
+  ---margin: calc(var(--margin) * -1);
+  --black: #282829;
+  --white: #f5f4f5;
+  --orange: #ed7c50;
+  --darkorange: #d96d43;
+  --purple: #8566f6;
+  --turks: #a6e2e3;
+  --red: #e46060;
+  --darkgrey: #595959;
+  --lightgrey: #8a8a8a;
+  --green: #43ae61;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --columns: 12;
+    --gutter: 30px;
+    --margin: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --padding-top: 180px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1;
+  background: var(--white);
+  color: var(--black);
+  font-family: Aeonik;
+  font-style: normal;
+  font-weight: 400;
+}
+
+button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}

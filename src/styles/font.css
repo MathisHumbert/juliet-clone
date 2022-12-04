@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'Aeonik';
+  src: url('../fonts/aeonik-bold.woff2') format('woff2'),
+    url('../fonts/aeonik-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('../fonts/aeonik-regular.woff2') format('woff2'),
+    url('../fonts/aeonik-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('../fonts/aeonik-light.woff2') format('woff2'),
+    url('../fonts/aeonik-light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apoc';
+  src: url('../fonts/apoc-bold.woff2') format('woff2'),
+    url('../fonts/apoc-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apoc';
+  src: url('../fonts/apoc-regular.woff2') format('woff2'),
+    url('../fonts/apoc-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Apoc';
+  src: url('../fonts/apoc-light.woff2') format('woff2'),
+    url('../fonts/apoc-light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
