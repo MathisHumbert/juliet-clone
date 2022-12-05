@@ -1,7 +1,36 @@
-import React from 'react';
+import { useRef } from 'react';
+import gsap from 'gsap';
 import styled from 'styled-components';
-import Logo from '../shared/Logo';
+import MainLogo from '../shared/MainLogo';
+import MenuHeader from './MenuHeader';
+
 export default function Header() {
+  const mainLogoRef = useRef<HTMLAnchorElement>(null);
+
+  const onMainLogoEnter = () => {
+    const color = mainLogoRef.current?.getAttribute('data-color');
+    const mainLogoSvg = mainLogoRef.current?.firstChild?.firstChild;
+
+    const nextColor =
+      color === '#a6e2e3'
+        ? '#8566f6'
+        : color === '#8566f6'
+        ? '#ed7c50'
+        : '#a6e2e3';
+
+    mainLogoRef.current?.setAttribute('data-color', nextColor);
+    gsap.to(mainLogoSvg!, { fill: color!, duration: 0.2, ease: 'power1.out' });
+  };
+  const onMainLogoLeave = () => {
+    const mainLogoSvg = mainLogoRef.current?.firstChild?.firstChild;
+
+    gsap.to(mainLogoSvg!, {
+      fill: '#282829',
+      duration: 0.2,
+      ease: 'power1.out',
+    });
+  };
+
   return (
     <Wrapper>
       <div className='header__wrapper'>
@@ -10,8 +39,14 @@ export default function Header() {
             <span>Menu</span>
             <span>Menu</span>
           </button>
-          <a className='header__logo'>
-            <Logo />
+          <a
+            className='header__logo'
+            data-color='#a6e2e3'
+            ref={mainLogoRef}
+            onMouseEnter={onMainLogoEnter}
+            onMouseLeave={onMainLogoLeave}
+          >
+            <MainLogo />
           </a>
           <a className='header__contact'>
             <span>Contact</span>
@@ -19,6 +54,7 @@ export default function Header() {
           </a>
         </div>
       </div>
+      <MenuHeader />
     </Wrapper>
   );
 }

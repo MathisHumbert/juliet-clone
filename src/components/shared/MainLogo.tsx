@@ -1,4 +1,4 @@
-export default function Logo() {
+export default function MainLogo() {
   return (
     <svg viewBox='0 0 150 58' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
