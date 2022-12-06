@@ -1,19 +1,50 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
+import gsap from 'gsap';
 import styled from 'styled-components';
+
 import { links } from '../../utils/mockData';
+import MenuHeaderItem from './MenuHeaderItem';
 
 export default function MenuHeader() {
   const menuRef = useRef<HTMLElement>(null);
+  const menuBackgroundRef = useRef<HTMLImageElement>(null);
+  const menuButtonCloseRef = useRef<HTMLButtonElement>(null);
+  const menuVideoRef = useRef<HTMLDivElement>(null);
+  const menuNavRef = useRef<HTMLElement>(null);
 
   const onCloseClick = () => {
-    menuRef.current?.classList.remove('menu--open');
+    const headerMenuTitles = document.querySelectorAll('.menu__nav__title');
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        menuRef.current?.classList.remove('menu--open');
+      },
+    });
+
+    tl.to(
+      [
+        menuBackgroundRef.current,
+        menuButtonCloseRef.current,
+        menuVideoRef.current,
+      ],
+      {
+        opacity: 0,
+        duration: 1,
+      }
+    )
+      .to(menuRef.current, { background: 'transparent' }, 0)
+      .to(menuNavRef.current, { opacity: 0 }, 0);
   };
 
   return (
     // @ts-ignore
-    <Wrapper className='menu menu--open' ref={menuRef}>
+    <Wrapper className='menu' ref={menuRef}>
       <div className='menu__wrapper'>
-        <button className='menu__button__close' onClick={onCloseClick}>
+        <button
+          className='menu__button__close'
+          onClick={onCloseClick}
+          ref={menuButtonCloseRef}
+        >
           <p>close</p>
           <svg
             viewBox='0 0 31 30'
@@ -22,36 +53,25 @@ export default function MenuHeader() {
           >
             <path
               stroke='#F5F4F5'
-              stroke-width='2.571'
+              strokeWidth='2.571'
               d='M22.895 7.61 8.352 22.153M23.014 21.823 8.47 7.28'
             />
           </svg>
         </button>
-        <nav className='menu__nav'>
+        <nav className='menu__nav' ref={menuNavRef}>
           <ul className='menu__nav__container'>
             {links.map((link) => (
-              <li className='menu__nav__item' key={link.id}>
-                <a href='/' className='menu__nav__link'>
-                  <div className='menu__nav__title'>
-                    <span className='menu__nav__title--sub'>0{link.id}</span>
-                    <span className='menu__nav__title--main'>{link.text}</span>
-                  </div>
-                  <div className='menu__nav__infinite'>
-                    <p>{link.infiniteText}</p>
-                  </div>
-                </a>
-              </li>
+              <MenuHeaderItem key={link.id} {...link} />
             ))}
           </ul>
         </nav>
-        <div className='menu__video'>
+        <div className='menu__video' ref={menuVideoRef}>
           <button className='menu__video__button'></button>{' '}
           <iframe
             id='reel-video'
             src='https://player.vimeo.com/video/683943644?autoplay=1&background=1&title=0&byline=0&portrait=0'
             frameBorder='0'
             allow='autoplay; fullscreen; picture-in-picture'
-            allowFullScreen
           ></iframe>
         </div>
       </div>
@@ -59,6 +79,7 @@ export default function MenuHeader() {
         src='/icon/background.svg'
         alt='background'
         className='menu__background'
+        ref={menuBackgroundRef}
       />
     </Wrapper>
   );
@@ -75,11 +96,22 @@ const Wrapper = styled.div`
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  background: var(--purple);
 
   &.menu--open {
     opacity: 1;
     pointer-events: auto;
+
+    .menu__nav__title {
+      pointer-events: auto;
+    }
+
+    .menu__button__close {
+      pointer-events: auto;
+    }
+
+    .menu__video {
+      pointer-events: auto;
+    }
   }
 
   .menu__wrapper {
@@ -101,44 +133,76 @@ const Wrapper = styled.div`
     z-index: 2;
   }
 
+  .menu__nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: var(--white);
+  }
+
   .menu__button__close {
     position: absolute;
-    top: 59px;
-    left: var(--margin);
-    height: 37px;
+    top: 22px;
+    left: 8px;
+    height: 30px;
     padding: 0 10px;
     display: flex;
     align-items: center;
     gap: 8px;
     border: 1px solid var(--white);
     border-radius: 1000px;
+    pointer-events: none;
 
     &:hover svg {
       animation: 1s cubic-bezier(0.76, 0, 0.24, 1) forwards rotateSvg;
     }
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
 
     p {
-      margin-top: 6px;
-      font-size: 24px;
+      margin-top: 2px;
+      font-size: 16px;
       text-transform: uppercase;
       color: var(--white);
     }
   }
 
+  @media (min-width: 900px) {
+    .menu__button__close {
+      left: 30px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .menu__button__close {
+      top: 59px;
+      height: 37px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      p {
+        margin-top: 6px;
+        font-size: 24px;
+      }
+    }
+  }
+
   .menu__video {
     position: absolute;
-    bottom: 40px;
-    right: 40px;
-    width: 83px;
-    height: 86px;
+    bottom: 30px;
+    right: 15px;
+    width: 49px;
+    height: 51px;
     mask-image: url('/icon/icon_flower.svg');
     mask-position: center;
     mask-repeat: no-repeat;
+    pointer-events: none;
 
     iframe {
       height: 100%;
@@ -147,6 +211,15 @@ const Wrapper = styled.div`
       position: absolute;
       width: calc(83px * (1 / 0.5625));
       transform: translateX(-50%);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .menu__video {
+      bottom: 40px;
+      right: 40px;
+      width: 83px;
+      height: 86px;
     }
   }
 
@@ -161,105 +234,6 @@ const Wrapper = styled.div`
     padding: 0 10px;
   }
 
-  .menu__nav {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    color: var(--white);
-  }
-
-  .menu__nav__item {
-    list-style-type: none;
-
-    &:nth-child(1) .menu__nav__title {
-      margin-left: 31.73vw;
-    }
-
-    &:nth-child(2) .menu__nav__title {
-      margin-left: 40.71vw;
-    }
-
-    &:nth-child(3) .menu__nav__title {
-      margin-left: 35.43vw;
-    }
-
-    &:nth-child(4) .menu__nav__title {
-      margin-left: 40.71vw;
-    }
-
-    &:nth-child(5) .menu__nav__title {
-      margin-left: 31.73vw;
-    }
-
-    &:nth-child(6) .menu__nav__title {
-      margin-left: 24.94vw;
-    }
-
-    &:nth-child(odd) .menu__nav__title--sub {
-      left: -48px;
-    }
-
-    &:nth-child(even) .menu__nav__title--sub {
-      right: -48px;
-    }
-  }
-
-  .menu__nav__link {
-    pointer-events: none;
-    position: relative;
-  }
-
-  .menu__nav__title {
-    width: fit-content;
-    text-transform: uppercase;
-    font-weight: 300;
-    position: relative;
-    padding-top: 22px;
-    padding-bottom: 6px;
-    margin-top: -22px;
-    margin-bottom: -6px;
-    pointer-events: auto;
-
-    &:hover {
-      opacity: 0;
-    }
-  }
-
-  .menu__nav__title--main {
-    font-size: 6.191vw;
-    line-height: 106.5%;
-    font-family: Apoc;
-  }
-
-  .menu__nav__title--sub {
-    position: absolute;
-    top: calc(1.4vw + 22px);
-    font-size: 18px;
-    pointer-events: none;
-  }
-
-  .menu__nav__infinite {
-    position: absolute;
-    top: 22px;
-    display: flex;
-    opacity: 0;
-    text-transform: uppercase;
-    font-family: Aeonik;
-    animation: 270s linear infinite reverse infiniteText;
-    animation-play-state: paused;
-
-    p {
-      font-size: 6.191vw;
-      line-height: 106.5%;
-      white-space: pre;
-    }
-  }
-
-  .menu__nav__title:hover + .menu__nav__infinite {
-    opacity: 1;
-    animation-play-state: running;
-  }
-
   @keyframes rotateSvg {
     0% {
       transform: rotate(0);
@@ -267,17 +241,6 @@ const Wrapper = styled.div`
 
     100% {
       transform: rotate(360deg);
-    }
-  }
-
-  @keyframes infiniteText {
-    0% {
-      -webkit-transform: translate3d(-200%, 0, 0);
-      transform: translate3d(-200%, 0, 0);
-    }
-    100% {
-      -webkit-transform: translate3d(00%, 0, 0);
-      transform: translate3d(00%, 0, 0);
     }
   }
 `;

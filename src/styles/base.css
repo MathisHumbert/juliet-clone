@@ -41,7 +41,9 @@
   --col12: calc((var(--col) * 12));
   --col12-g: calc(var(--col12) - var(--gutter));
   --col12g: calc(var(--col12) + var(--gutter));
-  ---margin: calc(var(--margin) * -1);
+  --margin: 8px;
+  --gutter: 8px;
+  --columns: 4;
   --black: #282829;
   --white: #f5f4f5;
   --orange: #ed7c50;

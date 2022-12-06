@@ -2,7 +2,7 @@
   font-family: 'Aeonik';
   src: url('../fonts/aeonik-bold.woff2') format('woff2'),
     url('../fonts/aeonik-bold.woff') format('woff');
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -11,7 +11,7 @@
   font-family: 'Aeonik';
   src: url('../fonts/aeonik-regular.woff2') format('woff2'),
     url('../fonts/aeonik-regular.woff') format('woff');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -29,7 +29,7 @@
   font-family: 'Apoc';
   src: url('../fonts/apoc-bold.woff2') format('woff2'),
     url('../fonts/apoc-bold.woff') format('woff');
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -38,7 +38,7 @@
   font-family: 'Apoc';
   src: url('../fonts/apoc-regular.woff2') format('woff2'),
     url('../fonts/apoc-regular.woff') format('woff');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -51,3 +51,5 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Revelations-Trial-Hairline */

@@ -18,27 +18,27 @@ export const links = [
     text: 'Community',
     href: '/',
     infiniteText:
-      'Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community',
+      'Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community Community',
   },
   {
     id: 4,
     text: 'Jobs',
     href: '/',
     infiniteText:
-      'Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs',
+      'Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs Jobs',
   },
   {
     id: 5,
     text: 'Contact',
     href: '/',
     infiniteText:
-      'Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact',
+      'Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact Contact',
   },
   {
     id: 6,
     text: 'Real Talk',
     href: '/',
     infiniteText:
-      'Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk',
+      'Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk Real Talk',
   },
 ];
