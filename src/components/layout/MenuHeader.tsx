@@ -1,9 +1,13 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
 import styled from 'styled-components';
 
 import { links } from '../../utils/mockData';
 import MenuHeaderItem from './MenuHeaderItem';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('cubic', '0.76, 0, 0.24, 1');
 
 export default function MenuHeader() {
   const menuRef = useRef<HTMLElement>(null);
@@ -13,9 +17,8 @@ export default function MenuHeader() {
   const menuNavRef = useRef<HTMLElement>(null);
 
   const onCloseClick = () => {
-    const headerMenuTitles = document.querySelectorAll('.menu__nav__title');
-
     const tl = gsap.timeline({
+      defaults: { duration: 1, ease: 'cubic' },
       onComplete: () => {
         menuRef.current?.classList.remove('menu--open');
       },
@@ -199,7 +202,7 @@ const Wrapper = styled.div`
     right: 15px;
     width: 49px;
     height: 51px;
-    mask-image: url('/icon/icon_flower.svg');
+    mask-image: url('/icon/flower.svg');
     mask-position: center;
     mask-repeat: no-repeat;
     pointer-events: none;

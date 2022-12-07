@@ -2,8 +2,13 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import styled from 'styled-components';
 
-import MainLogo from '../shared/MainLogo';
+import MainLogo from '../shared/logo/MainLogo';
 import MenuHeader from './MenuHeader';
+import { CustomEase } from 'gsap/all';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
+CustomEase.create('cubic-opacity', '0.76, 0, 0.24, 1');
 
 export default function Header() {
   const mainLogoRef = useRef<HTMLAnchorElement>(null);
@@ -44,6 +49,7 @@ export default function Header() {
     const headerMenuNav = document.querySelector('.menu__nav');
 
     const tl = gsap.timeline({
+      defaults: { duration: 1 },
       onStart: () => {
         headerMenu.classList.add('menu--open');
         gsap.set([headerMenuBackground, headerMenuCloseButton], { opacity: 0 });
@@ -54,19 +60,26 @@ export default function Header() {
 
     tl.to(headerMenuBackground, {
       opacity: 1,
-      duration: 1,
     })
       .to(
         headerMenu,
-        { backgroundColor: '#8566f6', opacity: 1, duration: 1 },
+        {
+          backgroundColor: '#8566f6',
+          opacity: 1,
+          ease: 'cubic-opacity',
+        },
         0
       )
       .to(
         [headerMenuCloseButton, headerMenuVideo],
-        { opacity: 1, duration: 1 },
+        { opacity: 1, ease: 'cubic-opacity' },
         0.6
       )
-      .to(headerMenuTitles, { yPercent: 0, duration: 1, stagger: 0.08 }, 0.4);
+      .to(
+        headerMenuTitles,
+        { yPercent: 0, stagger: 0.08, ease: 'cubic-text' },
+        0.4
+      );
   };
 
   return (

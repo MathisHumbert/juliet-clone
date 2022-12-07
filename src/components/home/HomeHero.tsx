@@ -1,7 +1,74 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
 import styled from 'styled-components';
-import FlowerLogo from '../shared/FlowerLogo';
+
+import FlowerLogo from '../shared/logo/FlowerLogo';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 
 export default function HomeHero() {
+  const heroLogoMaskRef = useRef(null);
+  const heroButtonRef = useRef(null);
+
+  let isFlowerAnimating = false;
+
+  useEffect(() => {
+    const titles = document.querySelectorAll('.hero__title');
+    const tl = gsap.timeline({ defaults: { duration: 1 } });
+
+    titles.forEach((title, index) => {
+      const el = title.querySelectorAll('span span');
+      const delay = index * 0.08;
+
+      tl.to(
+        el,
+        {
+          y: 0,
+          ease: 'cubic-text',
+        },
+        delay
+      );
+    });
+
+    tl.to(
+      heroLogoMaskRef.current,
+      {
+        scaleX: 0,
+        ease: 'power1.out',
+      },
+      0.8
+    ).to(
+      heroButtonRef.current,
+      {
+        marginLeft: 0,
+        marginRight: 0,
+        opacity: 1,
+        ease: 'power1.out',
+      },
+      1.2
+    );
+  }, []);
+
+  const onFlowerLogoEnter = () => {
+    const flowerLogoSvg = document.querySelector('.hero__flower');
+
+    if (isFlowerAnimating) return;
+
+    isFlowerAnimating = true;
+
+    gsap.to(flowerLogoSvg, {
+      rotateY: 360,
+      duration: 3,
+      ease: 'linear',
+      onComplete: () => {
+        isFlowerAnimating = false;
+        gsap.set(flowerLogoSvg, { rotateY: 0 });
+      },
+    });
+  };
+
   return (
     <Wrapper>
       <div className='hero__container'>
@@ -9,7 +76,7 @@ export default function HomeHero() {
           <span className='hero__title--sub'>
             <span>You&nbsp;</span>
           </span>
-          <span className='hero__title--sub'>
+          <span className='hero__title--sub' onMouseEnter={onFlowerLogoEnter}>
             <span>
               <FlowerLogo />
             </span>
@@ -47,7 +114,7 @@ export default function HomeHero() {
           <span className='hero__title--sub'>
             <span>Audience</span>
           </span>
-          <button className='hero__title--button'>
+          <button className='hero__title--button' ref={heroButtonRef}>
             <span>
               Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
               Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
@@ -61,8 +128,8 @@ export default function HomeHero() {
           </button>
         </h1>
         <div className='hero__logo'>
-          <div className='hero__logo__mask'></div>
-          <img src='/icon/like-crazy.svg' alt='' />
+          <div className='hero__logo__mask' ref={heroLogoMaskRef}></div>
+          <img src='/icon/like-crazy.svg' alt='like-crazy' />
         </div>
       </div>
     </Wrapper>
@@ -116,6 +183,9 @@ const Wrapper = styled.section`
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    display: inline-block;
+    transform: translateY(100%);
+    will-change: transform;
 
     &.bold {
       font-size: 16.38vw;
@@ -156,10 +226,19 @@ const Wrapper = styled.section`
     border: 1px solid var(--black);
     border-radius: 200px;
     overflow: hidden;
+    margin-left: 40px;
+    margin-right: -40px;
+    opacity: 0;
 
     span {
       display: inline-block;
       animation: 100s linear -40s infinite reverse infinitButton;
+      animation-play-state: running;
+      will-change: transform;
+    }
+
+    &:hover span {
+      animation-play-state: paused;
     }
   }
 
@@ -187,6 +266,8 @@ const Wrapper = styled.section`
   img {
     width: 92.8vw;
     height: 100%;
+    object-fit: contain;
+    text-indent: -999px;
   }
 
   .hero__logo__mask {
@@ -197,7 +278,8 @@ const Wrapper = styled.section`
     z-index: 10;
     width: 100%;
     height: 100%;
-    transform: scaleX(0);
+    /* padding: 10px; */
+    transform: scaleX(100%);
     transform-origin: 100% 0%;
   }
 
