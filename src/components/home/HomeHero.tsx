@@ -115,15 +115,27 @@ export default function HomeHero() {
             <span>Audience</span>
           </span>
           <button className='hero__title--button' ref={heroButtonRef}>
-            <span>
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-              Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+            <span className='infinite__text__container'>
+              <span className='infinite__text'>
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©{' '}
+              </span>
+              <span className='infinite__text'>
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+              </span>
             </span>
           </button>
         </h1>
@@ -137,7 +149,11 @@ export default function HomeHero() {
 }
 
 const Wrapper = styled.section`
-  padding: 180px 0;
+  padding: var(--padding-top) 0 90px;
+
+  @media (min-width: 1024px) {
+    padding: 180px 0;
+  }
 
   .hero__container {
     padding: 0 var(--margin);
@@ -216,10 +232,9 @@ const Wrapper = styled.section`
     bottom: -34.2vw;
     left: calc(50% - 83px);
     width: 166px;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
     font-size: 12px;
-    white-space: pre;
     font-family: Aeonik;
     font-weight: 400;
     text-transform: uppercase;
@@ -230,14 +245,7 @@ const Wrapper = styled.section`
     margin-right: -40px;
     opacity: 0;
 
-    span {
-      display: inline-block;
-      animation: 100s linear -40s infinite reverse infinitButton;
-      animation-play-state: running;
-      will-change: transform;
-    }
-
-    &:hover span {
+    &:hover .infinite__text {
       animation-play-state: paused;
     }
   }
@@ -249,25 +257,25 @@ const Wrapper = styled.section`
       top: 50%;
       right: 16.37vw;
       width: 14.4vw;
+      height: 40px;
       transform: translateY(-75%);
+      line-height: 40px;
       font-size: 21px;
-
-      span {
-        margin-top: 2px;
-      }
     }
   }
 
   .hero__logo {
     position: relative;
     transform: translateY(-0.5vw) rotate(4.24deg);
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
   }
 
-  img {
+  .hero__logo img {
     width: 92.8vw;
     height: 100%;
     object-fit: contain;
-    text-indent: -999px;
   }
 
   .hero__logo__mask {
@@ -278,27 +286,17 @@ const Wrapper = styled.section`
     z-index: 10;
     width: 100%;
     height: 100%;
-    /* padding: 10px; */
     transform: scaleX(100%);
     transform-origin: 100% 0%;
   }
 
   @media (min-width: 1024px) {
-    img {
+    .hero__logo img {
       width: 52.23vw;
     }
 
     .hero__logo__mask {
       width: 52.23vw;
-    }
-  }
-
-  @keyframes infinitButton {
-    0% {
-      transform: translate3d(-100%, 0, 0);
-    }
-    100% {
-      transform: translate3d(0, 0, 0);
     }
   }
 `;

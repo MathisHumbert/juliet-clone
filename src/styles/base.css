@@ -1,6 +1,10 @@
 :root {
   --vw: 1vw;
   --vh: 1vh;
+  --padding-top: 120px;
+  --margin: 8px;
+  --gutter: 8px;
+  --columns: 4;
   --grid: calc((var(--vw) * 100) - (var(--margin) * 2));
   --col: calc((var(--grid) + var(--gutter)) / var(--columns));
   --vh100: calc(var(--vh) * 100);
@@ -41,9 +45,6 @@
   --col12: calc((var(--col) * 12));
   --col12-g: calc(var(--col12) - var(--gutter));
   --col12g: calc(var(--col12) + var(--gutter));
-  --margin: 8px;
-  --gutter: 8px;
-  --columns: 4;
   --black: #282829;
   --white: #f5f4f5;
   --orange: #ed7c50;
@@ -101,4 +102,42 @@ a {
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+.infinite__text__container {
+  display: flex;
+  width: 200000px;
+}
+
+.infinite__text {
+  display: block;
+  will-change: transform;
+  white-space: pre;
+}
+
+.infinite__text__container .infinite__text:first-child {
+  animation: 266s linear -135s infinite reverse infiniteScrollText1;
+}
+
+.infinite__text__container .infinite__text:last-child {
+  text-align: right;
+  animation: 270s linear infinite reverse infiniteScrollText2;
+}
+
+@keyframes infiniteScrollText1 {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes infiniteScrollText2 {
+  0% {
+    transform: translate3d(-200%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
 }
