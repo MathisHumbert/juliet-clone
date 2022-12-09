@@ -77,6 +77,18 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: initial;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   line-height: 1;
   background: var(--white);
@@ -84,6 +96,7 @@ body {
   font-family: Aeonik;
   font-style: normal;
   font-weight: 400;
+  max-width: 100vw;
 }
 
 button {

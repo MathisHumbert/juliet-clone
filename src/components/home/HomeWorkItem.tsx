@@ -80,8 +80,6 @@ export default function HomeWorkItem({
     );
   }, []);
 
-  console.log(last);
-
   return (
     <Wrapper>
       <a href='/'>
@@ -158,6 +156,7 @@ const Wrapper = styled.li`
   .work__item__header {
     padding-top: 66px;
     position: sticky;
+    position: -webkit-sticky;
     background: var(--white);
     top: 0;
     z-index: 6;

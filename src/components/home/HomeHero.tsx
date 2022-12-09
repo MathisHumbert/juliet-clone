@@ -2,14 +2,16 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
 import styled from 'styled-components';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 import FlowerLogo from '../shared/logo/FlowerLogo';
+import likeCrazyLottie from '../../lottie/like-cray.json';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 
 export default function HomeHero() {
-  const heroLogoMaskRef = useRef(null);
+  const likeCrazyLottieRef = useRef<Player | null>(null);
   const heroButtonRef = useRef(null);
 
   let isFlowerAnimating = false;
@@ -32,14 +34,7 @@ export default function HomeHero() {
       );
     });
 
-    tl.to(
-      heroLogoMaskRef.current,
-      {
-        scaleX: 0,
-        ease: 'power1.out',
-      },
-      0.8
-    ).to(
+    tl.add(() => likeCrazyLottieRef.current!.play(), 0.8).to(
       heroButtonRef.current,
       {
         marginLeft: 0,
@@ -134,14 +129,18 @@ export default function HomeHero() {
                 Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
                 Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
                 Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
+                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©{' '}
               </span>
             </span>
           </button>
         </h1>
-        <div className='hero__logo'>
-          <div className='hero__logo__mask' ref={heroLogoMaskRef}></div>
-          <img src='/icon/like-crazy.svg' alt='like-crazy' />
+        <div className='hero__lottie'>
+          <Player
+            src={likeCrazyLottie}
+            ref={likeCrazyLottieRef}
+            keepLastFrame={true}
+            loop={false}
+          />
         </div>
       </div>
     </Wrapper>
@@ -264,38 +263,14 @@ const Wrapper = styled.section`
     }
   }
 
-  .hero__logo {
-    position: relative;
+  .hero__lottie {
     transform: translateY(-0.5vw) rotate(4.24deg);
-    overflow: hidden;
-    width: fit-content;
-    height: fit-content;
-  }
-
-  .hero__logo img {
     width: 92.8vw;
     height: 100%;
-    object-fit: contain;
-  }
-
-  .hero__logo__mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: var(--white);
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    transform: scaleX(100%);
-    transform-origin: 100% 0%;
   }
 
   @media (min-width: 1024px) {
-    .hero__logo img {
-      width: 52.23vw;
-    }
-
-    .hero__logo__mask {
+    .hero__lottie {
       width: 52.23vw;
     }
   }

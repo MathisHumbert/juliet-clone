@@ -1,93 +1,104 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
 import styled from 'styled-components';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 import { links } from '../../utils/mockData';
+import menuBackgroundLottie from '../../lottie/menu-background.json';
 import MenuHeaderItem from './MenuHeaderItem';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic', '0.76, 0, 0.24, 1');
 
-export default function MenuHeader() {
-  const menuRef = useRef<HTMLElement>(null);
-  const menuBackgroundRef = useRef<HTMLImageElement>(null);
-  const menuButtonCloseRef = useRef<HTMLButtonElement>(null);
-  const menuVideoRef = useRef<HTMLDivElement>(null);
-  const menuNavRef = useRef<HTMLElement>(null);
+const MenuHeader = React.forwardRef(
+  (props, ref: React.ForwardedRef<Player | null>) => {
+    const menuRef = useRef<HTMLElement>(null);
+    const menuBackgroundRef = useRef<HTMLImageElement>(null);
+    const menuButtonCloseRef = useRef<HTMLButtonElement>(null);
+    const menuVideoRef = useRef<HTMLDivElement>(null);
+    const menuNavRef = useRef<HTMLElement>(null);
 
-  const onCloseClick = () => {
-    const tl = gsap.timeline({
-      defaults: { duration: 1, ease: 'cubic' },
-      onComplete: () => {
-        menuRef.current?.classList.remove('menu--open');
-      },
-    });
+    console.log(props, ref);
 
-    tl.to(
-      [
-        menuBackgroundRef.current,
-        menuButtonCloseRef.current,
-        menuVideoRef.current,
-      ],
-      {
-        opacity: 0,
-        duration: 1,
-      }
-    )
-      .to(menuRef.current, { background: 'transparent' }, 0)
-      .to(menuNavRef.current, { opacity: 0 }, 0);
-  };
+    const onCloseClick = () => {
+      const tl = gsap.timeline({
+        defaults: { duration: 1, ease: 'cubic' },
+        onStart: () => {
+          // @ts-ignore
+          ref.current.pause();
+        },
+        onComplete: () => {
+          menuRef.current?.classList.remove('menu--open');
+        },
+      });
 
-  return (
-    // @ts-ignore
-    <Wrapper className='menu' ref={menuRef}>
-      <div className='menu__wrapper'>
-        <button
-          className='menu__button__close'
-          onClick={onCloseClick}
-          ref={menuButtonCloseRef}
-        >
-          <p>close</p>
-          <svg
-            viewBox='0 0 31 30'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
+      tl.to(
+        [
+          menuBackgroundRef.current,
+          menuButtonCloseRef.current,
+          menuVideoRef.current,
+        ],
+        {
+          opacity: 0,
+          duration: 1,
+        }
+      )
+        .to(menuRef.current, { background: 'transparent' }, 0)
+        .to(menuNavRef.current, { opacity: 0 }, 0);
+    };
+
+    return (
+      // @ts-ignore
+      <Wrapper className='menu' ref={menuRef}>
+        <div className='menu__wrapper'>
+          <button
+            className='menu__button__close'
+            onClick={onCloseClick}
+            ref={menuButtonCloseRef}
           >
-            <path
-              stroke='#F5F4F5'
-              strokeWidth='2.571'
-              d='M22.895 7.61 8.352 22.153M23.014 21.823 8.47 7.28'
-            />
-          </svg>
-        </button>
-        <nav className='menu__nav' ref={menuNavRef}>
-          <ul className='menu__nav__container'>
-            {links.map((link) => (
-              <MenuHeaderItem key={link.id} {...link} />
-            ))}
-          </ul>
-        </nav>
-        <div className='menu__video' ref={menuVideoRef}>
-          <button className='menu__video__button'></button>{' '}
-          <iframe
-            id='reel-video'
-            src='https://player.vimeo.com/video/683943644?autoplay=1&background=1&title=0&byline=0&portrait=0'
-            frameBorder='0'
-            allow='autoplay; fullscreen; picture-in-picture'
-          ></iframe>
+            <p>close</p>
+            <svg
+              viewBox='0 0 31 30'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                stroke='#F5F4F5'
+                strokeWidth='2.571'
+                d='M22.895 7.61 8.352 22.153M23.014 21.823 8.47 7.28'
+              />
+            </svg>
+          </button>
+          <nav className='menu__nav' ref={menuNavRef}>
+            <ul className='menu__nav__container'>
+              {links.map((link) => (
+                <MenuHeaderItem key={link.id} {...link} />
+              ))}
+            </ul>
+          </nav>
+          <div className='menu__video' ref={menuVideoRef}>
+            <button className='menu__video__button'></button>{' '}
+            <iframe
+              id='reel-video'
+              src='https://player.vimeo.com/video/683943644?autoplay=1&background=1&title=0&byline=0&portrait=0'
+              frameBorder='0'
+              allow='autoplay; fullscreen; picture-in-picture'
+            ></iframe>
+          </div>
         </div>
-      </div>
-      <img
-        src='/icon/background.svg'
-        alt='background'
-        className='menu__background'
-        ref={menuBackgroundRef}
-      />
-    </Wrapper>
-  );
-}
-
+        <div className='menu__background' ref={menuBackgroundRef}>
+          <Player
+            src={menuBackgroundLottie}
+            ref={ref}
+            loop={true}
+            className='menu__background__lootie'
+          />
+        </div>
+      </Wrapper>
+    );
+  }
+);
 const Wrapper = styled.div`
   position: absolute;
   top: 0;
@@ -132,8 +143,12 @@ const Wrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     z-index: 2;
+  }
+
+  .menu__background__lootie {
+    width: 200%;
+    height: 200%;
   }
 
   .menu__nav {
@@ -247,3 +262,5 @@ const Wrapper = styled.div`
     }
   }
 `;
+
+export default MenuHeader;

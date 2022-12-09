@@ -11,10 +11,12 @@ export default function MenuHeaderItem({ id, text, infiniteText }: Props) {
     <Wrapper className='menu__nav__item'>
       <a href='/' className='menu__nav__link'>
         <div className='menu__nav__title'>
-          <span className='menu__nav__title--sub'>0{id}</span>
-          <span className='menu__nav__title--main'>{text}</span>
+          <span className='menu__nav__title--main' data-id={`0${id}`}>
+            {text}
+          </span>
         </div>
         <div className='menu__nav__infinite'>
+          <p>{infiniteText}</p>
           <p>{infiniteText}</p>
         </div>
       </a>
@@ -124,6 +126,17 @@ const Wrapper = styled.li`
     font-size: 14.4vw;
     line-height: 90%;
     font-family: Apoc;
+
+    &::before {
+      content: attr(data-id);
+      position: absolute;
+      left: -22px;
+      top: calc(1.4vw + 22px);
+      font-size: 14px;
+      font-family: 'Aeonik';
+      font-weight: 400;
+      line-height: 100%;
+    }
   }
 
   @media (min-width: 768px) {
@@ -137,19 +150,12 @@ const Wrapper = styled.li`
     .menu__nav__title--main {
       font-size: 6.191vw;
       line-height: 106.5%;
-    }
-  }
 
-  .menu__nav__title--sub {
-    position: absolute;
-    top: calc(1.4vw + 22px);
-    font-size: 14px;
-    pointer-events: none;
-  }
-
-  @media (min-width: 900px) {
-    .menu__nav__title--sub {
-      font-size: 18px;
+      &::before {
+        top: calc(1.4vw + 22px);
+        font-size: 18px;
+        left: -48px;
+      }
     }
   }
 
@@ -160,13 +166,20 @@ const Wrapper = styled.li`
     opacity: 0;
     text-transform: uppercase;
     font-family: Aeonik;
-    animation: 270s linear infinite reverse infiniteText;
-    animation-play-state: paused;
 
     p {
+      animation-play-state: paused;
       font-size: 6.191vw;
       line-height: 106.5%;
       white-space: pre;
+
+      &:first-child {
+        animation: 266s linear -135s infinite reverse infiniteScrollText1;
+      }
+
+      &:last-child {
+        animation: 270s linear infinite reverse infiniteScrollText2;
+      }
     }
   }
 
@@ -178,17 +191,9 @@ const Wrapper = styled.li`
 
   .menu__nav__title:hover + .menu__nav__infinite {
     opacity: 1;
-    animation-play-state: running;
-  }
 
-  @keyframes infiniteText {
-    0% {
-      -webkit-transform: translate3d(-200%, 0, 0);
-      transform: translate3d(-200%, 0, 0);
-    }
-    100% {
-      -webkit-transform: translate3d(00%, 0, 0);
-      transform: translate3d(00%, 0, 0);
+    p {
+      animation-play-state: running;
     }
   }
 `;

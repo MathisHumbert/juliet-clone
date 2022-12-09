@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MainLogo from '../shared/logo/MainLogo';
 import MenuHeader from './MenuHeader';
 import { CustomEase } from 'gsap/all';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
@@ -12,6 +13,7 @@ CustomEase.create('cubic-opacity', '0.76, 0, 0.24, 1');
 
 export default function Header() {
   const mainLogoRef = useRef<HTMLAnchorElement>(null);
+  const menuBackgroundLottieRef = useRef<Player | null>(null);
 
   const onMainLogoEnter = () => {
     const color = mainLogoRef.current?.getAttribute('data-color');
@@ -55,6 +57,7 @@ export default function Header() {
         gsap.set([headerMenuBackground, headerMenuCloseButton], { opacity: 0 });
         gsap.set(headerMenuTitles, { yPercent: -100 });
         gsap.set(headerMenuNav, { opacity: 1 });
+        menuBackgroundLottieRef.current!.play();
       },
     });
 
@@ -105,7 +108,7 @@ export default function Header() {
           </a>
         </div>
       </div>
-      <MenuHeader />
+      <MenuHeader ref={menuBackgroundLottieRef} />
     </Wrapper>
   );
 }
