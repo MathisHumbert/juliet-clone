@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import styled from 'styled-components';
 
@@ -6,14 +6,39 @@ import MainLogo from '../shared/logo/MainLogo';
 import MenuHeader from './MenuHeader';
 import { CustomEase } from 'gsap/all';
 import { Player } from '@lottiefiles/react-lottie-player';
+import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 CustomEase.create('cubic-opacity', '0.76, 0, 0.24, 1');
 
 export default function Header() {
+  const { lenis } = usePage();
+  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLHeadElement>(null);
   const mainLogoRef = useRef<HTMLAnchorElement>(null);
   const menuBackgroundLottieRef = useRef<Player | null>(null);
+
+  lenis?.on(
+    'scroll',
+    ({ scroll, direction }: { scroll: number; direction: number }) => {
+      if (direction === 1 && scroll > 160 && !scrolled) {
+        headerRef.current?.classList.add('scrolled');
+        headerRef.current?.classList.add('small');
+
+        setScrolled(true);
+      }
+
+      if (direction === -1 && scroll > 160 && scrolled) {
+        headerRef.current?.classList.remove('scrolled');
+        setScrolled(false);
+      }
+
+      if (direction === -1 && scroll < 160 && scrolled) {
+        headerRef.current?.classList.remove('small');
+      }
+    }
+  );
 
   const onMainLogoEnter = () => {
     const color = mainLogoRef.current?.getAttribute('data-color');
@@ -58,6 +83,7 @@ export default function Header() {
         gsap.set(headerMenuTitles, { yPercent: -100 });
         gsap.set(headerMenuNav, { opacity: 1 });
         menuBackgroundLottieRef.current!.play();
+        lenis?.stop();
       },
     });
 
@@ -86,7 +112,7 @@ export default function Header() {
   };
 
   return (
-    <Wrapper>
+    <Wrapper ref={headerRef}>
       <div className='header__wrapper'>
         <div className='header__container'>
           <button className='header__menu' onClick={onOpenClick}>
@@ -116,7 +142,7 @@ export default function Header() {
 const Wrapper = styled.header`
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 100;
 
   .header__wrapper {
@@ -129,21 +155,42 @@ const Wrapper = styled.header`
     align-items: center;
     padding: 20px 0;
     margin: 0 var(--margin);
+    will-change: transform;
+    transition: transform 0.4s ease-out, background 0.4s ease-out,
+      padding 0.4s ease-out;
+  }
+
+  &.scrolled .header__container {
+    transform: translateY(-100%);
+  }
+
+  &.small .header__container {
+    background: var(--white);
   }
 
   @media (min-width: 1024px) {
     .header__container {
       padding: 50px 0;
     }
+
+    &.small .header__container {
+      padding: 12px 0;
+      background: var(--white);
+    }
   }
 
   .header__logo svg {
     height: 32px;
+    transition: height 0.4s ease-out;
   }
 
   @media (min-width: 1024px) {
     .header__logo svg {
       height: 58px;
+    }
+
+    &.small .header__logo svg {
+      height: 38px;
     }
   }
 

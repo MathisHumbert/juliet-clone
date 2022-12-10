@@ -7,19 +7,19 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import { links } from '../../utils/mockData';
 import menuBackgroundLottie from '../../lottie/menu-background.json';
 import MenuHeaderItem from './MenuHeaderItem';
+import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic', '0.76, 0, 0.24, 1');
 
 const MenuHeader = React.forwardRef(
   (props, ref: React.ForwardedRef<Player | null>) => {
+    const { lenis } = usePage();
     const menuRef = useRef<HTMLElement>(null);
     const menuBackgroundRef = useRef<HTMLImageElement>(null);
     const menuButtonCloseRef = useRef<HTMLButtonElement>(null);
     const menuVideoRef = useRef<HTMLDivElement>(null);
     const menuNavRef = useRef<HTMLElement>(null);
-
-    console.log(props, ref);
 
     const onCloseClick = () => {
       const tl = gsap.timeline({
@@ -30,6 +30,7 @@ const MenuHeader = React.forwardRef(
         },
         onComplete: () => {
           menuRef.current?.classList.remove('menu--open');
+          lenis?.start();
         },
       });
 
