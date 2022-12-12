@@ -40,9 +40,8 @@ export default function HomeWork() {
         ease: 'cubic-opacity',
         scrollTrigger: {
           trigger: workButtonContainerRef.current,
-          start: 'top bottom-=80px',
-          end: 'bottom+=80px bottom',
-          scrub: 1,
+          start: 'top bottom',
+          end: 'bottom bottom',
         },
       }
     );
@@ -62,7 +61,7 @@ export default function HomeWork() {
           <div className='tracking__bar' ref={trackingBarRef}></div>
         </span>
         <ul className='work__item__container'>
-          {homeWorkItems.map((item, index) => (
+          {homeWorkItems.map((item) => (
             <HomeWorkItem
               key={item.id}
               {...item}
@@ -104,7 +103,11 @@ export default function HomeWork() {
 }
 
 const Wrapper = styled.section`
-  padding-bottom: 120px;
+  padding-bottom: 50px;
+
+  @media (min-width: 1024px) {
+    padding-bottom: 120px;
+  }
 
   .work__container {
     position: relative;
@@ -114,31 +117,63 @@ const Wrapper = styled.section`
 
   .work__title {
     text-align: right;
-    margin-right: var(--col1);
     margin-bottom: 10px;
     text-transform: uppercase;
     font-weight: 400;
   }
 
+  @media (min-width: 768px) {
+    .work__title {
+      margin-right: var(--col1);
+    }
+  }
+
   .work__title--main {
-    font-size: 38px;
-    line-height: 36px;
-    display: -block;
+    font-size: 22px;
+    line-height: 22px;
+    display: block;
   }
 
   .work__title--sub {
-    font-size: 35px;
-    line-height: 42px;
+    font-size: 20px;
+    line-height: 25px;
     display: block;
     font-family: 'Apoc';
   }
 
+  @media (min-width: 1024px) {
+    .work__title--main {
+      font-size: 38px;
+      line-height: 36px;
+    }
+
+    .work__title--sub {
+      font-size: 35px;
+      line-height: 42px;
+    }
+  }
+
   .tracking__bar__container {
-    height: 240px;
+    height: 60px;
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding-right: var(--col1);
+  }
+
+  @media (min-width: 768px) {
+    .tracking__bar__container {
+      padding-right: var(--col1);
+    }
+
+    .tracking__bar__container {
+      height: 120px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .tracking__bar__container {
+      height: 240px;
+    }
   }
 
   .tracking__bar {

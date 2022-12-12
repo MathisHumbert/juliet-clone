@@ -28,6 +28,7 @@ export default function HomeHero() {
         el,
         {
           y: 0,
+          duration: 1.5,
           ease: 'cubic-text',
         },
         delay
@@ -156,10 +157,22 @@ const Wrapper = styled.section`
 
   .hero__container {
     padding: 0 var(--margin);
-    padding-bottom: 4vw;
+    padding-bottom: calc(5.8vw + 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero__container {
+      padding-bottom: calc(9.8vw + 60px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__container {
+      padding-bottom: 4vw;
+    }
   }
 
   .hero__title {

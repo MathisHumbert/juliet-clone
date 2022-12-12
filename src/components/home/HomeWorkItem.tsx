@@ -96,15 +96,13 @@ export default function HomeWorkItem({
           {type === 'img' ? (
             <img src={src} alt={title} className='work__item__visual' />
           ) : (
-            <div className='work__item__visual__mask'>
-              <iframe
-                src={src}
-                frameBorder='0'
-                allow='autoplay; fullscreen; picture-in-picture'
-                allowFullScreen={true}
-                className='work__item__visual'
-              ></iframe>
-            </div>
+            <iframe
+              src={src}
+              frameBorder='0'
+              allow='autoplay; fullscreen; picture-in-picture'
+              allowFullScreen={true}
+              className='work__item__visual'
+            ></iframe>
           )}
           <div className='infinite__text__container'>
             <p className='infinite__text'>
@@ -151,21 +149,29 @@ const Wrapper = styled.li`
     display: block;
     pointer-events: none;
     position: relative;
+    margin-top: 15px;
   }
 
   .work__item__header {
-    padding-top: 66px;
+    padding-top: 0;
     position: sticky;
-    position: -webkit-sticky;
-    background: var(--white);
     top: 0;
-    z-index: 6;
+    position: -webkit-sticky;
+    transition: background 0.6s ease-out;
+    background: var(--white);
+    z-index: 10;
+  }
+
+  @media (min-width: 1024px) {
+    .work__item__header {
+      padding-top: 66px;
+    }
   }
 
   .work__item__title {
-    padding-left: 57px;
-    margin-bottom: 20px;
-    font-size: 8.667vw;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    font-size: 12.26vw;
     line-height: 89%;
     text-transform: uppercase;
     font-family: 'Apoc';
@@ -178,10 +184,22 @@ const Wrapper = styled.li`
       position: absolute;
       left: 0;
       top: 0.4vw;
-      font-size: 38px;
+      font-size: 16px;
       font-family: 'Aeonik';
       font-weight: 400;
       line-height: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .work__item__title {
+      font-size: 8.667vw;
+      padding-left: 57px;
+      margin-bottom: 20px;
+
+      &::before {
+        font-size: 38px;
+      }
     }
   }
 
@@ -201,7 +219,7 @@ const Wrapper = styled.li`
 
   .work__item__visual__container {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     position: relative;
     pointer-events: auto;
 
@@ -220,12 +238,23 @@ const Wrapper = styled.li`
     }
   }
 
+  @media (min-width: 1024px) {
+    .work__item__visual__container {
+      margin-bottom: 30px;
+    }
+  }
+
   .work__item__visual {
     display: block;
     width: 100%;
     height: calc(var(--grid) * 0.5625);
     object-fit: cover;
     pointer-events: none;
+  }
+
+  .work__item__visual__container iframe {
+    width: 100%;
+    height: calc(var(--grid) * 0.5625);
   }
 
   .work__item__footer {
@@ -236,12 +265,20 @@ const Wrapper = styled.li`
   }
 
   .work__item__footer__left {
-    font-size: 21px;
-    line-height: 21px;
+    font-size: 16px;
+    line-height: 16px;
+
     min-height: 21px;
     text-transform: uppercase;
     font-weight: 400;
     pointer-events: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .work__item__footer__left {
+      font-size: 21px;
+      line-height: 21px;
+    }
   }
 
   .work__item__footer__right {

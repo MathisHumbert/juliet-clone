@@ -8,28 +8,28 @@ interface PageProviderProps {
 interface IPage {
   isPageFirstLoad: boolean;
   activePageContext: () => void;
-  lenis: Lenis | null;
+  // lenis: Lenis | null;
 }
 
 const PageContext = createContext<IPage>({
   isPageFirstLoad: false,
   activePageContext: () => {},
-  lenis: null,
+  // lenis: null,
 });
 
-const lenis = new Lenis({
-  // @ts-ignore
-  lerp: 0.01,
-  smooth: true,
-  direction: 'vertical',
-});
+// const lenis = new Lenis({
+//   // @ts-ignore
+//   lerp: 0.01,
+//   smooth: true,
+//   direction: 'vertical',
+// });
 
-function raf(time: any) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
+// function raf(time: any) {
+//   lenis.raf(time);
+//   requestAnimationFrame(raf);
+// }
 
-requestAnimationFrame(raf);
+// requestAnimationFrame(raf);
 
 export const PageProvider = ({ children }: PageProviderProps) => {
   const [isPageFirstLoad, setIsPageFirstLoad] = useState(false);
@@ -37,7 +37,7 @@ export const PageProvider = ({ children }: PageProviderProps) => {
   const activePageContext = () => setIsPageFirstLoad(true);
 
   const memoedValue = useMemo(
-    () => ({ isPageFirstLoad, activePageContext, lenis }),
+    () => ({ isPageFirstLoad, activePageContext }),
     [isPageFirstLoad]
   );
 

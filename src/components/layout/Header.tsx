@@ -13,32 +13,32 @@ CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 CustomEase.create('cubic-opacity', '0.76, 0, 0.24, 1');
 
 export default function Header() {
-  const { lenis } = usePage();
+  // const { lenis } = usePage();
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLHeadElement>(null);
   const mainLogoRef = useRef<HTMLAnchorElement>(null);
   const menuBackgroundLottieRef = useRef<Player | null>(null);
 
-  lenis?.on(
-    'scroll',
-    ({ scroll, direction }: { scroll: number; direction: number }) => {
-      if (direction === 1 && scroll > 160 && !scrolled) {
-        headerRef.current?.classList.add('scrolled');
-        headerRef.current?.classList.add('small');
+  // lenis?.on(
+  //   'scroll',
+  //   ({ scroll, direction }: { scroll: number; direction: number }) => {
+  //     if (direction === 1 && scroll > 160 && !scrolled) {
+  //       document.body.classList.add('scrolled');
+  //       headerRef.current?.classList.add('small');
 
-        setScrolled(true);
-      }
+  //       setScrolled(true);
+  //     }
 
-      if (direction === -1 && scroll > 160 && scrolled) {
-        headerRef.current?.classList.remove('scrolled');
-        setScrolled(false);
-      }
+  //     if (direction === -1 && scroll > 160 && scrolled) {
+  //       document.body.classList.remove('scrolled');
+  //       setScrolled(false);
+  //     }
 
-      if (direction === -1 && scroll < 160 && scrolled) {
-        headerRef.current?.classList.remove('small');
-      }
-    }
-  );
+  //     if (direction === -1 && scroll < 160 && scrolled) {
+  //       headerRef.current?.classList.remove('small');
+  //     }
+  //   }
+  // );
 
   const onMainLogoEnter = () => {
     const color = mainLogoRef.current?.getAttribute('data-color');
@@ -83,7 +83,7 @@ export default function Header() {
         gsap.set(headerMenuTitles, { yPercent: -100 });
         gsap.set(headerMenuNav, { opacity: 1 });
         menuBackgroundLottieRef.current!.play();
-        lenis?.stop();
+        // lenis?.stop();
       },
     });
 
@@ -160,11 +160,11 @@ const Wrapper = styled.header`
       padding 0.4s ease-out;
   }
 
-  &.scrolled .header__container {
+  body.scrolled .header__container {
     transform: translateY(-100%);
   }
 
-  &.small .header__container {
+  body.small .header__container {
     background: var(--white);
   }
 
@@ -173,7 +173,7 @@ const Wrapper = styled.header`
       padding: 50px 0;
     }
 
-    &.small .header__container {
+    body.small .header__container {
       padding: 12px 0;
       background: var(--white);
     }
@@ -189,7 +189,7 @@ const Wrapper = styled.header`
       height: 58px;
     }
 
-    &.small .header__logo svg {
+    body.small .header__logo svg {
       height: 38px;
     }
   }
