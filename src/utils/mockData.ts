@@ -69,3 +69,46 @@ export const homeWorkItems = [
     text_right: 'Creative Production Connections Strategy',
   },
 ];
+
+export const homeBlogScrollItems = [
+  {
+    id: 1,
+    mainTitle: 'for the love of live',
+    subTitleText: 'do good',
+    subTitleDate: '04-04-2022',
+    img: '/img/for-the-love-of-live.jpg',
+    icon: '/icon/for-the-love-of-live-shape.svg',
+  },
+  {
+    id: 2,
+    mainTitle: 'little local ad',
+    subTitleText: 'do good',
+    subTitleDate: '18-07-2021',
+    img: '/img/little-local-ad.jpg',
+    icon: '/icon/little-local-ad-shape.svg',
+  },
+  {
+    id: 3,
+    mainTitle: 'homepage for chance',
+    subTitleText: 'do good',
+    subTitleDate: '06-12-2021',
+    img: '/img/home-page-for-chance.jpg',
+    icon: '/icon/home-page-for-change-shape.svg',
+  },
+  {
+    id: 4,
+    mainTitle: 'snowbirds',
+    subTitleText: 'social',
+    subTitleDate: '22-03-2022',
+    img: '/img/snowbirds.jpg',
+    icon: '/icon/snowbirds-shape.svg',
+  },
+  {
+    id: 5,
+    mainTitle: 'monthly debate',
+    subTitleText: 'social',
+    subTitleDate: '01-04-2021',
+    img: '/img/monthly-debate.jpg',
+    icon: '/icon/monthly-debate-shape.svg',
+  },
+];

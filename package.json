@@ -12,6 +12,7 @@
     "@lottiefiles/react-lottie-player": "^3.5.0",
     "@studio-freight/lenis": "^0.2.26",
     "gsap": "^3.11.3",
+    "locomotive-scroll": "^4.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.4",
