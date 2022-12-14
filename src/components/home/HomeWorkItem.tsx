@@ -5,6 +5,7 @@ import SplitType from 'split-type';
 import styled from 'styled-components';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
+
 CustomEase.create('cubic-title', '0.25, 1, 0.5, 1');
 CustomEase.create('cubic-opacity', '0.5, 1, 0.89, 1');
 
@@ -301,7 +302,7 @@ const Wrapper = styled.li`
     background: var(--black);
   }
 
-  .infinite__text__container {
+  /* .infinite__text__container {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -331,5 +332,5 @@ const Wrapper = styled.li`
     .infinite__text {
       animation-play-state: running !important;
     }
-  }
+  } */
 `;

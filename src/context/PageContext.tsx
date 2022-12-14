@@ -1,18 +1,16 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-
+import Lenis from '@studio-freight/lenis';
 interface PageProviderProps {
   children: React.ReactNode;
 }
 interface IPage {
   isPageFirstLoad: boolean;
   activePageContext: () => void;
-  // locoScroll: LocomotiveScroll | null;
 }
 
 const PageContext = createContext<IPage>({
   isPageFirstLoad: false,
   activePageContext: () => {},
-  // locoScroll: null,
 });
 
 export const PageProvider = ({ children }: PageProviderProps) => {

@@ -118,43 +118,43 @@ a {
   cursor: pointer;
 }
 
-.infinite__text__container {
+/* .infinite__text__container {
   display: flex;
   width: 200000px;
-}
+} */
 
-.infinite__text {
+/* .infinite__text {
   display: block;
   will-change: transform;
   white-space: pre;
-}
+} */
 
-.infinite__text__container .infinite__text:first-child {
+/* .infinite__text__container .infinite__text:first-child {
   animation: 266s linear -135s infinite reverse infiniteScrollText1;
-}
+} */
 
-.infinite__text__container .infinite__text:last-child {
+/* .infinite__text__container .infinite__text:last-child {
   text-align: right;
   animation: 270s linear infinite reverse infiniteScrollText2;
-}
+} */
 
-@keyframes infiniteScrollText1 {
+/* @keyframes infiniteScrollText1 {
   0% {
     transform: translate3d(-100%, 0, 0);
   }
   100% {
     transform: translate3d(100%, 0, 0);
   }
-}
+} */
 
-@keyframes infiniteScrollText2 {
+/* @keyframes infiniteScrollText2 {
   0% {
     transform: translate3d(-200%, 0, 0);
   }
   100% {
     transform: translate3d(0%, 0, 0);
   }
-}
+} */
 
 @media (min-width: 1024px) {
   .header__container {

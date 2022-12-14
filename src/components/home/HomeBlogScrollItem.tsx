@@ -19,7 +19,9 @@ export default function HomeBlogScrollItem({
   img,
   icon,
 }: Props) {
+  const scrollItemRef = useRef(null);
   const scrollItemMainTitleRef = useRef(null);
+
   useEffect(() => {
     const title = new SplitType(scrollItemMainTitleRef.current!, {
       types: 'words',
@@ -37,6 +39,7 @@ export default function HomeBlogScrollItem({
       className='home__blog__scroll__item'
       icon={icon}
       placeBot={id % 2 === 1}
+      ref={scrollItemRef}
     >
       <a href='/'>
         <h6 className='scroll__item__title--sub'>

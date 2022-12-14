@@ -28,8 +28,15 @@ export default function HomeAbout() {
       trigger: homeAboutRef.current,
       start: 'center bottom',
       end: 'bottom bottom',
-      onEnter: () => document.body.classList.add('dark'),
-      onLeaveBack: () => document.body.classList.remove('dark'),
+      markers: true,
+      onEnter: () => {
+        console.log('enter');
+        document.body.classList.add('dark');
+      },
+      onLeaveBack: () => {
+        console.log('leave');
+        document.body.classList.remove('dark');
+      },
     });
 
     const tl = gsap.timeline();
@@ -255,6 +262,7 @@ const Wrapper = styled.section`
   text-transform: uppercase;
   color: var(--color);
   position: relative;
+  z-index: 4;
 
   @media (min-width: 768px) {
     padding-top: 50px;

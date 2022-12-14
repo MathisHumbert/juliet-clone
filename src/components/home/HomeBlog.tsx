@@ -1,29 +1,42 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 
 import { homeBlogScrollItems } from '../../utils/mockData';
 import HomeBlogScrollItem from './HomeBlogScrollItem';
+import HomeBlogScrollSocial from './HomeBlogScrollSocial';
+import HomeBlogHeading from './HomeBlogHeading';
 
 export default function HomeBlog() {
+  const homeBlogRef = useRef(null);
   const homeBlogContainerRef = useRef(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLUListElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollBlogContainerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const totalWidth =
-      scrollContainerRef.current?.getBoundingClientRect().width;
-    const vw = window.innerWidth / 2;
+    const homeFooter = document.querySelector('.home__footer');
 
     gsap.to(scrollContainerRef.current, {
       xPercent: -100,
       duration: 3,
-      x: () => -totalWidth! / 5,
+      x: () =>
+        (scrollBlogContainerRef.current?.getBoundingClientRect().width! +
+          window.innerWidth) /
+          5 -
+        window.innerWidth,
       ease: 'none',
       scrollTrigger: {
         trigger: homeBlogContainerRef.current,
-        start: 'center bottom',
-        end: () => `+=${totalWidth}`,
+        start: 'top top',
+        end: () =>
+          `+=${
+            scrollBlogContainerRef.current?.getBoundingClientRect().width! +
+            window.innerWidth +
+            window.innerWidth
+          }`,
+        onLeave: () => gsap.set(homeFooter, { opacity: 1 }),
+        onEnterBack: () => gsap.set(homeFooter, { opacity: 0 }),
         scrub: true,
         pin: true,
         pinSpacing: true,
@@ -33,14 +46,14 @@ export default function HomeBlog() {
 
     gsap.fromTo(
       scrollRef.current,
-      { yPercent: 150 },
+      { xPercent: 10 },
       {
-        yPercent: -50,
+        xPercent: 0,
         ease: 'none',
         scrollTrigger: {
-          trigger: homeBlogContainerRef.current,
-          start: 'center bottom',
-          end: () => `+=${vw}`,
+          trigger: homeBlogRef.current,
+          start: 'top bottom',
+          end: () => `+=${window.innerHeight}`,
           scrub: true,
         },
       }
@@ -48,15 +61,21 @@ export default function HomeBlog() {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper ref={homeBlogRef}>
       <div className='home__blog__container' ref={homeBlogContainerRef}>
+        <HomeBlogHeading />
         <div className='home__blog__scroll__container' ref={scrollContainerRef}>
-          <ul className='home__blog__scroll' ref={scrollRef}>
-            <div className='scroll__item__spacer'></div>
-            {homeBlogScrollItems.map((item) => (
-              <HomeBlogScrollItem key={item.id} {...item} />
-            ))}
-          </ul>
+          <div className='home__blog__scroll' ref={scrollRef}>
+            <ul
+              className='home__blog__scroll__item__container'
+              ref={scrollBlogContainerRef}
+            >
+              {homeBlogScrollItems.map((item) => (
+                <HomeBlogScrollItem key={item.id} {...item} />
+              ))}
+            </ul>
+            <HomeBlogScrollSocial />
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -64,51 +83,55 @@ export default function HomeBlog() {
 }
 
 const Wrapper = styled.section`
+  background: var(--black);
+
   .home__blog__container {
     position: relative;
-    min-height: 100%;
   }
 
   .home__blog__scroll__container {
-    width: calc((5 * var(--col9-g)) + ((5 - 1) * var(--col1)) + var(--margin));
+    width: calc(
+      (5 * var(--col9-g)) + (5 * var(--col1)) + var(--col1) + var(--margin)
+    );
     height: 100vh;
-  }
-
-  .scroll__item__spacer {
-    min-width: 50vw;
+    display: flex;
+    align-items: center;
   }
 
   .home__blog__scroll {
     display: flex;
+    width: fit-content;
+  }
+
+  .home__blog__scroll__item__container {
+    display: flex;
     margin-right: var(--col1);
     position: relative;
     padding-left: var(--margin);
-    width: calc(
-      (var(--items) * var(--col9-g)) + ((var(--items) - 1) * var(--col1)) +
-        var(--margin) + 100vw
-    );
+    width: fit-content;
+    top: calc((84px + 10px + 104px + 10px) / 2);
 
-    li:nth-child(2) .scroll__item__visual {
+    li:nth-child(1) .scroll__item__visual {
       top: 4vw;
       transform: rotate(-16.13deg);
     }
 
-    li:nth-child(3) .scroll__item__visual {
+    li:nth-child(2) .scroll__item__visual {
       top: 0;
       transform: rotate(-20.7deg);
     }
 
-    li:nth-child(4) .scroll__item__visual {
+    li:nth-child(3) .scroll__item__visual {
       top: 3vw;
       transform: rotate(-4.43deg);
     }
 
-    li:nth-child(5) .scroll__item__visual {
+    li:nth-child(4) .scroll__item__visual {
       top: 0.5vw;
       transform: rotate(-11.18deg);
     }
 
-    li:nth-child(6) .scroll__item__visual {
+    li:nth-child(5) .scroll__item__visual {
       top: 3.5vw;
     }
   }

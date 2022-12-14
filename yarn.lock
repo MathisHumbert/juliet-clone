@@ -340,6 +340,11 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/locomotive-scroll@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/locomotive-scroll/-/locomotive-scroll-4.1.0.tgz#0d04556eb2b57cf18d40a924f9e2d90ada669226"
+  integrity sha512-Tnw/FEJQxMhQwIDEzbLIlJuCJOma0D0l3hymoyE75TermfRfNGkUlvzlyHkZvu/GrGW4CH2mUaPs1n1iCdgjqQ==
+
 "@types/prop-types@*":
   version "15.7.5"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"

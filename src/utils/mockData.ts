@@ -55,8 +55,10 @@ export const homeWorkItems = [
   {
     id: 2,
     title: 'Travel Edge',
-    src: 'https://player.vimeo.com/video/651220811?autoplay=1&background=1&title=0&byline=0&portrait=0',
-    type: 'video',
+    // src: 'https://player.vimeo.com/video/651220811?autoplay=1&background=1&title=0&byline=0&portrait=0',
+    // type: 'video',
+    src: '/img/hero-better-battery-co.jpeg',
+    type: 'img',
     text_left: 'Don’t Just Go On A Trip, Go On Your Trip.',
     text_right: 'Strategy Creative Connections Production',
   },
