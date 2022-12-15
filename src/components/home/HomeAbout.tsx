@@ -28,13 +28,10 @@ export default function HomeAbout() {
       trigger: homeAboutRef.current,
       start: 'center bottom',
       end: 'bottom bottom',
-      markers: true,
       onEnter: () => {
-        console.log('enter');
         document.body.classList.add('dark');
       },
       onLeaveBack: () => {
-        console.log('leave');
         document.body.classList.remove('dark');
       },
     });
@@ -162,30 +159,12 @@ export default function HomeAbout() {
               onMouseEnter={() => onEnter('.toronto__img')}
               onMouseLeave={() => onLeave('.toronto__img')}
             >
-              <span className='infinite__text__container'>
-                <span className='infinite__text'>
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W{' '}
-                </span>
-                <span className='infinite__text'>
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W 43.6532° N, 79.3832° W 43.6532° N,
-                  79.3832° W 43.6532° N, 79.3832° W 43.6532° N, 79.3832° W
-                  43.6532° N, 79.3832° W{' '}
-                </span>
-              </span>
+              <div className='looped__text looped__text--reverse'>
+                <div>43.6532° N, 79.3832° W°&nbsp;</div>
+                <div>43.6532° N, 79.3832° W°&nbsp;</div>
+                <div>43.6532° N, 79.3832° W°&nbsp;</div>
+                <div>43.6532° N, 79.3832° W°</div>
+              </div>
             </button>
             <span
               className='toronto__lottie__container'
@@ -212,28 +191,12 @@ export default function HomeAbout() {
               onMouseEnter={() => onEnter('.losangeles__img')}
               onMouseLeave={() => onLeave('.losangeles__img')}
             >
-              <span className='infinite__text__container'>
-                <span className='infinite__text'>
-                  434.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                </span>
-                <span className='infinite__text'>
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                  34.0522° N, 118.2437° W 34.0522° N, 118.2437° W 34.0522° N,
-                  118.2437° W 34.0522° N, 118.2437° W 34.0522° N, 118.2437° W
-                </span>
-              </span>
+              <div className='looped__text'>
+                <div>34.0522° N, 118.2437° W&nbsp;</div>
+                <div>34.0522° N, 118.2437° W&nbsp;</div>
+                <div>34.0522° N, 118.2437° W&nbsp;</div>
+                <div>34.0522° N, 118.2437° W</div>
+              </div>
             </button>
             <span
               className='losangeles__lottie__container'
@@ -634,5 +597,9 @@ const Wrapper = styled.section`
       top: 50% !important;
       bottom: initial;
     }
+  }
+
+  .looped__text div {
+    margin-top: 3px;
   }
 `;

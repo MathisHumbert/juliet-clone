@@ -1,11 +1,33 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import SplitType from 'split-type';
+import gsap from 'gsap';
+import { CustomEase, ScrollTrigger } from 'gsap/all';
+
+import useOnScreen from '../../utils/useOnScreen';
+
+gsap.registerPlugin(CustomEase, ScrollTrigger);
+
+CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 export default function HomeBlogScrollSocial() {
+  const [animationDone, setAnimationDone] = useState(false);
+  const [text, setText] = useState<HTMLElement[]>([]);
+
+  const scrollSocialRef = useRef(null);
   const scrollSocialMainTitleRef = useRef(null);
 
+  const onScreen = useOnScreen(scrollSocialRef, 0.5);
+
   useEffect(() => {
+    const scrollBlogContainer = document.querySelector(
+      '.home__blog__scroll__item__container'
+    );
+    const homeBlogHeading = document.querySelector('.home__blog__heading');
+
+    const blogHeadingButton = document.querySelector('.blog__heading__button');
+
     const title = new SplitType(scrollSocialMainTitleRef.current!, {
       types: 'chars',
       tagName: 'span',
@@ -15,10 +37,54 @@ export default function HomeBlogScrollSocial() {
       types: 'chars',
       tagName: 'span',
     });
+
+    setText(subtitle.chars!);
+
+    const tl = gsap.timeline();
+
+    tl.to(homeBlogHeading, { xPercent: -30 }).to(
+      blogHeadingButton,
+      { opacity: 0 },
+      0
+    );
+
+    ScrollTrigger.create({
+      trigger: scrollSocialRef.current,
+      start: () =>
+        `+=${
+          scrollBlogContainer!.getBoundingClientRect().width! +
+          window.innerWidth / 2
+        } top`,
+      end: () => `+=${window.innerWidth / 2}`,
+      scrub: true,
+      animation: tl,
+    });
   }, []);
 
+  useEffect(() => {
+    if (animationDone || !onScreen) return;
+
+    const blogSocialImages = document.querySelectorAll('.scroll__social__img');
+
+    setAnimationDone(true);
+
+    const tl = gsap.timeline();
+
+    tl.to(text, { y: 0, duration: 1, ease: 'text-in', stagger: 0.08 }, 0).to(
+      blogSocialImages,
+      {
+        opacity: 1,
+        top: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'fade-in',
+      },
+      1
+    );
+  }, [onScreen]);
+
   return (
-    <Wrapper>
+    <Wrapper ref={scrollSocialRef}>
       <div className='home__blog__scroll__social'>
         <h5 className='scroll__social__title--sub'>
           <span>Follow us</span>
@@ -117,7 +183,7 @@ const Wrapper = styled.div`
     z-index: 4;
   }
 
-  .scroll__social__title-main span {
+  .scroll__social__title--main span {
     display: inline-block;
     margin-top: -22px;
     margin-bottom: -6px;
@@ -125,10 +191,11 @@ const Wrapper = styled.div`
     vertical-align: bottom;
   }
 
-  .scroll__social__title-main span span {
+  .scroll__social__title--main span span {
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    transform: translateY(100%);
   }
 
   .scroll__social__visual {
@@ -188,6 +255,9 @@ const Wrapper = styled.div`
     width: 100%;
     height: inherit;
     object-fit: cover;
+    opacity: 0;
+    position: relative;
+    top: 40px;
   }
 
   .scroll__social__title--main:hover

@@ -1,9 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import styled from 'styled-components';
 
 import MainLogo from '../shared/logo/MainLogo';
-import MenuHeader from './MenuHeader';
 import { CustomEase } from 'gsap/all';
 import { Player } from '@lottiefiles/react-lottie-player';
 import usePage from '../../context/PageContext';
@@ -13,32 +12,10 @@ CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 CustomEase.create('cubic-opacity', '0.76, 0, 0.24, 1');
 
 export default function Header() {
-  // const { lenis } = usePage();
-  const [scrolled, setScrolled] = useState(false);
+  const { lenis } = usePage();
   const headerRef = useRef<HTMLHeadElement>(null);
   const mainLogoRef = useRef<HTMLAnchorElement>(null);
   const menuBackgroundLottieRef = useRef<Player | null>(null);
-
-  // lenis?.on(
-  //   'scroll',
-  //   ({ scroll, direction }: { scroll: number; direction: number }) => {
-  //     if (direction === 1 && scroll > 160 && !scrolled) {
-  //       document.body.classList.add('scrolled');
-  //       headerRef.current?.classList.add('small');
-
-  //       setScrolled(true);
-  //     }
-
-  //     if (direction === -1 && scroll > 160 && scrolled) {
-  //       document.body.classList.remove('scrolled');
-  //       setScrolled(false);
-  //     }
-
-  //     if (direction === -1 && scroll < 160 && scrolled) {
-  //       headerRef.current?.classList.remove('small');
-  //     }
-  //   }
-  // );
 
   const onMainLogoEnter = () => {
     const color = mainLogoRef.current?.getAttribute('data-color');
@@ -83,7 +60,7 @@ export default function Header() {
         gsap.set(headerMenuTitles, { yPercent: -100 });
         gsap.set(headerMenuNav, { opacity: 1 });
         menuBackgroundLottieRef.current!.play();
-        // lenis?.stop();
+        lenis?.stop();
       },
     });
 
@@ -112,7 +89,7 @@ export default function Header() {
   };
 
   return (
-    <Wrapper ref={headerRef}>
+    <Wrapper ref={headerRef} className='header'>
       <div className='header__wrapper'>
         <div className='header__container'>
           <button className='header__menu' onClick={onOpenClick}>
@@ -134,7 +111,7 @@ export default function Header() {
           </a>
         </div>
       </div>
-      <MenuHeader ref={menuBackgroundLottieRef} />
+      {/* <MenuHeader ref={menuBackgroundLottieRef} /> */}
     </Wrapper>
   );
 }
@@ -144,6 +121,8 @@ const Wrapper = styled.header`
   top: 0;
   width: 100vw;
   z-index: 100;
+  transition: transform 0.4s ease-out, background 0.4s ease-out,
+    padding 0.4s ease-out;
 
   .header__wrapper {
     background: none;
@@ -160,23 +139,19 @@ const Wrapper = styled.header`
       padding 0.4s ease-out;
   }
 
-  body.scrolled .header__container {
-    transform: translateY(-100%);
-  }
-
-  body.small .header__container {
-    background: var(--white);
-  }
-
   @media (min-width: 1024px) {
     .header__container {
       padding: 50px 0;
     }
 
-    body.small .header__container {
+    body.fixed .header__container {
       padding: 12px 0;
       background: var(--white);
     }
+  }
+
+  .header__logo {
+    line-height: 0;
   }
 
   .header__logo svg {
@@ -188,10 +163,6 @@ const Wrapper = styled.header`
     .header__logo svg {
       height: 58px;
     }
-
-    body.small .header__logo svg {
-      height: 38px;
-    }
   }
 
   .header__menu,
@@ -201,6 +172,7 @@ const Wrapper = styled.header`
     text-transform: uppercase;
     font-size: 16px;
     line-height: 22px;
+    color: var(--black);
   }
 
   @media (min-width: 1024px) {

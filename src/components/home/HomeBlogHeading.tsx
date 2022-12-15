@@ -1,14 +1,51 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function HomeBlogHeading() {
+  const blogHeadingRef = useRef(null);
   const trackingBarContainerRef = useRef(null);
   const trackingBarRef = useRef(null);
 
-  useEffect(() => {});
+  useEffect(() => {
+    const blogScroll = document.querySelector('.home__blog__scroll__container');
+
+    gsap.to(trackingBarRef.current, {
+      height: '100%',
+      ease: 'linear',
+      scrollTrigger: {
+        trigger: trackingBarContainerRef.current,
+        start: 'top bottom-=80px',
+        end: 'bottom+=80px bottom',
+        scrub: 1,
+      },
+      onComplete: () => {
+        gsap.killTweensOf(trackingBarRef.current);
+      },
+    });
+
+    gsap.fromTo(
+      blogHeadingRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        scrollTrigger: {
+          trigger: blogScroll,
+          start: 'top bottom',
+          end: 'bottom bottom',
+        },
+      }
+    );
+  });
 
   return (
-    <Wrapper>
+    <Wrapper ref={blogHeadingRef} className='home__blog__heading'>
       <h2 className='blog__heading__title'>
         <span className='blog__heading__title--main'>Juliet X</span>
         <span className='blog__heading__title--sub'>Community</span>
@@ -17,28 +54,12 @@ export default function HomeBlogHeading() {
         <div className='tracking__bar' ref={trackingBarRef}></div>
       </span>
       <a href='/' className='blog__heading__button'>
-        <span className='infinite__text__container'>
-          <span className='infinite__text'>
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +{' '}
-          </span>
-          <span className='infinite__text'>
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +
-            VIEW ALL + VIEW ALL + VIEW ALL + VIEW ALL +{' '}
-          </span>
-        </span>
+        <div className='looped__text'>
+          <div>VIEW ALL +&nbsp;</div>
+          <div>VIEW ALL +&nbsp;</div>
+          <div>VIEW ALL +&nbsp;</div>
+          <div>VIEW ALL +</div>
+        </div>
       </a>
     </Wrapper>
   );
@@ -89,7 +110,7 @@ const Wrapper = styled.div`
   }
 
   .tracking__bar__container {
-    height: 60px;
+    height: 0;
     width: 100%;
     display: flex;
     z-index: 10;
@@ -113,11 +134,15 @@ const Wrapper = styled.div`
     top: 12px;
     right: var(--margin);
     width: 11.25vw;
-    height: 60px;
+    height: 40px;
     font-size: 21px;
-    line-height: 60px !important;
+    line-height: 40px;
     border: 1px solid var(--white);
     border-radius: 200px;
     overflow: hidden;
+  }
+
+  .looped__text div {
+    margin-top: 3px;
   }
 `;

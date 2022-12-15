@@ -111,28 +111,11 @@ export default function HomeHero() {
             <span>Audience</span>
           </span>
           <button className='hero__title--button' ref={heroButtonRef}>
-            <span className='infinite__text__container'>
-              <span className='infinite__text'>
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©{' '}
-              </span>
-              <span className='infinite__text'>
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©
-                Show Reel 2022© Show Reel 2022© Show Reel 2022© Show Reel 2022©{' '}
-              </span>
-            </span>
+            <div className='looped__text'>
+              <div>Show Reel 2022©&nbsp;</div>
+              <div>Show Reel 2022©&nbsp;</div>
+              <div>Show Reel 2022©</div>
+            </div>
           </button>
         </h1>
         <div className='hero__lottie'>
@@ -245,9 +228,9 @@ const Wrapper = styled.section`
     left: calc(50% - 83px);
     width: 166px;
     height: 30px;
-    line-height: 30px;
     font-size: 12px;
     font-family: Aeonik;
+    line-height: 30px;
     font-weight: 400;
     text-transform: uppercase;
     border: 1px solid var(--black);
@@ -257,7 +240,11 @@ const Wrapper = styled.section`
     margin-right: -40px;
     opacity: 0;
 
-    &:hover .infinite__text {
+    .looped__text div {
+      margin-top: 3px;
+    }
+
+    &:hover .looped__text div {
       animation-play-state: paused;
     }
   }

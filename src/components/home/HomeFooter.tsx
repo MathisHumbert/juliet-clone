@@ -58,7 +58,7 @@ export default function HomeFooter() {
           </div>
           <div className='home__footer__social'>
             <h3 className='home__footer__title'>Follow Us</h3>{' '}
-            <a href='/' className='home__footer__link'>
+            <a href='/' className='home__footer__link first'>
               In
             </a>
             <a href='/' className='home__footer__link'>
@@ -66,7 +66,7 @@ export default function HomeFooter() {
             </a>
           </div>
           <div className='home__footer__rights'>
-            <a href='/' className='home__footer__link--sub'>
+            <a href='/' className='home__footer__link--sub '>
               Privacy Policy
             </a>
             <h6 className='home__footer__title--sub'>
@@ -82,30 +82,57 @@ export default function HomeFooter() {
 const Wrapper = styled.footer`
   background: var(--white);
   color: var(--black);
-  position: sticky;
-  opacity: 0;
-  bottom: 0;
+  opacity: 1;
   z-index: -1;
+
+  @media (min-width: 1024px) {
+    position: sticky;
+    opacity: 0;
+    bottom: 0;
+  }
 
   .home__footer__container {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
-    padding: 90px var(--margin) 45px;
-    position: sticky;
-    bottom: 0;
+    padding: 60px var(--margin);
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__container {
+      padding: 90px var(--margin) 45px;
+    }
   }
 
   .home__footer__intro {
     width: 100%;
     text-align: center;
-    margin-bottom: 120px;
+    margin-bottom: 60px;
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__intro {
+      margin-bottom: 90px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__intro {
+      margin-bottom: 120px;
+    }
   }
 
   .home__footer__intro__title {
-    font-size: 6.67vw;
-    line-height: 100%;
+    font-size: 9.94vw;
+    line-height: 110%;
     text-transform: uppercase;
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__intro__title {
+      font-size: 6.67vw;
+      line-height: 100%;
+    }
   }
 
   .home__footer__intro__title:first-child {
@@ -117,12 +144,28 @@ const Wrapper = styled.footer`
     }
 
     svg {
-      width: 5.3vw;
+      width: 7.8vw;
     }
   }
 
   .home__footer__intro__title:last-child {
-    font-size: 7.265vw;
+    font-size: 11vw;
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__intro__title:first-child svg {
+      width: 5.3vw;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__intro__title:first-child svg {
+      width: 5.3vw;
+    }
+
+    .home__footer__intro__title:last-child {
+      font-size: 7.265vw;
+    }
   }
 
   .home__footer__intro__title--dynamic {
@@ -148,10 +191,19 @@ const Wrapper = styled.footer`
 
   .home__footer__links {
     display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    row-gap: 60px;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+    row-gap: 50px;
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__links {
+      align-items: flex-end;
+      flex-direction: row;
+      flex-wrap: wrap;
+      row-gap: 60px;
+    }
   }
 
   @media (min-width: 1120px) {
@@ -162,53 +214,130 @@ const Wrapper = styled.footer`
   }
 
   .home__footer__title {
-    font-size: 35px;
-    line-height: 42px;
+    font-size: 20px;
+    line-height: 25px;
     font-weight: 400;
     font-family: 'Apoc';
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     white-space: pre;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__title {
+      margin-bottom: 15px;
+      text-align: inherit;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__title {
+      font-size: 35px;
+      line-height: 42px;
+    }
   }
 
   .home__footer__link {
     display: inline-block;
-    font-size: 21px;
-    line-height: 21px;
+    font-size: 16px;
+    line-height: 16px;
     font-weight: 400;
     pointer-events: auto;
-    max-width: 20vw;
+    max-width: 21vw;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__link {
+      text-align: inherit;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__link {
+      font-size: 21px;
+      line-height: 21px;
+    }
   }
 
   .home__footer__location {
-    margin-right: var(--col1-g);
+    margin-right: 0;
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__location {
+      margin-right: var(--col1-g);
+    }
   }
 
   .home__footer__social {
-    margin-right: var(--col1-g);
+    margin-right: 0;
     flex: 1;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 
     .home__footer__title {
       width: 100%;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
+      font-size: 24px;
+      line-height: 25px;
     }
 
     .home__footer__link {
       text-transform: uppercase;
-      margin-right: 45px;
+      text-align: center;
+      font-size: 21px;
+      line-height: 21px;
+
+      &.first {
+        margin-right: 30px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .home__footer__social {
+      margin-right: var(--col1-g);
+      justify-content: inherit;
+
+      .home__footer__title {
+        margin-bottom: 31px;
+        font-size: 20px;
+        line-height: 25px;
+      }
+
+      .home__footer__link {
+        text-align: inherit;
+        font-size: 16px;
+        line-height: 16px;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home__footer__social {
+      .home__footer__title {
+        margin-bottom: 36px;
+        font-size: 35px;
+        line-height: 42px;
+      }
+
+      .home__footer__link {
+        text-align: inherit;
+        font-size: 21px;
+        line-height: 21px;
+      }
     }
   }
 
   .home__footer__rights {
     display: flex;
-    width: 100%;
-    flex: 1;
     flex-direction: column;
-    justify-content: flex-end;
     gap: 15px;
+    text-align: center;
 
     a,
     h6 {
@@ -220,9 +349,19 @@ const Wrapper = styled.footer`
     }
   }
 
+  @media (min-width: 768px) {
+    .home__footer__rights {
+      min-width: 100%;
+      flex: 1;
+      justify-content: flex-end;
+      text-align: right;
+    }
+  }
+
   @media (min-width: 1120px) {
     .home__footer__rights {
       width: fit-content;
+      min-width: inherit;
     }
   }
 `;

@@ -24,6 +24,10 @@ export default function HomeWork() {
         start: 'top bottom-=80px',
         end: 'bottom+=80px bottom',
         scrub: 1,
+        toggleActions: 'play none none none',
+      },
+      onComplete: () => {
+        gsap.killTweensOf(trackingBarRef.current);
       },
     });
 
@@ -71,30 +75,12 @@ export default function HomeWork() {
         </ul>
         <div className='work__button__container' ref={workButtonContainerRef}>
           <a href='/' className='work__button' ref={workButtonRef}>
-            <span className='infinite__text__container'>
-              <span className='infinite__text'>
-                See All Projects See All Projects See All Projects See All
-                Projects See All Projects See All Projects See All Projects See
-                All Projects See All Projects See All Projects See All Projects
-                See All Projects See All Projects See All Projects See All
-                Projects See All Projects See All Projects See All Projects See
-                All Projects See All Projects See All Projects See All Projects
-                See All Projects See All Projects See All Projects See All
-                Projects See All Projects See All Projects See All Projects See
-                All Projects{' '}
-              </span>
-              <span className='infinite__text'>
-                See All Projects See All Projects See All Projects See All
-                Projects See All Projects See All Projects See All Projects See
-                All Projects See All Projects See All Projects See All Projects
-                See All Projects See All Projects See All Projects See All
-                Projects See All Projects See All Projects See All Projects See
-                All Projects See All Projects See All Projects See All Projects
-                See All Projects See All Projects See All Projects See All
-                Projects See All Projects See All Projects See All Projects See
-                All Projects{' '}
-              </span>
-            </span>
+            <div className='looped__text'>
+              <div>See All Projects&nbsp;</div>
+              <div>See All Projects&nbsp;</div>
+              <div>See All Projects&nbsp;</div>
+              <div>See All Projects</div>
+            </div>
           </a>
         </div>
       </div>
@@ -185,7 +171,13 @@ const Wrapper = styled.section`
 
   .work__item__container {
     position: relative;
-    margin-bottom: 90px;
+    margin-bottom: 25px;
+  }
+
+  @media (min-width: 1024px) {
+    .work__item__container {
+      margin-bottom: 90px;
+    }
   }
 
   .work__button__container {
@@ -194,17 +186,30 @@ const Wrapper = styled.section`
   }
 
   .work__button {
-    width: 242px;
-    height: 40px;
-    line-height: 40px !important;
-    font-size: 21px;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
     overflow: hidden;
     text-transform: uppercase;
     border: 1px solid var(--black);
     border-radius: 200px;
 
-    &:hover .infinite__text {
+    .looped__text div {
+      margin-top: 3px;
+    }
+
+    &:hover .looped__text div {
       animation-play-state: paused;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .work__button {
+      width: 242px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 21px;
     }
   }
 `;

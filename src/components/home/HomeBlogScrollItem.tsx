@@ -1,6 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SplitType from 'split-type';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { CustomEase, ScrollTrigger } from 'gsap/all';
+
+import useOnScreen from '../../utils/useOnScreen';
+
+gsap.registerPlugin(CustomEase, ScrollTrigger);
+
+CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 type Props = {
   id: number;
@@ -19,8 +28,15 @@ export default function HomeBlogScrollItem({
   img,
   icon,
 }: Props) {
+  const [animationDone, setAnimationDone] = useState(false);
+  const [text, setText] = useState<HTMLElement[]>([]);
+
   const scrollItemRef = useRef(null);
   const scrollItemMainTitleRef = useRef(null);
+  const scrollItemSubTitleRef = useRef(null);
+  const scrollItemVisualRef = useRef(null);
+
+  const onScreen = useOnScreen(scrollItemRef, 0.5);
 
   useEffect(() => {
     const title = new SplitType(scrollItemMainTitleRef.current!, {
@@ -32,17 +48,38 @@ export default function HomeBlogScrollItem({
       types: 'words',
       tagName: 'span',
     });
+
+    setText(subtitle.words!);
   }, []);
+
+  useEffect(() => {
+    if (animationDone || !onScreen) return;
+
+    setAnimationDone(true);
+
+    const tl = gsap.timeline();
+
+    tl.to([scrollItemSubTitleRef.current, scrollItemVisualRef.current], {
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.3,
+      ease: 'fade-in',
+    }).to(text, { y: 0, duration: 1, ease: 'text-in', stagger: 0.08 }, 0);
+  }, [onScreen]);
 
   return (
     <Wrapper
-      className='home__blog__scroll__item'
+      className={
+        onScreen
+          ? 'home__blog__scroll__item scrolled'
+          : 'home__blog__scroll__item'
+      }
       icon={icon}
       placeBot={id % 2 === 1}
       ref={scrollItemRef}
     >
       <a href='/'>
-        <h6 className='scroll__item__title--sub'>
+        <h6 className='scroll__item__title--sub' ref={scrollItemSubTitleRef}>
           <span>{subTitleText}</span>
           <span>{subTitleDate}</span>
         </h6>
@@ -53,7 +90,11 @@ export default function HomeBlogScrollItem({
         >
           {mainTitle}
         </h3>
-        <figure className='scroll__item__visual' data-icon={icon}>
+        <figure
+          className='scroll__item__visual'
+          data-icon={icon}
+          ref={scrollItemVisualRef}
+        >
           <img src={img} alt={mainTitle} className='scroll__item__img' />
         </figure>
       </a>
@@ -83,6 +124,7 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     margin-bottom: 30px;
     pointer-events: auto;
     font-weight: 400;
+    opacity: 0;
   }
 
   .scroll__item__title--sub span:first-child {
@@ -129,6 +171,7 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    transform: translateY(100%);
   }
 
   .scroll__item__title--main::before {
@@ -138,6 +181,12 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     font-size: 28px;
     font-family: 'Aeonik';
     font-weight: 400;
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  &.scrolled .scroll__item__title--main::before {
+    opacity: 1;
   }
 
   .scroll__item__visual {
@@ -153,6 +202,7 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: contain;
+    opacity: 0;
   }
 
   .scroll__item__img {

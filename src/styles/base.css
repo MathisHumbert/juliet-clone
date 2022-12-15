@@ -118,52 +118,41 @@ a {
   cursor: pointer;
 }
 
-/* .infinite__text__container {
-  display: flex;
-  width: 200000px;
-} */
+.looped__text {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
 
-/* .infinite__text {
-  display: block;
-  will-change: transform;
-  white-space: pre;
-} */
+.looped__text div {
+  position: relative;
+  display: inline-flex;
+  animation: loopTextLeft 3s steps(100, jump-end);
+  animation-iteration-count: infinite;
+}
 
-/* .infinite__text__container .infinite__text:first-child {
-  animation: 266s linear -135s infinite reverse infiniteScrollText1;
-} */
+.looped__text--reverse div {
+  animation: loopTextRight 3s steps(100, jump-end);
+  animation-iteration-count: infinite;
+}
 
-/* .infinite__text__container .infinite__text:last-child {
-  text-align: right;
-  animation: 270s linear infinite reverse infiniteScrollText2;
-} */
+body.hide__nav .header {
+  transform: translateY(-100%);
+}
 
-/* @keyframes infiniteScrollText1 {
-  0% {
-    transform: translate3d(-100%, 0, 0);
-  }
-  100% {
-    transform: translate3d(100%, 0, 0);
-  }
-} */
-
-/* @keyframes infiniteScrollText2 {
-  0% {
-    transform: translate3d(-200%, 0, 0);
-  }
-  100% {
-    transform: translate3d(0%, 0, 0);
-  }
-} */
+body.scrolled .header {
+  background: var(--white);
+}
 
 @media (min-width: 1024px) {
-  .header__container {
-    padding: 50px 0;
+  body.scrolled .header__container {
+    padding: 12px 0;
   }
 
-  body.small .header__container {
-    padding: 12px 0;
-    background: var(--white);
+  body.scrolled .header__logo svg {
+    height: 38px;
   }
 }
 
@@ -183,4 +172,27 @@ body.dark .losangeles__lottie__container::before {
 body.dark .home__about__header::after {
   border-top: 1px solid var(--white);
   border-right: 1px solid var(--white);
+}
+
+body.dark .work__button {
+  border: 1px solid var(--white);
+}
+
+/* keyframes */
+@keyframes loopTextLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loopTextRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }

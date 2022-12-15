@@ -105,27 +105,14 @@ export default function HomeWorkItem({
               className='work__item__visual'
             ></iframe>
           )}
-          <div className='infinite__text__container'>
-            <p className='infinite__text'>
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case - View case - View case -
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case - View case - View case -
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case - View case - View case -
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case -{' '}
-            </p>
-            <p className='infinite__text'>
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case - View case - View case -
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case - View case - View case -
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case - View case - View case -
-              View case - View case - View case - View case - View case - View
-              case - View case - View case - View case -{' '}
-            </p>
+          <div className='looped__text'>
+            <div>View case -&nbsp;</div>
+            <div>View case -&nbsp;</div>
+            <div>View case -&nbsp;</div>
+            <div>View case -&nbsp;</div>
+            <div>View case -&nbsp;</div>
+            <div>View case -&nbsp;</div>
+            <div>View case -</div>
           </div>
         </figure>
         <footer className='work__item__footer' ref={workItemFooterRef}>
@@ -155,9 +142,7 @@ const Wrapper = styled.li`
 
   .work__item__header {
     padding-top: 0;
-    position: sticky;
-    top: 0;
-    position: -webkit-sticky;
+
     transition: background 0.6s ease-out;
     background: var(--white);
     z-index: 10;
@@ -166,6 +151,8 @@ const Wrapper = styled.li`
   @media (min-width: 1024px) {
     .work__item__header {
       padding-top: 66px;
+      position: sticky;
+      top: 0;
     }
   }
 
@@ -268,7 +255,6 @@ const Wrapper = styled.li`
   .work__item__footer__left {
     font-size: 16px;
     line-height: 16px;
-
     min-height: 21px;
     text-transform: uppercase;
     font-weight: 400;
@@ -283,6 +269,7 @@ const Wrapper = styled.li`
   }
 
   .work__item__footer__right {
+    display: none;
     font-size: 16px;
     line-height: 16px;
     text-transform: uppercase;
@@ -296,20 +283,29 @@ const Wrapper = styled.li`
     }
   }
 
+  @media (min-width: 768px) {
+    .work__item__footer__right {
+      display: block;
+    }
+  }
+
   .work__item__bar {
     width: 100%;
     height: 1px;
     background: var(--black);
   }
 
-  /* .infinite__text__container {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
+  .looped__text {
+    display: none;
   }
 
-  .infinite__text {
+  @media (min-width: 1024px) {
+    .looped__text {
+      display: block;
+    }
+  }
+
+  .looped__text div {
     font-size: 4.375vw;
     letter-spacing: -0.04em;
     line-height: 114.29%;
@@ -325,12 +321,9 @@ const Wrapper = styled.li`
       opacity: 1;
     }
 
-    .infinite__text__container p {
+    .looped__text div {
       opacity: 1;
-    }
-
-    .infinite__text {
       animation-play-state: running !important;
     }
-  } */
+  }
 `;
