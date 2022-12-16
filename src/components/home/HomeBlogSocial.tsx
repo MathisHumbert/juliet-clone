@@ -11,14 +11,14 @@ gsap.registerPlugin(CustomEase, ScrollTrigger);
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
-export default function HomeBlogScrollSocial() {
+export default function HomeBlogSocial() {
   const [animationDone, setAnimationDone] = useState(false);
   const [text, setText] = useState<HTMLElement[]>([]);
 
-  const scrollSocialRef = useRef(null);
-  const scrollSocialMainTitleRef = useRef(null);
+  const blogSocialRef = useRef(null);
+  const blogSocialMainTitleRef = useRef(null);
 
-  const onScreen = useOnScreen(scrollSocialRef, 0.5);
+  const onScreen = useOnScreen(blogSocialRef, 0.5);
 
   useEffect(() => {
     const scrollBlogContainer = document.querySelector(
@@ -28,7 +28,7 @@ export default function HomeBlogScrollSocial() {
 
     const blogHeadingButton = document.querySelector('.blog__heading__button');
 
-    const title = new SplitType(scrollSocialMainTitleRef.current!, {
+    const title = new SplitType(blogSocialMainTitleRef.current!, {
       types: 'chars',
       tagName: 'span',
     });
@@ -49,7 +49,7 @@ export default function HomeBlogScrollSocial() {
     );
 
     ScrollTrigger.create({
-      trigger: scrollSocialRef.current,
+      trigger: blogSocialRef.current,
       start: () =>
         `+=${
           scrollBlogContainer!.getBoundingClientRect().width! +
@@ -64,7 +64,7 @@ export default function HomeBlogScrollSocial() {
   useEffect(() => {
     if (animationDone || !onScreen) return;
 
-    const blogSocialImages = document.querySelectorAll('.scroll__social__img');
+    const blogSocialImages = document.querySelectorAll('.blog__social__img');
 
     setAnimationDone(true);
 
@@ -84,59 +84,59 @@ export default function HomeBlogScrollSocial() {
   }, [onScreen]);
 
   return (
-    <Wrapper ref={scrollSocialRef}>
-      <div className='home__blog__scroll__social'>
-        <h5 className='scroll__social__title--sub'>
+    <Wrapper ref={blogSocialRef}>
+      <div className='blog__social__container'>
+        <h5 className='blog__social__title--sub'>
           <span>Follow us</span>
         </h5>
         <a
           href='/'
-          className='scroll__social__title--main'
-          ref={scrollSocialMainTitleRef}
+          className='blog__social__title--main'
+          ref={blogSocialMainTitleRef}
         >
           @julietcreative
         </a>
-        <div className='scroll__social__images'>
-          <figure className='scroll__social__visual'>
+        <div className='blog__social__images'>
+          <figure className='blog__social__visual'>
             <img
               src='/img/blog-social-1.jpg'
               alt='blog-1'
-              className='scroll__social__img'
+              className='blog__social__img'
             />
           </figure>
-          <figure className='scroll__social__visual'>
+          <figure className='blog__social__visual'>
             <img
               src='/img/blog-social-2.jpg'
               alt='blog-2'
-              className='scroll__social__img'
+              className='blog__social__img'
             />
           </figure>
-          <figure className='scroll__social__visual'>
+          <figure className='blog__social__visual'>
             <img
               src='/img/blog-social-3.jpg'
               alt='blog-3'
-              className='scroll__social__img'
+              className='blog__social__img'
             />
           </figure>
-          <figure className='scroll__social__visual'>
+          <figure className='blog__social__visual'>
             <img
               src='/img/blog-social-4.jpg'
               alt='blog-4'
-              className='scroll__social__img'
+              className='blog__social__img'
             />
           </figure>
-          <figure className='scroll__social__visual'>
+          <figure className='blog__social__visual'>
             <img
               src='/img/blog-social-5.jpg'
               alt='blog-5'
-              className='scroll__social__img'
+              className='blog__social__img'
             />
           </figure>
-          <figure className='scroll__social__visual'>
+          <figure className='blog__social__visual'>
             <img
               src='/img/blog-social-6.jpg'
               alt='blog-6'
-              className='scroll__social__img'
+              className='blog__social__img'
             />
           </figure>
         </div>
@@ -148,7 +148,7 @@ export default function HomeBlogScrollSocial() {
 const Wrapper = styled.div`
   width: 100vw;
 
-  .home__blog__scroll__social {
+  .blog__social__container {
     height: 100%;
     display: flex;
     align-items: center;
@@ -157,7 +157,7 @@ const Wrapper = styled.div`
     position: relative;
   }
 
-  .scroll__social__title--sub {
+  .blog__social__title--sub {
     margin-bottom: 30px;
     font-size: 21px;
     line-height: 21px;
@@ -172,7 +172,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .scroll__social__title--main {
+  .blog__social__title--main {
     display: block;
     font-size: 7.95vw;
     font-family: 'Apoc';
@@ -183,7 +183,7 @@ const Wrapper = styled.div`
     z-index: 4;
   }
 
-  .scroll__social__title--main span {
+  .blog__social__title--main span {
     display: inline-block;
     margin-top: -22px;
     margin-bottom: -6px;
@@ -191,20 +191,20 @@ const Wrapper = styled.div`
     vertical-align: bottom;
   }
 
-  .scroll__social__title--main span span {
+  .blog__social__title--main span span {
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
     transform: translateY(100%);
   }
 
-  .scroll__social__visual {
+  .blog__social__visual {
     position: absolute;
     margin-bottom: 1rem;
     transition: transform 5.5s cubic-bezier(0.07, 0.84, 0, 0.99);
   }
 
-  .scroll__social__visual {
+  .blog__social__visual {
     &:nth-child(1) {
       top: calc(50% - 4.76vw);
       left: 17.86vw;
@@ -250,7 +250,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .scroll__social__img {
+  .blog__social__img {
     display: block;
     width: 100%;
     height: inherit;
@@ -260,9 +260,9 @@ const Wrapper = styled.div`
     top: 40px;
   }
 
-  .scroll__social__title--main:hover
-    + .scroll__social__images
-    .scroll__social__visual {
+  .blog__social__title--main:hover
+    + .blog__social__images
+    .blog__social__visual {
     &:nth-child(1) {
       transform: translate(2.68vw, -11.96vw);
     }

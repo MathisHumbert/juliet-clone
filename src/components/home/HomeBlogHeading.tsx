@@ -6,43 +6,50 @@ import { CustomEase } from 'gsap/all';
 gsap.registerPlugin(CustomEase);
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
-export default function HomeBlogHeading() {
+export default function HomeBlogHeading({ isDesktop }: { isDesktop: boolean }) {
   const blogHeadingRef = useRef(null);
   const trackingBarContainerRef = useRef(null);
   const trackingBarRef = useRef(null);
 
   useEffect(() => {
-    const blogScroll = document.querySelector('.home__blog__scroll__container');
+    gsap.killTweensOf(trackingBarRef.current);
+    gsap.killTweensOf(blogHeadingRef.current);
 
-    gsap.to(trackingBarRef.current, {
-      height: '100%',
-      ease: 'linear',
-      scrollTrigger: {
-        trigger: trackingBarContainerRef.current,
-        start: 'top bottom-=80px',
-        end: 'bottom+=80px bottom',
-        scrub: 1,
-      },
-      onComplete: () => {
-        gsap.killTweensOf(trackingBarRef.current);
-      },
-    });
+    if (isDesktop) {
+      const blogScroll = document.querySelector(
+        '.home__blog__scroll__container'
+      );
 
-    gsap.fromTo(
-      blogHeadingRef.current,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 0.8,
-        ease: 'fade-in',
+      gsap.to(trackingBarRef.current, {
+        height: '100%',
+        ease: 'linear',
         scrollTrigger: {
-          trigger: blogScroll,
-          start: 'top bottom',
-          end: 'bottom bottom',
+          trigger: trackingBarContainerRef.current,
+          start: 'top bottom-=80px',
+          end: 'bottom+=80px bottom',
+          scrub: 1,
         },
-      }
-    );
-  });
+        onComplete: () => {
+          gsap.killTweensOf(trackingBarRef.current);
+        },
+      });
+
+      gsap.fromTo(
+        blogHeadingRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: 'fade-in',
+          scrollTrigger: {
+            trigger: blogScroll,
+            start: 'top bottom',
+            end: 'bottom bottom',
+          },
+        }
+      );
+    }
+  }, [isDesktop]);
 
   return (
     <Wrapper ref={blogHeadingRef} className='home__blog__heading'>
@@ -58,6 +65,9 @@ export default function HomeBlogHeading() {
           <div>VIEW ALL +&nbsp;</div>
           <div>VIEW ALL +&nbsp;</div>
           <div>VIEW ALL +&nbsp;</div>
+          <div>VIEW ALL +&nbsp;</div>
+          <div>VIEW ALL +&nbsp;</div>
+          <div>VIEW ALL +&nbsp;</div>
           <div>VIEW ALL +</div>
         </div>
       </a>
@@ -66,10 +76,21 @@ export default function HomeBlogHeading() {
 }
 
 const Wrapper = styled.div`
-  position: fixed;
-  top: calc((100vh - 27vw - 84px - 10px - 104px - 10px) / 2);
+  position: relative;
+  top: 0;
   width: 100%;
-  padding-left: var(--col1);
+  margin-bottom: 60px;
+  padding-left: var(--margin);
+
+  @media (min-width: 768px) {
+    padding-left: var(--col1);
+  }
+
+  @media (min-width: 1024px) {
+    position: fixed;
+    top: calc((100vh - 27vw - 84px - 10px - 104px - 10px) / 2);
+    margin-bottom: 0;
+  }
 
   .blog__heading__title {
     text-align: left;
@@ -110,7 +131,7 @@ const Wrapper = styled.div`
   }
 
   .tracking__bar__container {
-    height: 0;
+    height: 90px;
     width: 100%;
     display: flex;
     z-index: 10;
@@ -123,7 +144,7 @@ const Wrapper = styled.div`
     background: var(--white);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .tracking__bar__container {
       height: 120px;
     }
@@ -131,15 +152,34 @@ const Wrapper = styled.div`
 
   .blog__heading__button {
     position: absolute;
-    top: 12px;
+    top: initial;
+    bottom: 0;
     right: var(--margin);
-    width: 11.25vw;
-    height: 40px;
-    font-size: 21px;
-    line-height: 40px;
+    width: 29.33vw;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
     border: 1px solid var(--white);
     border-radius: 200px;
     overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .blog__heading__button {
+      height: 40px;
+
+      line-height: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog__heading__button {
+      top: 12px;
+      bottom: initial;
+      width: 11.25vw;
+      height: 40px;
+      font-size: 21px;
+    }
   }
 
   .looped__text div {
