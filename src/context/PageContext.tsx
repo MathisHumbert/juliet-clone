@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 
 import debounce from '../utils/debounce';

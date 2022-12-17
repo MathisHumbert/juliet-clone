@@ -6,12 +6,12 @@ import HomeFooter from '../components/home/HomeFooter';
 
 export default function Home() {
   return (
-    <div>
+    <>
       <HomeHero />
       <HomeWork />
       <HomeAbout />
       <HomeBlog />
       <HomeFooter />
-    </div>
+    </>
   );
 }

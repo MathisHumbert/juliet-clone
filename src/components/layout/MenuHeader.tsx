@@ -14,7 +14,7 @@ CustomEase.create('cubic', '0.76, 0, 0.24, 1');
 
 const MenuHeader = React.forwardRef(
   (props, ref: React.ForwardedRef<Player | null>) => {
-    // const { lenis } = usePage();
+    const { lenis } = usePage();
     const menuRef = useRef<HTMLElement>(null);
     const menuBackgroundRef = useRef<HTMLImageElement>(null);
     const menuButtonCloseRef = useRef<HTMLButtonElement>(null);
@@ -30,7 +30,7 @@ const MenuHeader = React.forwardRef(
         },
         onComplete: () => {
           menuRef.current?.classList.remove('menu--open');
-          // lenis?.start();
+          lenis?.start();
         },
       });
 
@@ -148,8 +148,15 @@ const Wrapper = styled.div`
   }
 
   .menu__background__lootie {
-    width: 200%;
-    height: 200%;
+    width: 400%;
+    height: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .menu__background__lootie {
+      width: 200%;
+      height: 100%;
+    }
   }
 
   .menu__nav {

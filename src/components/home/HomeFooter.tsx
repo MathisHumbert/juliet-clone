@@ -1,18 +1,103 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, MutableRefObject } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 import FlowerLogo from '../shared/logo/FlowerLogo';
+import { footerDynamicWords } from '../../utils/mockData';
+import footerLottie from '../../lottie/footer.json';
+
+gsap.registerPlugin(CustomEase);
+
+CustomEase.create('fade-in', '0.65, 0, 0.35, 1');
 
 export default function HomeFooter() {
   const dynamicContainerRef = useRef<HTMLSpanElement>(null);
   const dynamicTextRef = useRef<HTMLSpanElement>(null);
+  const inLottieRef = useRef<Player | null>(null);
+  const liLottieRef = useRef<Player | null>(null);
 
   useEffect(() => {
-    gsap.set(dynamicContainerRef.current, {
-      width: dynamicTextRef.current?.getBoundingClientRect().width,
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 3,
+      onStart: () => {
+        let name =
+          footerDynamicWords[
+            Math.ceil(Math.random() * footerDynamicWords.length - 1)
+          ];
+        dynamicTextRef.current!.innerHTML = name;
+
+        gsap.to(dynamicContainerRef.current, {
+          opacity: 1,
+          width: dynamicTextRef.current!.offsetWidth,
+          duration: 0.6,
+          ease: 'fade-in',
+        });
+      },
+      onRepeat: () => {
+        gsap.to(dynamicContainerRef.current, {
+          opacity: 0,
+          width: '0px',
+          duration: 0.6,
+          ease: 'fade-in',
+          onComplete: () => {
+            let name =
+              footerDynamicWords[
+                Math.ceil(Math.random() * footerDynamicWords.length - 1)
+              ];
+            dynamicTextRef.current!.innerHTML = name;
+          },
+        });
+
+        gsap.to(dynamicContainerRef.current, {
+          opacity: 1,
+          duration: 0.6,
+          delay: 0.6,
+          ease: 'fade-in',
+          width: () => {
+            return dynamicTextRef.current!.offsetWidth;
+          },
+        });
+      },
     });
+
+    tl.to(dynamicContainerRef.current, {
+      opacity: 0,
+      duration: 0.6,
+      ease: 'fade-in',
+    });
+
+    dynamicContainerRef.current?.addEventListener('mouseenter', () =>
+      tl.pause()
+    );
+
+    dynamicContainerRef.current?.addEventListener('mouseleave', () =>
+      tl.play()
+    );
+
+    return () => {
+      dynamicContainerRef.current?.removeEventListener('mouseenter', () =>
+        tl.pause()
+      );
+
+      dynamicContainerRef.current?.removeEventListener('mouseleave', () =>
+        tl.play()
+      );
+    };
   }, []);
+
+  const onLinkEnter = (lottieRef: MutableRefObject<Player | null>) => {
+    lottieRef.current?.setPlayerDirection(1);
+    lottieRef.current?.play();
+  };
+
+  const onLinkLeave = (lottieRef: MutableRefObject<Player | null>) => {
+    lottieRef.current?.setPlayerDirection(-1);
+
+    lottieRef.current?.play();
+  };
 
   return (
     <Wrapper className='home__footer'>
@@ -35,9 +120,7 @@ export default function HomeFooter() {
                 <span
                   className='home__footer__dynamic__text'
                   ref={dynamicTextRef}
-                >
-                  Bonjour
-                </span>
+                ></span>
               </span>
               ”
             </span>
@@ -46,32 +129,68 @@ export default function HomeFooter() {
         <div className='home__footer__links'>
           <div className='home__footer__location'>
             <h3 className='home__footer__title'>Toronto</h3>
-            <a href='/' className='home__footer__link'>
-              1306 Queen St E, Toronto, ON M4L 1C4
+            <a
+              href='https://www.google.com/maps/place/Juliet+Creative/@43.6628022,-79.3284228,16.23z/data=!4m5!3m4!1s0x89d4cb316cce3c63:0x5ddc36d93b914800!8m2!3d43.663973!4d-79.328101'
+              target='_blank'
+              className='home__footer__link'
+            >
+              1306 Queen St E, <br /> Toronto, ON M4L 1C4
             </a>
           </div>
           <div className='home__footer__location'>
             <h3 className='home__footer__title'>Los Angeles</h3>{' '}
-            <a href='/' className='home__footer__link'>
-              1926 E Maple Ave El Segundo, CA 90245
+            <a
+              href='/https://www.google.com/maps/place/1926+E+Maple+Ave,+El+Segundo,+CA+90245,+USA/@33.9266641,-118.3943383,17z/data=!3m1!4b1!4m5!3m4!1s0x80c2b6b53a601559:0x5ad0d247c5fab4a5!8m2!3d33.9266641!4d-118.3921496'
+              target='_blank'
+              className='home__footer__link'
+            >
+              1926 E Maple Ave <br /> El Segundo, CA 90245
             </a>
           </div>
           <div className='home__footer__social'>
             <h3 className='home__footer__title'>Follow Us</h3>{' '}
-            <a href='/' className='home__footer__link first'>
+            <a
+              href='/https://www.instagram.com/julietcreative/'
+              target='_blank'
+              className='home__footer__link first'
+              onMouseEnter={() => onLinkEnter(inLottieRef)}
+              onMouseLeave={() => onLinkLeave(inLottieRef)}
+            >
               In
+              <Player
+                src={footerLottie}
+                ref={inLottieRef}
+                keepLastFrame={true}
+                loop={false}
+                className='footer__lottie'
+              />
             </a>
-            <a href='/' className='home__footer__link'>
+            <a
+              href='/https://www.linkedin.com/company/juliet-creative/'
+              target='_blank'
+              className='home__footer__link'
+              onMouseEnter={() => onLinkEnter(liLottieRef)}
+              onMouseLeave={() => onLinkLeave(liLottieRef)}
+            >
               Li
+              <Player
+                src={footerLottie}
+                ref={liLottieRef}
+                keepLastFrame={true}
+                loop={false}
+                className='footer__lottie'
+              />
             </a>
           </div>
           <div className='home__footer__rights'>
-            <a href='/' className='home__footer__link--sub '>
-              Privacy Policy
+            <a
+              href='https://twitter.com/Mathis1Humbert'
+              target='_blank'
+              className='home__footer__link--sub'
+            >
+              Cloned by Mathis Humbert
             </a>
-            <h6 className='home__footer__title--sub'>
-              All Rights Reserved 2022©
-            </h6>
+            <h6 className='home__footer__title--sub'>This is a clone site</h6>
           </div>
         </div>
       </div>
@@ -82,12 +201,12 @@ export default function HomeFooter() {
 const Wrapper = styled.footer`
   background: var(--white);
   color: var(--black);
-  opacity: 1;
+  visibility: visible;
   z-index: -1;
 
   @media (min-width: 1024px) {
     position: sticky;
-    opacity: 0;
+    visibility: hidden;
     bottom: 0;
   }
 
@@ -181,6 +300,26 @@ const Wrapper = styled.footer`
     display: block;
     overflow: hidden;
     position: relative;
+
+    &:hover {
+      &::after {
+        left: 0;
+        right: auto;
+        width: 100%;
+      }
+    }
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      left: auto;
+      right: 0;
+      width: 0;
+      display: block;
+      border-bottom: 6px solid var(--orange);
+      transition: width 0.6s ease-out;
+    }
   }
 
   .home__footer__dynamic__text {
@@ -244,8 +383,12 @@ const Wrapper = styled.footer`
     line-height: 16px;
     font-weight: 400;
     pointer-events: auto;
-    max-width: 21vw;
     text-align: center;
+    transition: color 0.2s ease-out;
+
+    &:hover {
+      color: var(--orange);
+    }
   }
 
   @media (min-width: 768px) {
@@ -263,11 +406,13 @@ const Wrapper = styled.footer`
 
   .home__footer__location {
     margin-right: 0;
+    text-align: center;
   }
 
   @media (min-width: 768px) {
     .home__footer__location {
       margin-right: var(--col1-g);
+      text-align: inherit;
     }
   }
 
@@ -291,10 +436,30 @@ const Wrapper = styled.footer`
       text-align: center;
       font-size: 21px;
       line-height: 21px;
+      position: relative;
+
+      &:hover {
+        color: initial;
+
+        .footer__lottie {
+          opacity: 1;
+        }
+      }
 
       &.first {
         margin-right: 30px;
       }
+    }
+
+    .footer__lottie {
+      display: block;
+      height: calc(100% + 4px);
+      left: -10px;
+      opacity: 0;
+      position: absolute;
+      top: -3px;
+      transition: opacity 0.4s ease-out;
+      width: calc(100% + 20px);
     }
   }
 
@@ -338,6 +503,7 @@ const Wrapper = styled.footer`
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    pointer-events: auto;
 
     a,
     h6 {
@@ -347,6 +513,29 @@ const Wrapper = styled.footer`
       font-weight: 400;
       white-space: pre;
     }
+
+    .home__footer__link--sub {
+      position: relative;
+
+      &:hover {
+        &::after {
+          left: 0;
+          right: auto;
+          width: 100%;
+        }
+      }
+
+      &::after {
+        content: ' ';
+        position: absolute;
+        bottom: 0;
+        left: auto;
+        right: 0;
+        width: 0;
+        border-bottom: 1px solid var(--black);
+        transition: width 0.6s ease-out;
+      }
+    }
   }
 
   @media (min-width: 768px) {
@@ -354,7 +543,7 @@ const Wrapper = styled.footer`
       min-width: 100%;
       flex: 1;
       justify-content: flex-end;
-      text-align: right;
+      text-align: left;
     }
   }
 
@@ -362,6 +551,7 @@ const Wrapper = styled.footer`
     .home__footer__rights {
       width: fit-content;
       min-width: inherit;
+      flex: inherit;
     }
   }
 `;

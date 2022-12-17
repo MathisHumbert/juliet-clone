@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import styled from 'styled-components';
-
-import MainLogo from '../shared/logo/MainLogo';
 import { CustomEase } from 'gsap/all';
 import { Player } from '@lottiefiles/react-lottie-player';
+
+import MenuHeader from './MenuHeader';
+import MainLogo from '../shared/logo/MainLogo';
 import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase);
@@ -57,7 +58,7 @@ export default function Header() {
       onStart: () => {
         headerMenu.classList.add('menu--open');
         gsap.set([headerMenuBackground, headerMenuCloseButton], { opacity: 0 });
-        gsap.set(headerMenuTitles, { yPercent: -100 });
+        gsap.set(headerMenuTitles, { yPercent: 120 });
         gsap.set(headerMenuNav, { opacity: 1 });
         menuBackgroundLottieRef.current!.play();
         lenis?.stop();
@@ -111,7 +112,7 @@ export default function Header() {
           </a>
         </div>
       </div>
-      {/* <MenuHeader ref={menuBackgroundLottieRef} /> */}
+      <MenuHeader ref={menuBackgroundLottieRef} />
     </Wrapper>
   );
 }
@@ -152,6 +153,7 @@ const Wrapper = styled.header`
 
   .header__logo {
     line-height: 0;
+    pointer-events: auto;
   }
 
   .header__logo svg {
@@ -173,6 +175,7 @@ const Wrapper = styled.header`
     font-size: 16px;
     line-height: 22px;
     color: var(--black);
+    pointer-events: auto;
   }
 
   @media (min-width: 1024px) {

@@ -35,8 +35,8 @@ export default function HomeBlogScroll() {
             window.innerWidth +
             window.innerWidth
           }`,
-        onLeave: () => gsap.set(homeFooter, { opacity: 1 }),
-        onEnterBack: () => gsap.set(homeFooter, { opacity: 0 }),
+        onLeave: () => gsap.set(homeFooter, { visibility: 'visible' }),
+        onEnterBack: () => gsap.set(homeFooter, { visibility: 'hidden' }),
         scrub: true,
         pin: true,
         pinSpacing: true,

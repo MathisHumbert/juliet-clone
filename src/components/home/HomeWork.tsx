@@ -183,6 +183,7 @@ const Wrapper = styled.section`
   .work__button__container {
     display: flex;
     justify-content: center;
+    pointer-events: auto;
   }
 
   .work__button {

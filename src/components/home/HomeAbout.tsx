@@ -154,7 +154,9 @@ export default function HomeAbout() {
         </h3>
         <h3 className='home__about__title'>
           <span className='home__about__title--lottie'>
-            <button
+            <a
+              href='https://www.google.com/maps/place/Juliet+Creative/@43.6628022,-79.3284228,16.23z/data=!4m5!3m4!1s0x89d4cb316cce3c63:0x5ddc36d93b914800!8m2!3d43.663973!4d-79.328101'
+              target='_blank'
               className='toronto__lottie__button fade--in'
               onMouseEnter={() => onEnter('.toronto__img')}
               onMouseLeave={() => onLeave('.toronto__img')}
@@ -165,7 +167,7 @@ export default function HomeAbout() {
                 <div>43.6532° N, 79.3832° W°&nbsp;</div>
                 <div>43.6532° N, 79.3832° W°</div>
               </div>
-            </button>
+            </a>
             <span
               className='toronto__lottie__container'
               onMouseEnter={() => onEnter('.toronto__img')}
@@ -186,7 +188,9 @@ export default function HomeAbout() {
         </h3>
         <h3 className='home__about__title'>
           <span className='home__about__title--lottie'>
-            <button
+            <a
+              href='https://www.google.com/maps/place/1926+E+Maple+Ave,+El+Segundo,+CA+90245,+USA/@33.9266641,-118.3943383,17z/data=!3m1!4b1!4m5!3m4!1s0x80c2b6b53a601559:0x5ad0d247c5fab4a5!8m2!3d33.9266641!4d-118.3921496'
+              target='_blank'
               className='losangeles__lottie__button fade--in'
               onMouseEnter={() => onEnter('.losangeles__img')}
               onMouseLeave={() => onLeave('.losangeles__img')}
@@ -197,7 +201,7 @@ export default function HomeAbout() {
                 <div>34.0522° N, 118.2437° W&nbsp;</div>
                 <div>34.0522° N, 118.2437° W</div>
               </div>
-            </button>
+            </a>
             <span
               className='losangeles__lottie__container'
               onMouseEnter={() => onEnter('.losangeles__img')}
@@ -481,7 +485,7 @@ const Wrapper = styled.section`
     overflow: hidden;
   }
 
-  .home__about__title--lottie button {
+  .home__about__title--lottie a {
     position: absolute;
     top: 25%;
     transform: translateY(-50%);
@@ -489,7 +493,6 @@ const Wrapper = styled.section`
     font-size: 12px;
     height: 30px;
     line-height: 30px;
-
     display: inline-block;
     font-family: 'Aeonik';
     font-weight: 400;
@@ -502,14 +505,14 @@ const Wrapper = styled.section`
   }
 
   @media (min-width: 768px) {
-    .home__about__title--lottie button {
+    .home__about__title--lottie a {
       height: 40px;
       line-height: 40px;
     }
   }
 
   @media (min-width: 1024px) {
-    .home__about__title--lottie button {
+    .home__about__title--lottie a {
       top: 50%;
       width: 11.25vw;
       font-size: 21px;
@@ -525,6 +528,7 @@ const Wrapper = styled.section`
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    pointer-events: auto;
   }
 
   .toronto__lottie__container {
@@ -549,6 +553,7 @@ const Wrapper = styled.section`
     left: 2.93vw;
     border: 1px solid var(--orange);
     color: var(--orange);
+    pointer-events: auto;
   }
 
   @media (min-width: 1024px) {

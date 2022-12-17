@@ -90,7 +90,8 @@ export default function HomeBlogSocial() {
           <span>Follow us</span>
         </h5>
         <a
-          href='/'
+          href='https://www.instagram.com/julietcreative/'
+          target='_blank'
           className='blog__social__title--main'
           ref={blogSocialMainTitleRef}
         >
@@ -147,6 +148,7 @@ export default function HomeBlogSocial() {
 
 const Wrapper = styled.div`
   width: 100vw;
+  pointer-events: auto;
 
   .blog__social__container {
     height: 100%;

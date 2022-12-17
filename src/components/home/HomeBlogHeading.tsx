@@ -162,6 +162,11 @@ const Wrapper = styled.div`
     border: 1px solid var(--white);
     border-radius: 200px;
     overflow: hidden;
+    pointer-events: auto;
+
+    &:hover .looped__text div {
+      animation-play-state: paused;
+    }
   }
 
   @media (min-width: 1024px) {

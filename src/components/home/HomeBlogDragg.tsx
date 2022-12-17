@@ -12,6 +12,7 @@ gsap.registerPlugin(Draggable);
 export default function HomeBlogDragg() {
   const blogDragRef = useRef(null);
   const blogDragItemContainerRef = useRef(null);
+  let startX = 0;
 
   useEffect(() => {
     const draggableInstance = Draggable.create(
@@ -23,6 +24,13 @@ export default function HomeBlogDragg() {
         autoScroll: 1.5,
         lockAxis: true,
         throwProps: true,
+        onDragStart: function () {
+          startX = this.x;
+        },
+        onDragEnd: function () {
+          const smooth = (this.x - startX) * 0.8;
+          gsap.to(blogDragItemContainerRef.current, { x: this.x + smooth });
+        },
       }
     );
   }, []);
@@ -55,10 +63,10 @@ const Wrapper = styled.section`
     padding-bottom: 60px;
     width: fit-content;
     display: flex;
-
     padding-left: var(--margin);
     position: relative;
     -webkit-overflow-scrolling: touch;
+    transition: transform 0.3 ease;
 
     li:nth-child(1) .blog__item__visual {
       top: 4vw;

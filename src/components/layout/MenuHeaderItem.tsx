@@ -3,21 +3,28 @@ import styled from 'styled-components';
 type Props = {
   id: number;
   text: string;
-  infiniteText: string;
+  infiniteText: string[];
+  href: string;
 };
 
-export default function MenuHeaderItem({ id, text, infiniteText }: Props) {
+export default function MenuHeaderItem({
+  id,
+  text,
+  infiniteText,
+  href,
+}: Props) {
   return (
     <Wrapper className='menu__nav__item'>
-      <a href='/' className='menu__nav__link'>
+      <a href={href} className='menu__nav__link'>
         <div className='menu__nav__title'>
           <span className='menu__nav__title--main' data-id={`0${id}`}>
             {text}
           </span>
         </div>
-        <div className='menu__nav__infinite'>
-          <p>{infiniteText}</p>
-          <p>{infiniteText}</p>
+        <div className='looped__text'>
+          {infiniteText.map((text, index) => (
+            <div key={index}>{text}</div>
+          ))}
         </div>
       </a>
     </Wrapper>
@@ -26,6 +33,7 @@ export default function MenuHeaderItem({ id, text, infiniteText }: Props) {
 
 const Wrapper = styled.li`
   list-style-type: none;
+  height: 100%;
   overflow: hidden;
 
   &:nth-child(1) .menu__nav__title {
@@ -98,6 +106,8 @@ const Wrapper = styled.li`
   .menu__nav__link {
     pointer-events: none;
     position: relative;
+    display: block;
+    margin-bottom: 3vw;
   }
 
   .menu__nav__title {
@@ -105,14 +115,16 @@ const Wrapper = styled.li`
     text-transform: uppercase;
     font-weight: 300;
     position: relative;
-    padding-top: 22px;
-    padding-bottom: 6px;
+    display: inline-block;
     margin-top: -22px;
     margin-bottom: -6px;
-    margin-bottom: 3vw;
   }
 
   @media (min-width: 900px) {
+    .menu__nav__link {
+      margin-bottom: 0;
+    }
+
     .menu__nav__title {
       margin-bottom: 0;
 
@@ -126,6 +138,9 @@ const Wrapper = styled.li`
     font-size: 14.4vw;
     line-height: 90%;
     font-family: Apoc;
+    display: inline-block;
+    padding-top: 24px;
+    padding-bottom: 6px;
 
     &::before {
       content: attr(data-id);
@@ -159,40 +174,34 @@ const Wrapper = styled.li`
     }
   }
 
-  .menu__nav__infinite {
-    display: none;
+  .looped__text {
     position: absolute;
-    top: 0;
+    left: 0;
     opacity: 0;
+    display: none;
+    width: 100%;
+    overflow: hidden;
     text-transform: uppercase;
     font-family: Aeonik;
 
-    p {
+    div {
       animation-play-state: paused;
       font-size: 6.191vw;
       line-height: 106.5%;
       white-space: pre;
-
-      &:first-child {
-        animation: 266s linear -135s infinite reverse infiniteScrollText1;
-      }
-
-      &:last-child {
-        animation: 270s linear infinite reverse infiniteScrollText2;
-      }
     }
   }
 
   @media (min-width: 900px) {
-    .menu__nav__infinite {
-      display: flex;
+    .looped__text {
+      display: block;
     }
   }
 
-  .menu__nav__title:hover + .menu__nav__infinite {
+  .menu__nav__title:hover + .looped__text {
     opacity: 1;
 
-    p {
+    div {
       animation-play-state: running;
     }
   }

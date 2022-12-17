@@ -16,6 +16,7 @@ type Props = {
   type: string;
   text_left: string;
   text_right: string;
+  href: string;
   last: boolean;
 };
 
@@ -26,6 +27,7 @@ export default function HomeWorkItem({
   type,
   text_left,
   text_right,
+  href,
   last,
 }: Props) {
   const workItemTitleRef = useRef(null);
@@ -83,7 +85,7 @@ export default function HomeWorkItem({
 
   return (
     <Wrapper>
-      <a href='/'>
+      <a href={href}>
         <header className='work__item__header'>
           <h3
             className='work__item__title'
@@ -223,6 +225,7 @@ const Wrapper = styled.li`
       background: rgba(0, 0, 0, 0.6);
       transition: opacity 0.6s ease-out;
       opacity: 0;
+      z-index: 1;
     }
   }
 
@@ -296,13 +299,7 @@ const Wrapper = styled.li`
   }
 
   .looped__text {
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .looped__text {
-      display: block;
-    }
+    z-index: 2;
   }
 
   .looped__text div {
