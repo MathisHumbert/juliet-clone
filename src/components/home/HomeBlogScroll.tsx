@@ -15,8 +15,6 @@ export default function HomeBlogScroll() {
   const scrollBlogContainerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const homeFooter = document.querySelector('.home__footer');
-
     gsap.to(scrollContainerRef.current, {
       xPercent: -100,
       duration: 3,
@@ -35,8 +33,6 @@ export default function HomeBlogScroll() {
             window.innerWidth +
             window.innerWidth
           }`,
-        onLeave: () => gsap.set(homeFooter, { visibility: 'visible' }),
-        onEnterBack: () => gsap.set(homeFooter, { visibility: 'hidden' }),
         scrub: true,
         pin: true,
         pinSpacing: true,

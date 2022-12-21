@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
@@ -11,6 +11,14 @@ CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 export default function WorkList() {
+  const workListRef = useRef(null);
+
+  useEffect(() => {
+    const footer = document.querySelector('.footer');
+
+    footer?.classList.add('dark', 'small');
+  }, []);
+
   useEffect(() => {
     const workListItems = gsap.utils.toArray(
       '.work__list__item'
@@ -172,7 +180,7 @@ export default function WorkList() {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper ref={workListRef}>
       <div className='work__list__container'>
         <ul className='work__list'>
           {workListItem.map((item) => (
@@ -188,6 +196,7 @@ const Wrapper = styled.section`
   pointer-events: auto;
   padding-top: var(--padding-top);
   padding-bottom: 120px;
+  background: var(--white);
 
   .work__list__container {
     padding: 0 var(--margin);

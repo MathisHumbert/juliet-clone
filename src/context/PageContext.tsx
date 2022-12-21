@@ -9,12 +9,14 @@ interface IPage {
   isPageFirstLoad: boolean;
   activePageContext: () => void;
   lenis: Lenis | null;
+  isDesktop: boolean;
 }
 
 const PageContext = createContext<IPage>({
   isPageFirstLoad: false,
   activePageContext: () => {},
   lenis: null,
+  isDesktop: false,
 });
 
 const lenis = new Lenis({
@@ -53,13 +55,24 @@ lenis?.on('scroll', ({ scroll }: { scroll: number }) => {
 });
 
 export const PageProvider = ({ children }: PageProviderProps) => {
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
   const [isPageFirstLoad, setIsPageFirstLoad] = useState(false);
 
   const activePageContext = () => setIsPageFirstLoad(true);
 
+  useEffect(() => {
+    const onWindowResize = () => {
+      setIsDesktop(window.innerWidth > 1024);
+    };
+
+    window.addEventListener('resize', onWindowResize);
+
+    return () => window.removeEventListener('resize', onWindowResize);
+  }, []);
+
   const memoedValue = useMemo(
-    () => ({ isPageFirstLoad, activePageContext, lenis }),
-    [isPageFirstLoad]
+    () => ({ isPageFirstLoad, activePageContext, lenis, isDesktop }),
+    [isPageFirstLoad, isDesktop]
   );
 
   return (

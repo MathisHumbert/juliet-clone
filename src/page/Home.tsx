@@ -1,17 +1,23 @@
+import { useEffect } from 'react';
+
 import HomeHero from '../components/home/HomeHero';
 import HomeWork from '../components/home/HomeWork';
 import HomeAbout from '../components/home/HomeAbout';
 import HomeBlog from '../components/home/HomeBlog';
-import HomeFooter from '../components/home/HomeFooter';
 
 export default function Home() {
+  useEffect(() => {
+    const footer = document.querySelector('.footer');
+
+    footer?.classList.add('light', 'large');
+  }, []);
+
   return (
-    <>
+    <div className='section__container'>
       <HomeHero />
       <HomeWork />
       <HomeAbout />
       <HomeBlog />
-      <HomeFooter />
-    </>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, MutableRefObject } from 'react';
+import { useEffect, useRef, MutableRefObject, useState } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
@@ -6,17 +6,28 @@ import { Player } from '@lottiefiles/react-lottie-player';
 
 import FlowerLogo from '../shared/logo/FlowerLogo';
 import { footerDynamicWords } from '../../utils/mockData';
-import footerLottie from '../../lottie/footer.json';
+import lightFooterLottie from '../../lottie/light-footer.json';
+import darkFooterLottie from '../../lottie/dark-footer.json';
 
 gsap.registerPlugin(CustomEase);
 
 CustomEase.create('fade-in', '0.65, 0, 0.35, 1');
 
-export default function HomeFooter() {
+export default function Footer() {
+  let [lottieSrc, setLottieSrc] = useState(lightFooterLottie);
+  const footerRef = useRef<HTMLDivElement>(null);
   const dynamicContainerRef = useRef<HTMLSpanElement>(null);
   const dynamicTextRef = useRef<HTMLSpanElement>(null);
   const inLottieRef = useRef<Player | null>(null);
   const liLottieRef = useRef<Player | null>(null);
+
+  useEffect(() => {
+    setLottieSrc(
+      footerRef.current?.classList.contains('light')
+        ? lightFooterLottie
+        : darkFooterLottie
+    );
+  }, []);
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -95,30 +106,29 @@ export default function HomeFooter() {
 
   const onLinkLeave = (lottieRef: MutableRefObject<Player | null>) => {
     lottieRef.current?.setPlayerDirection(-1);
-
     lottieRef.current?.play();
   };
 
   return (
-    <Wrapper className='home__footer'>
-      <div className='home__footer__container'>
-        <div className='home__footer__intro'>
-          <h2 className='home__footer__intro__title'>
+    <Wrapper className='footer' ref={footerRef}>
+      <div className='footer__container'>
+        <div className='footer__intro'>
+          <h2 className='footer__intro__title'>
             Good Things{' '}
             <span>
               <FlowerLogo /> Happen
             </span>
           </h2>
-          <h2 className='home__footer__intro__title'>
-            <span>When You Say</span>
-            <span className='home__footer__intro__title--dynamic'>
+          <h2 className='footer__intro__title'>
+            <span>When You Say </span>
+            <span className='footer__intro__title--dynamic'>
               “
               <span
-                className='home__footer__dynamic__container'
+                className='footer__dynamic__container'
                 ref={dynamicContainerRef}
               >
                 <span
-                  className='home__footer__dynamic__text'
+                  className='footer__dynamic__text'
                   ref={dynamicTextRef}
                 ></span>
               </span>
@@ -126,39 +136,39 @@ export default function HomeFooter() {
             </span>
           </h2>
         </div>
-        <div className='home__footer__links'>
-          <div className='home__footer__location'>
-            <h3 className='home__footer__title'>Toronto</h3>
+        <div className='footer__links'>
+          <div className='footer__location'>
+            <h3 className='footer__title'>Toronto</h3>
             <a
               href='https://www.google.com/maps/place/Juliet+Creative/@43.6628022,-79.3284228,16.23z/data=!4m5!3m4!1s0x89d4cb316cce3c63:0x5ddc36d93b914800!8m2!3d43.663973!4d-79.328101'
               target='_blank'
-              className='home__footer__link'
+              className='footer__link'
             >
               1306 Queen St E, <br /> Toronto, ON M4L 1C4
             </a>
           </div>
-          <div className='home__footer__location'>
-            <h3 className='home__footer__title'>Los Angeles</h3>{' '}
+          <div className='footer__location'>
+            <h3 className='footer__title'>Los Angeles</h3>{' '}
             <a
               href='/https://www.google.com/maps/place/1926+E+Maple+Ave,+El+Segundo,+CA+90245,+USA/@33.9266641,-118.3943383,17z/data=!3m1!4b1!4m5!3m4!1s0x80c2b6b53a601559:0x5ad0d247c5fab4a5!8m2!3d33.9266641!4d-118.3921496'
               target='_blank'
-              className='home__footer__link'
+              className='footer__link'
             >
               1926 E Maple Ave <br /> El Segundo, CA 90245
             </a>
           </div>
-          <div className='home__footer__social'>
-            <h3 className='home__footer__title'>Follow Us</h3>{' '}
+          <div className='footer__social'>
+            <h3 className='footer__title'>Follow Us</h3>{' '}
             <a
               href='/https://www.instagram.com/julietcreative/'
               target='_blank'
-              className='home__footer__link first'
+              className='footer__link first'
               onMouseEnter={() => onLinkEnter(inLottieRef)}
               onMouseLeave={() => onLinkLeave(inLottieRef)}
             >
               In
               <Player
-                src={footerLottie}
+                src={lottieSrc}
                 ref={inLottieRef}
                 keepLastFrame={true}
                 loop={false}
@@ -168,13 +178,13 @@ export default function HomeFooter() {
             <a
               href='/https://www.linkedin.com/company/juliet-creative/'
               target='_blank'
-              className='home__footer__link'
+              className='footer__link'
               onMouseEnter={() => onLinkEnter(liLottieRef)}
               onMouseLeave={() => onLinkLeave(liLottieRef)}
             >
               Li
               <Player
-                src={footerLottie}
+                src={lottieSrc}
                 ref={liLottieRef}
                 keepLastFrame={true}
                 loop={false}
@@ -182,15 +192,15 @@ export default function HomeFooter() {
               />
             </a>
           </div>
-          <div className='home__footer__rights'>
+          <div className='footer__rights'>
             <a
               href='https://twitter.com/Mathis1Humbert'
               target='_blank'
-              className='home__footer__link--sub'
+              className='footer__link--sub'
             >
               Cloned by Mathis Humbert
             </a>
-            <h6 className='home__footer__title--sub'>This is a clone site</h6>
+            <h6 className='footer__title--sub'>This is a clone site</h6>
           </div>
         </div>
       </div>
@@ -199,18 +209,24 @@ export default function HomeFooter() {
 }
 
 const Wrapper = styled.footer`
-  background: var(--white);
-  color: var(--black);
-  visibility: visible;
   z-index: -1;
+
+  &.light {
+    background: var(--white);
+    color: var(--black);
+  }
+
+  &.dark {
+    background: var(--black);
+    color: var(--white);
+  }
 
   @media (min-width: 1024px) {
     position: sticky;
-    visibility: hidden;
     bottom: 0;
   }
 
-  .home__footer__container {
+  .footer__container {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -218,43 +234,56 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 1024px) {
-    .home__footer__container {
+    .footer__container {
       padding: 90px var(--margin) 45px;
     }
   }
 
-  .home__footer__intro {
+  .footer__intro {
     width: 100%;
     text-align: center;
     margin-bottom: 60px;
   }
 
   @media (min-width: 768px) {
-    .home__footer__intro {
+    .footer__intro {
       margin-bottom: 90px;
+    }
+
+    &.small .footer__intro {
+      margin-bottom: 60px;
+      text-align: left;
     }
   }
 
   @media (min-width: 1024px) {
-    .home__footer__intro {
+    &.small .footer__intro,
+    .footer__intro {
       margin-bottom: 120px;
     }
   }
 
-  .home__footer__intro__title {
+  .footer__intro__title {
     font-size: 9.94vw;
     line-height: 110%;
     text-transform: uppercase;
   }
 
+  @media (min-width: 768px) {
+    &.small .footer__intro__title {
+      font-size: 4.4645vw;
+      line-height: 103%;
+    }
+  }
+
   @media (min-width: 1024px) {
-    .home__footer__intro__title {
+    .footer__intro__title {
       font-size: 6.67vw;
       line-height: 100%;
     }
   }
 
-  .home__footer__intro__title:first-child {
+  .footer__intro__title:first-child {
     font-weight: 300;
     font-family: 'Apoc';
 
@@ -264,30 +293,43 @@ const Wrapper = styled.footer`
 
     svg {
       width: 7.8vw;
+
+      path {
+        fill: currentColor;
+      }
     }
   }
 
-  .home__footer__intro__title:last-child {
+  .footer__intro__title:last-child {
     font-size: 11vw;
   }
 
   @media (min-width: 768px) {
-    .home__footer__intro__title:first-child svg {
+    .footer__intro__title:first-child svg {
       width: 5.3vw;
+    }
+
+    &.small .footer__intro__title:first-child svg {
+      width: 3.5vw;
+    }
+
+    &.small .footer__intro__title:last-child {
+      font-size: 4.4645vw;
+      line-height: 103%;
     }
   }
 
   @media (min-width: 1024px) {
-    .home__footer__intro__title:first-child svg {
+    .footer__intro__title:first-child svg {
       width: 5.3vw;
     }
 
-    .home__footer__intro__title:last-child {
+    .footer__intro__title:last-child {
       font-size: 7.265vw;
     }
   }
 
-  .home__footer__intro__title--dynamic {
+  .footer__intro__title--dynamic {
     display: inline-flex;
     justify-content: center;
     width: 100%;
@@ -296,7 +338,13 @@ const Wrapper = styled.footer`
     pointer-events: auto;
   }
 
-  .home__footer__dynamic__container {
+  @media (min-width: 768px) {
+    &.small .footer__intro__title--dynamic {
+      width: fit-content;
+    }
+  }
+
+  .footer__dynamic__container {
     display: block;
     overflow: hidden;
     position: relative;
@@ -322,13 +370,13 @@ const Wrapper = styled.footer`
     }
   }
 
-  .home__footer__dynamic__text {
+  .footer__dynamic__text {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .home__footer__links {
+  .footer__links {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -337,7 +385,7 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 768px) {
-    .home__footer__links {
+    .footer__links {
       align-items: flex-end;
       flex-direction: row;
       flex-wrap: wrap;
@@ -346,13 +394,13 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 1120px) {
-    .home__footer__links {
+    .footer__links {
       flex-wrap: nowrap;
       row-gap: 0;
     }
   }
 
-  .home__footer__title {
+  .footer__title {
     font-size: 20px;
     line-height: 25px;
     font-weight: 400;
@@ -364,20 +412,20 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 768px) {
-    .home__footer__title {
+    .footer__title {
       margin-bottom: 15px;
       text-align: inherit;
     }
   }
 
   @media (min-width: 1024px) {
-    .home__footer__title {
+    .footer__title {
       font-size: 35px;
       line-height: 42px;
     }
   }
 
-  .home__footer__link {
+  .footer__link {
     display: inline-block;
     font-size: 16px;
     line-height: 16px;
@@ -392,31 +440,31 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 768px) {
-    .home__footer__link {
+    .footer__link {
       text-align: inherit;
     }
   }
 
   @media (min-width: 1024px) {
-    .home__footer__link {
+    .footer__link {
       font-size: 21px;
       line-height: 21px;
     }
   }
 
-  .home__footer__location {
+  .footer__location {
     margin-right: 0;
     text-align: center;
   }
 
   @media (min-width: 768px) {
-    .home__footer__location {
+    .footer__location {
       margin-right: var(--col1-g);
       text-align: inherit;
     }
   }
 
-  .home__footer__social {
+  .footer__social {
     margin-right: 0;
     flex: 1;
     width: 100%;
@@ -424,14 +472,14 @@ const Wrapper = styled.footer`
     flex-wrap: wrap;
     justify-content: center;
 
-    .home__footer__title {
+    .footer__title {
       width: 100%;
       margin-bottom: 24px;
       font-size: 24px;
       line-height: 25px;
     }
 
-    .home__footer__link {
+    .footer__link {
       text-transform: uppercase;
       text-align: center;
       font-size: 21px;
@@ -439,7 +487,7 @@ const Wrapper = styled.footer`
       position: relative;
 
       &:hover {
-        color: initial;
+        color: currentColor;
 
         .footer__lottie {
           opacity: 1;
@@ -464,17 +512,17 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 768px) {
-    .home__footer__social {
+    .footer__social {
       margin-right: var(--col1-g);
       justify-content: inherit;
 
-      .home__footer__title {
+      .footer__title {
         margin-bottom: 31px;
         font-size: 20px;
         line-height: 25px;
       }
 
-      .home__footer__link {
+      .footer__link {
         text-align: inherit;
         font-size: 16px;
         line-height: 16px;
@@ -483,14 +531,14 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 1024px) {
-    .home__footer__social {
-      .home__footer__title {
+    .footer__social {
+      .footer__title {
         margin-bottom: 36px;
         font-size: 35px;
         line-height: 42px;
       }
 
-      .home__footer__link {
+      .footer__link {
         text-align: inherit;
         font-size: 21px;
         line-height: 21px;
@@ -498,7 +546,7 @@ const Wrapper = styled.footer`
     }
   }
 
-  .home__footer__rights {
+  .footer__rights {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -514,7 +562,7 @@ const Wrapper = styled.footer`
       white-space: pre;
     }
 
-    .home__footer__link--sub {
+    .footer__link--sub {
       position: relative;
 
       &:hover {
@@ -538,8 +586,12 @@ const Wrapper = styled.footer`
     }
   }
 
+  &.dark .footer__link--sub::after {
+    border-color: var(--white);
+  }
+
   @media (min-width: 768px) {
-    .home__footer__rights {
+    .footer__rights {
       min-width: 100%;
       flex: 1;
       justify-content: flex-end;
@@ -548,7 +600,7 @@ const Wrapper = styled.footer`
   }
 
   @media (min-width: 1120px) {
-    .home__footer__rights {
+    .footer__rights {
       width: fit-content;
       min-width: inherit;
       flex: inherit;

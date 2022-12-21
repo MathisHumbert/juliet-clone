@@ -101,6 +101,15 @@ body {
   transition: background 0.6s ease-out, color 0.6s ease-out;
 }
 
+#main {
+  position: relative;
+}
+
+.section__container {
+  background: var(--white);
+  transition: background 0.6s ease-out, color 0.6s ease-out;
+}
+
 button {
   background: none;
   border: none;
@@ -157,13 +166,17 @@ body.scrolled .header {
   }
 }
 
-body.dark .work__item__header {
-  background: var(--black);
-}
-
 body.dark {
   background: var(--black);
   color: var(--white);
+}
+
+body.dark .section__container {
+  background: var(--black);
+}
+
+body.dark .work__item__header {
+  background: var(--black);
 }
 
 body.dark .losangeles__lottie__container::before {
