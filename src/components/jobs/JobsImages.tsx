@@ -1,9 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
+CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 import MaskFlowerLogo from '../shared/logo/MaskFlowerLogo';
 
 export default function JobsImages() {
+  useEffect(() => {
+    const container = document.querySelector(
+      '.section__container'
+    )! as HTMLDivElement;
+    const images = document.querySelectorAll('.job__images__img');
+    const figures = document.querySelectorAll('.job__images__visual');
+    const height = container.offsetHeight;
+
+    const parallax = [0.025, 0.05, 0.075, 0.05, 0.06, 0.025];
+
+    gsap.fromTo(
+      images,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        delay: 0.6,
+        stagger: 0.2,
+      }
+    );
+
+    figures.forEach((figure, index) => {
+      gsap.to(figure, {
+        y: -height * parallax[index],
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1,
+        },
+      });
+    });
+  }, []);
+
   return (
     <Wrapper>
       <div className='jobs__images__container'>
@@ -140,7 +182,8 @@ const Wrapper = styled.section`
     .job__images__visual {
       &:nth-child(1) {
         width: calc(var(--col3-g) - var(--gutter));
-        right: var(--col10);
+        right: var(--col10g);
+        left: inherit;
         z-index: 2;
 
         img {

@@ -231,6 +231,8 @@ const Wrapper = styled.footer`
     align-items: flex-start;
     flex-wrap: wrap;
     padding: 60px var(--margin);
+    width: 100vw;
+    overflow: hidden;
   }
 
   @media (min-width: 1024px) {

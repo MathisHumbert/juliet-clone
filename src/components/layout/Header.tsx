@@ -127,6 +127,8 @@ const Wrapper = styled.header`
 
   .header__wrapper {
     background: none;
+    width: 100vw;
+    overflow: hidden;
   }
 
   .header__container {

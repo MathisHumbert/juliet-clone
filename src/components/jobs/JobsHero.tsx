@@ -1,7 +1,40 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
+CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function JobsHero() {
+  const smallTitleRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const titles = document.querySelectorAll('.jobs__hero__title span sub');
+
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      titles,
+      { yPercent: 100 },
+      { yPercent: 0, duration: 1, ease: 'text-in', stagger: 0.08 }
+    )
+      .fromTo(
+        smallTitleRef.current,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
+        0.3
+      )
+      .fromTo(
+        textRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
+        0.6
+      );
+  }, []);
+
   return (
     <Wrapper>
       <div className='jobs__hero__container'>
@@ -16,11 +49,11 @@ export default function JobsHero() {
           <span>
             <sub>Together</sub>
           </span>
-          <small>
+          <small ref={smallTitleRef}>
             <p>We're hiring</p>
           </small>
         </h1>
-        <div className='jobs__hero__text'>
+        <div className='jobs__hero__text' ref={textRef}>
           <p>
             We want Juliet to <strong>represent the world we live in</strong>,
             with talent that’s diverse in background and skill sets.
@@ -39,6 +72,8 @@ const Wrapper = styled.section`
   .jobs__hero__container {
     min-height: 100%;
     padding: 0 var(--margin);
+    width: 100vw;
+    overflow: hidden;
   }
 
   .jobs__hero__title {
@@ -68,7 +103,6 @@ const Wrapper = styled.section`
     &:nth-child(4) {
       font-size: 16.38vw;
       line-height: 81%;
-      font-weight: 500;
     }
   }
 
@@ -95,6 +129,7 @@ const Wrapper = styled.section`
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    will-change: transform;
   }
 
   .jobs__hero__title small {
@@ -105,6 +140,7 @@ const Wrapper = styled.section`
     padding: 4px;
     background: var(--orange);
     transform: rotate(-5.3deg);
+    will-change: transform, opacity;
 
     p {
       font-size: 3.72vw;
