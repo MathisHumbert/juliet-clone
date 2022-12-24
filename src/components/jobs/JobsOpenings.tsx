@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
+CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function JobsOpenings() {
+  const firstTitleRef = useRef(null);
+  const secondTitleRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      [firstTitleRef.current, secondTitleRef.current],
+      { yPercent: 100 },
+      { yPercent: 0, duration: 1, ease: 'text-in', stagger: 0.08 }
+    ).fromTo(
+      textRef.current,
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
+      0.6
+    );
+  }, []);
+
   return (
     <Wrapper>
       <div className='jobs__openings__container'>
         <div className='jobs__openings__intro'>
           <h2 className='jobs__opening__heading'>
             <span>
-              <sub>Curent&nbsp;</sub>
+              <sub ref={firstTitleRef}>Curent&nbsp;</sub>
             </span>
             <span>
-              <sub>Openings</sub>
+              <sub ref={secondTitleRef}>Openings</sub>
             </span>
           </h2>
-          <div className='jobs__openings_text'>
+          <div className='jobs__openings_text' ref={textRef}>
             <p>
               We’re always interested in meeting smart, kind, and creative
               individuals with a desire to love their audience like crazy. Is

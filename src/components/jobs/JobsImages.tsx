@@ -16,9 +16,9 @@ export default function JobsImages() {
     )! as HTMLDivElement;
     const images = document.querySelectorAll('.job__images__img');
     const figures = document.querySelectorAll('.job__images__visual');
-    const height = container.offsetHeight;
 
-    const parallax = [0.025, 0.05, 0.075, 0.05, 0.06, 0.025];
+    const height = container.offsetHeight;
+    const parallax = [0.05, 0.1, 0.15, 0.1, 0.12, 0.05];
 
     gsap.fromTo(
       images,
@@ -35,7 +35,7 @@ export default function JobsImages() {
 
     figures.forEach((figure, index) => {
       gsap.to(figure, {
-        y: -height * parallax[index],
+        y: (-height * parallax[index]) / 4,
         scrollTrigger: {
           trigger: container,
           start: 'top top',
@@ -84,7 +84,7 @@ const Wrapper = styled.section`
 
   @media (min-width: 768px) {
     height: var(--col6);
-    margin-bottom: 18px;
+    margin-bottom: 180px;
     margin-top: -15vw;
   }
 

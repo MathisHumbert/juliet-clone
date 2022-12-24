@@ -12,7 +12,12 @@ export default function JobsHero() {
   const textRef = useRef(null);
 
   useEffect(() => {
+    const container = document.querySelector(
+      '.section__container'
+    )! as HTMLDivElement;
     const titles = document.querySelectorAll('.jobs__hero__title span sub');
+
+    const height = container.offsetHeight;
 
     const tl = gsap.timeline();
 
@@ -33,6 +38,16 @@ export default function JobsHero() {
         { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
         0.6
       );
+
+    gsap.to(smallTitleRef.current, {
+      rotate: height * 0.1,
+      scrollTrigger: {
+        trigger: container,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+      },
+    });
   }, []);
 
   return (
