@@ -48,7 +48,7 @@ export default function HomeHero() {
   }, []);
 
   const onFlowerLogoEnter = () => {
-    const flowerLogoSvg = document.querySelector('.hero__flower');
+    const flowerLogoSvg = document.querySelector('.flower__logo');
 
     if (isFlowerAnimating) return;
 
