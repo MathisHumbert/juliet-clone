@@ -192,6 +192,10 @@ body.dark .work__button {
   border: 1px solid var(--white);
 }
 
+body.dark .contact__social__container {
+  color: var(--white);
+}
+
 /* keyframes */
 @keyframes loopTextLeft {
   0% {

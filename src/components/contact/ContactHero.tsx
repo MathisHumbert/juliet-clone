@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 import { footerDynamicWords } from '../../utils/mockData';
 import FlowerLogo from '../shared/logo/FlowerLogo';
@@ -12,6 +16,14 @@ export default function ContactHero() {
   let isFlowerAnimating = false;
 
   useEffect(() => {
+    const titles = document.querySelectorAll('.context__hero__title--inner');
+
+    gsap.fromTo(
+      titles,
+      { yPercent: 100 },
+      { yPercent: 0, duration: 1, stagger: 0.08, ease: 'text-in' }
+    );
+
     const tl = gsap.timeline({
       repeat: -1,
       repeatDelay: 3,
@@ -104,31 +116,31 @@ export default function ContactHero() {
       <div className='context__hero__container'>
         <h1 className='context__hero__title'>
           <span>
-            <span>Good&nbsp;</span>
+            <span className='context__hero__title--inner'>Good&nbsp;</span>
           </span>
           <span>
-            <span>Things&nbsp;</span>
+            <span className='context__hero__title--inner'>Things&nbsp;</span>
           </span>
           <br className='context__hero__title--separator' />
           <span onMouseEnter={onFlowerLogoEnter}>
-            <span>
+            <span className='context__hero__title--inner'>
               <FlowerLogo />
             </span>
           </span>
           <span>
-            <span>&nbsp;Happen</span>
+            <span className='context__hero__title--inner'>&nbsp;Happen</span>
           </span>
         </h1>
         <h1 className='context__hero__title'>
           <strong>
             <span>
-              <span>When&nbsp;</span>
+              <span className='context__hero__title--inner'>When&nbsp;</span>
             </span>
             <span>
-              <span>You&nbsp;</span>
+              <span className='context__hero__title--inner'>You&nbsp;</span>
             </span>
             <span>
-              <span>Say</span>
+              <span className='context__hero__title--inner'>Say</span>
             </span>
           </strong>
         </h1>
@@ -136,14 +148,14 @@ export default function ContactHero() {
           <span>
             <span>
               <strong>
-                <span className='context__hero__title--dynamic'>
+                <span className='context__hero__title--dynamic context__hero__title--inner'>
                   “
                   <span
                     className='context__dynamic__container'
                     ref={dynamicContainerRef}
                   >
                     <span
-                      className='context__dynamic__text'
+                      className='context__dynamic__text '
                       ref={dynamicTextRef}
                     ></span>
                   </span>
@@ -162,6 +174,7 @@ const Wrapper = styled.section`
   padding-top: var(--padding-top);
   margin-bottom: 60px;
   pointer-events: auto;
+  min-height: 100%;
 
   @media (min-width: 1024px) {
     margin-bottom: 120px;

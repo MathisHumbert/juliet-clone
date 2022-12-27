@@ -100,42 +100,42 @@ export default function HomeBlogSocial() {
         <div className='blog__social__images'>
           <figure className='blog__social__visual'>
             <img
-              src='/img/blog-social-1.jpg'
+              src='/img/social-1.jpg'
               alt='blog-1'
               className='blog__social__img'
             />
           </figure>
           <figure className='blog__social__visual'>
             <img
-              src='/img/blog-social-2.jpg'
+              src='/img/social-2.jpg'
               alt='blog-2'
               className='blog__social__img'
             />
           </figure>
           <figure className='blog__social__visual'>
             <img
-              src='/img/blog-social-3.jpg'
+              src='/img/social-3.jpg'
               alt='blog-3'
               className='blog__social__img'
             />
           </figure>
           <figure className='blog__social__visual'>
             <img
-              src='/img/blog-social-4.jpg'
+              src='/img/social-4.jpg'
               alt='blog-4'
               className='blog__social__img'
             />
           </figure>
           <figure className='blog__social__visual'>
             <img
-              src='/img/blog-social-5.jpg'
+              src='/img/social-5.jpg'
               alt='blog-5'
               className='blog__social__img'
             />
           </figure>
           <figure className='blog__social__visual'>
             <img
-              src='/img/blog-social-6.jpg'
+              src='/img/social-6.jpg'
               alt='blog-6'
               className='blog__social__img'
             />
