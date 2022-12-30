@@ -127,38 +127,40 @@ export default function HomeBlogSocial() {
           </figure>
         </div>
         <div className='contact__social__links'>
-          <a
-            href='/https://www.instagram.com/julietcreative/'
-            target='_blank'
-            className='contact__social__link first'
-            onMouseEnter={() => onLinkEnter(inLottieRef)}
-            onMouseLeave={() => onLinkLeave(inLottieRef)}
-          >
-            In
-            <Player
-              src={SocialLottie}
-              ref={inLottieRef}
-              keepLastFrame={true}
-              loop={false}
-              className='contact__social__lottie'
-            />
-          </a>
-          <a
-            href='/https://www.linkedin.com/company/juliet-creative/'
-            target='_blank'
-            className='contact__social__link'
-            onMouseEnter={() => onLinkEnter(liLottieRef)}
-            onMouseLeave={() => onLinkLeave(liLottieRef)}
-          >
-            Li
-            <Player
-              src={SocialLottie}
-              ref={liLottieRef}
-              keepLastFrame={true}
-              loop={false}
-              className='contact__social__lottie'
-            />
-          </a>
+          <div className='lootie__container'>
+            <a
+              href='/https://www.instagram.com/julietcreative/'
+              target='_blank'
+              className='contact__social__link first'
+              onMouseEnter={() => onLinkEnter(inLottieRef)}
+              onMouseLeave={() => onLinkLeave(inLottieRef)}
+            >
+              In
+              <Player
+                src={SocialLottie}
+                ref={inLottieRef}
+                keepLastFrame={true}
+                loop={false}
+                className='contact__social__lottie'
+              />
+            </a>
+            <a
+              href='/https://www.linkedin.com/company/juliet-creative/'
+              target='_blank'
+              className='contact__social__link'
+              onMouseEnter={() => onLinkEnter(liLottieRef)}
+              onMouseLeave={() => onLinkLeave(liLottieRef)}
+            >
+              Li
+              <Player
+                src={SocialLottie}
+                ref={liLottieRef}
+                keepLastFrame={true}
+                loop={false}
+                className='contact__social__lottie'
+              />
+            </a>
+          </div>
           <h6 className='contact__social__subtilte left'>
             <a href='https://twitter.com/Mathis1Humbert' target='_blank'>
               Cloned by mathis humbert
@@ -322,11 +324,21 @@ const Wrapper = styled.div`
   .contact__social__links {
     position: absolute;
     left: 0;
-    bottom: 60px;
+    bottom: 88px;
     width: 100%;
     padding: 0 var(--margin);
     display: flex;
     align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .contact__social__links {
+      bottom: 60px;
+      flex-direction: row;
+      gap: 0;
+    }
   }
 
   .contact__social__subtilte {
@@ -337,11 +349,11 @@ const Wrapper = styled.div`
   }
 
   .contact__social__subtilte.left {
-    order: -1;
-    margin-right: 4.1vw;
+    order: 0;
+    margin-right: 0;
 
     a {
-      margin-right: 45px;
+      margin-right: 0;
       position: relative;
       display: inline-block;
 
@@ -367,6 +379,19 @@ const Wrapper = styled.div`
     }
   }
 
+  @media (min-width: 768px) {
+    .contact__social__subtilte.left {
+      order: -1;
+      margin-right: 4.1vw;
+
+      a {
+        margin-right: 45px;
+        position: relative;
+        display: inline-block;
+      }
+    }
+  }
+
   .contact__social__subtilte.right {
     flex: 1;
     text-align: right;
@@ -386,6 +411,12 @@ const Wrapper = styled.div`
     }
 
     &.first {
+      margin-right: 30px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .contact__social__link.first {
       margin-right: 45px;
     }
   }
