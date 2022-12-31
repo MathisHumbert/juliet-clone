@@ -10,13 +10,15 @@ import likeCrazyLottie from '../../lottie/like-cray.json';
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 
-export default function HomeHero() {
+export default function HomeHero({ isPageLoaded }: { isPageLoaded: boolean }) {
   const likeCrazyLottieRef = useRef<Player | null>(null);
   const heroButtonRef = useRef(null);
 
   let isFlowerAnimating = false;
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const titles = document.querySelectorAll('.hero__title');
     const tl = gsap.timeline({ defaults: { duration: 1 } });
 
@@ -45,7 +47,7 @@ export default function HomeHero() {
       },
       1.2
     );
-  }, []);
+  }, [isPageLoaded]);
 
   const onFlowerLogoEnter = () => {
     const flowerLogoSvg = document.querySelector('.flower__logo');

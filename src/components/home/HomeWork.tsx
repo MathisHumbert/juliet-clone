@@ -9,11 +9,12 @@ import HomeWorkItem from './HomeWorkItem';
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create('cubic-opacity', '0.5, 1, 0.89, 1');
 
-export default function HomeWork() {
+export default function HomeWork({ isPageLoaded }: { isPageLoaded: boolean }) {
   const trackingBarContainerRef = useRef(null);
   const trackingBarRef = useRef(null);
   const workButtonContainerRef = useRef(null);
   const workButtonRef = useRef(null);
+  const workTitleRef = useRef(null);
 
   useEffect(() => {
     gsap.to(trackingBarRef.current, {
@@ -51,10 +52,20 @@ export default function HomeWork() {
     );
   }, []);
 
+  useEffect(() => {
+    if (!isPageLoaded) return;
+
+    gsap.to([workTitleRef.current, trackingBarRef.current], {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'cubic-opacity',
+    });
+  }, [isPageLoaded]);
+
   return (
     <Wrapper>
       <div className='work__container'>
-        <h2 className='work__title'>
+        <h2 className='work__title' ref={workTitleRef}>
           <span className='work__title--main'>Selected</span>
           <span className='work__title--sub'>Works</span>
         </h2>
@@ -106,6 +117,7 @@ const Wrapper = styled.section`
     margin-bottom: 10px;
     text-transform: uppercase;
     font-weight: 400;
+    opacity: 0;
   }
 
   @media (min-width: 768px) {
@@ -165,6 +177,7 @@ const Wrapper = styled.section`
   .tracking__bar {
     display: block;
     height: 0;
+    opacity: 0;
     width: 1px;
     background: var(--black);
   }

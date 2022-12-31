@@ -25,6 +25,8 @@ const lenis = new Lenis({
   smooth: true,
 });
 
+lenis.stop();
+
 const scrollFn = (time: any) => {
   lenis.raf(time);
   requestAnimationFrame(scrollFn);
