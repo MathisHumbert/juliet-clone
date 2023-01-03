@@ -5,11 +5,13 @@ import styled from 'styled-components';
 
 import { homeWorkItems } from '../../utils/mockData';
 import HomeWorkItem from './HomeWorkItem';
+import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create('cubic-opacity', '0.5, 1, 0.89, 1');
 
-export default function HomeWork({ isPageLoaded }: { isPageLoaded: boolean }) {
+export default function HomeWork() {
+  const { isPageLoaded } = usePage();
   const trackingBarContainerRef = useRef(null);
   const trackingBarRef = useRef(null);
   const workButtonContainerRef = useRef(null);

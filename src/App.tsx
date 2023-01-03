@@ -7,6 +7,7 @@ import Contact from './page/Contact';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import Transition from './components/layout/Transition';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/contact' element={<Contact />} />
       </Routes>
       <Footer />
+      <Transition />
     </Router>
   );
 }

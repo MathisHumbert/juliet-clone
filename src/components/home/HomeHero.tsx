@@ -6,18 +6,20 @@ import { Player } from '@lottiefiles/react-lottie-player';
 
 import FlowerLogo from '../shared/logo/FlowerLogo';
 import likeCrazyLottie from '../../lottie/like-cray.json';
+import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
 
-export default function HomeHero({ isPageLoaded }: { isPageLoaded: boolean }) {
+export default function HomeHero() {
+  const { isPageLoaded } = usePage();
   const likeCrazyLottieRef = useRef<Player | null>(null);
   const heroButtonRef = useRef(null);
 
   let isFlowerAnimating = false;
 
   useEffect(() => {
-    if (!isPageLoaded) return;
+    if (isPageLoaded) return;
 
     const titles = document.querySelectorAll('.hero__title');
     const tl = gsap.timeline({ defaults: { duration: 1 } });

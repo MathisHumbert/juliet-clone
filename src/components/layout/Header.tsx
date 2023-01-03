@@ -7,6 +7,8 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import MenuHeader from './MenuHeader';
 import MainLogo from '../shared/logo/MainLogo';
 import usePage from '../../context/PageContext';
+import Transition from './Transition';
+import TransitionLink from '../shared/TransitionLink';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
@@ -97,19 +99,23 @@ export default function Header() {
             <span>Menu</span>
             <span>Menu</span>
           </button>
-          <a
-            className='header__logo'
-            data-color='#a6e2e3'
-            ref={mainLogoRef}
-            onMouseEnter={onMainLogoEnter}
-            onMouseLeave={onMainLogoLeave}
-          >
-            <MainLogo />
-          </a>
-          <a className='header__contact'>
-            <span>Contact</span>
-            <span>Contact</span>
-          </a>
+          <TransitionLink href='/'>
+            <a
+              className='header__logo'
+              data-color='#a6e2e3'
+              ref={mainLogoRef}
+              onMouseEnter={onMainLogoEnter}
+              onMouseLeave={onMainLogoLeave}
+            >
+              <MainLogo />
+            </a>
+          </TransitionLink>
+          <TransitionLink href='/contact'>
+            <a className='header__contact'>
+              <span>Contact</span>
+              <span>Contact</span>
+            </a>
+          </TransitionLink>
         </div>
       </div>
       <MenuHeader ref={menuBackgroundLottieRef} />

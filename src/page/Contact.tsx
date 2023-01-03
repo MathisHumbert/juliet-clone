@@ -4,6 +4,7 @@ import ContactLocations from '../components/contact/ContactLocations';
 import ContactHero from '../components/contact/ContactHero';
 import ContactConnect from '../components/contact/ContactConnect';
 import ContactSocial from '../components/contact/ContactSocial';
+import LoaderLayout from '../components/layout/LoaderLayout';
 
 export default function Contact() {
   useEffect(() => {
@@ -14,11 +15,13 @@ export default function Contact() {
   }, []);
 
   return (
-    <div className='section__container'>
-      <ContactHero />
-      <ContactLocations />
-      <ContactConnect />
-      <ContactSocial />
-    </div>
+    <LoaderLayout>
+      <div className='section__container'>
+        <ContactHero />
+        <ContactLocations />
+        <ContactConnect />
+        <ContactSocial />
+      </div>
+    </LoaderLayout>
   );
 }

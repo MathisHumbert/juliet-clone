@@ -7,16 +7,28 @@ interface PageProviderProps {
 }
 interface IPage {
   isPageFirstLoad: boolean;
-  activePageContext: () => void;
-  lenis: Lenis | null;
+  isPageLoaded: boolean;
+  isPageTransition: boolean;
   isDesktop: boolean;
+  lenis: Lenis | null;
+  activePageContext: () => void;
+  activePageLoaded: () => void;
+  resetPageLoaded: () => void;
+  activePageTransition: () => void;
+  resetPageTransition: () => void;
 }
 
 const PageContext = createContext<IPage>({
   isPageFirstLoad: false,
-  activePageContext: () => {},
+  isPageLoaded: false,
+  isPageTransition: false,
   lenis: null,
   isDesktop: false,
+  activePageContext: () => {},
+  activePageLoaded: () => {},
+  resetPageLoaded: () => {},
+  activePageTransition: () => {},
+  resetPageTransition: () => {},
 });
 
 const lenis = new Lenis({
@@ -57,10 +69,20 @@ lenis?.on('scroll', ({ scroll }: { scroll: number }) => {
 });
 
 export const PageProvider = ({ children }: PageProviderProps) => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
   const [isPageFirstLoad, setIsPageFirstLoad] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [isPageTransition, setIsPageTransition] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
 
   const activePageContext = () => setIsPageFirstLoad(true);
+
+  const activePageLoaded = () => setIsPageLoaded(true);
+
+  const resetPageLoaded = () => setIsPageLoaded(false);
+
+  const activePageTransition = () => setIsPageTransition(true);
+
+  const resetPageTransition = () => setIsPageTransition(false);
 
   useEffect(() => {
     const onWindowResize = () => {
@@ -73,8 +95,19 @@ export const PageProvider = ({ children }: PageProviderProps) => {
   }, []);
 
   const memoedValue = useMemo(
-    () => ({ isPageFirstLoad, activePageContext, lenis, isDesktop }),
-    [isPageFirstLoad, isDesktop]
+    () => ({
+      isPageFirstLoad,
+      isPageLoaded,
+      isPageTransition,
+      isDesktop,
+      lenis,
+      activePageContext,
+      activePageLoaded,
+      resetPageLoaded,
+      activePageTransition,
+      resetPageTransition,
+    }),
+    [isPageFirstLoad, isPageLoaded, isPageTransition, isDesktop]
   );
 
   return (
