@@ -4,6 +4,8 @@ import { ScrollTrigger, CustomEase } from 'gsap/all';
 import SplitType from 'split-type';
 import styled from 'styled-components';
 
+import usePage from '../../context/PageContext';
+
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 CustomEase.create('cubic-title', '0.25, 1, 0.5, 1');
@@ -30,6 +32,7 @@ export default function HomeWorkItem({
   href,
   last,
 }: Props) {
+  const { isPageLoaded } = usePage();
   const workItemTitleRef = useRef(null);
   const workItemFooterRef = useRef(null);
   const workItemTextLeftRef = useRef(null);
@@ -37,7 +40,8 @@ export default function HomeWorkItem({
   const workItemBarRef = useRef(null);
 
   useEffect(() => {
-    const title = new SplitType(workItemTitleRef.current!, {
+    if (!isPageLoaded) return;
+    const title = new SplitType(workItemTitleRef?.current!, {
       types: 'words',
       wordClass: 'work__item__title__item',
       tagName: 'span',
@@ -48,7 +52,7 @@ export default function HomeWorkItem({
       tagName: 'span',
     });
 
-    const text = new SplitType(workItemTextRightRef.current!, {
+    const text = new SplitType(workItemTextRightRef?.current!, {
       types: 'words',
       tagName: 'span',
     });
@@ -62,26 +66,26 @@ export default function HomeWorkItem({
         stagger: 0.08,
         ease: 'cubic-title',
         scrollTrigger: {
-          trigger: workItemTitleRef.current,
+          trigger: workItemTitleRef?.current,
           start: 'bottom bottom',
         },
       }
     );
 
     gsap.fromTo(
-      [text.words, workItemTextLeftRef.current, workItemBarRef.current],
+      [text.words, workItemTextLeftRef?.current, workItemBarRef?.current],
       { opacity: 0 },
       {
         opacity: 1,
         duration: 1,
         ease: 'cubic-opacity',
         scrollTrigger: {
-          trigger: workItemFooterRef.current,
+          trigger: workItemFooterRef?.current,
           start: 'bottom bottom',
         },
       }
     );
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>

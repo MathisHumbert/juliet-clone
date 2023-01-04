@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TransitionLink from '../shared/TransitionLink';
 
 type Props = {
   id: number;
@@ -15,18 +16,20 @@ export default function MenuHeaderItem({
 }: Props) {
   return (
     <Wrapper className='menu__nav__item'>
-      <a href={href} className='menu__nav__link'>
-        <div className='menu__nav__title'>
-          <span className='menu__nav__title--main' data-id={`0${id}`}>
-            {text}
-          </span>
-        </div>
-        <div className='looped__text'>
-          {infiniteText.map((text, index) => (
-            <div key={index}>{text}</div>
-          ))}
-        </div>
-      </a>
+      <TransitionLink href={href} hideNav>
+        <a className='menu__nav__link'>
+          <div className='menu__nav__title'>
+            <span className='menu__nav__title--main' data-id={`0${id}`}>
+              {text}
+            </span>
+          </div>
+          <div className='looped__text'>
+            {infiniteText.map((text, index) => (
+              <div key={index}>{text}</div>
+            ))}
+          </div>
+        </a>
+      </TransitionLink>
     </Wrapper>
   );
 }
@@ -118,6 +121,7 @@ const Wrapper = styled.li`
     display: inline-block;
     margin-top: -22px;
     margin-bottom: -6px;
+    will-change: transform;
   }
 
   @media (min-width: 900px) {

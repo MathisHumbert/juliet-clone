@@ -8,21 +8,26 @@ CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 import { footerDynamicWords } from '../../utils/mockData';
 import FlowerLogo from '../shared/logo/FlowerLogo';
+import usePage from '../../context/PageContext';
 
 export default function ContactHero() {
+  const { isPageLoaded } = usePage();
   const dynamicContainerRef = useRef<HTMLSpanElement>(null);
   const dynamicTextRef = useRef<HTMLSpanElement>(null);
 
   let isFlowerAnimating = false;
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const titles = document.querySelectorAll('.context__hero__title--inner');
 
-    gsap.fromTo(
-      titles,
-      { yPercent: 100 },
-      { yPercent: 0, duration: 1, stagger: 0.08, ease: 'text-in' }
-    );
+    gsap.to(titles, {
+      y: 0,
+      duration: 1,
+      stagger: 0.08,
+      ease: 'text-in',
+    });
 
     const tl = gsap.timeline({
       repeat: -1,
@@ -34,15 +39,15 @@ export default function ContactHero() {
           ];
         dynamicTextRef.current!.innerHTML = name;
 
-        gsap.to(dynamicContainerRef.current, {
+        gsap.to(dynamicContainerRef?.current, {
           opacity: 1,
-          width: dynamicTextRef.current!.offsetWidth,
+          width: dynamicTextRef?.current!.offsetWidth,
           duration: 0.6,
           ease: 'fade-in',
         });
       },
       onRepeat: () => {
-        gsap.to(dynamicContainerRef.current, {
+        gsap.to(dynamicContainerRef?.current, {
           opacity: 0,
           width: '0px',
           duration: 0.6,
@@ -56,42 +61,42 @@ export default function ContactHero() {
           },
         });
 
-        gsap.to(dynamicContainerRef.current, {
+        gsap.to(dynamicContainerRef?.current, {
           opacity: 1,
           duration: 0.6,
           delay: 0.6,
           ease: 'fade-in',
           width: () => {
-            return dynamicTextRef.current!.offsetWidth;
+            return dynamicTextRef?.current!.offsetWidth;
           },
         });
       },
     });
 
-    tl.to(dynamicContainerRef.current, {
+    tl.to(dynamicContainerRef?.current, {
       opacity: 0,
       duration: 0.6,
       ease: 'fade-in',
     });
 
-    dynamicContainerRef.current?.addEventListener('mouseenter', () =>
+    dynamicContainerRef?.current?.addEventListener('mouseenter', () =>
       tl.pause()
     );
 
-    dynamicContainerRef.current?.addEventListener('mouseleave', () =>
+    dynamicContainerRef?.current?.addEventListener('mouseleave', () =>
       tl.play()
     );
 
     return () => {
-      dynamicContainerRef.current?.removeEventListener('mouseenter', () =>
+      dynamicContainerRef?.current?.removeEventListener('mouseenter', () =>
         tl.pause()
       );
 
-      dynamicContainerRef.current?.removeEventListener('mouseleave', () =>
+      dynamicContainerRef?.current?.removeEventListener('mouseleave', () =>
         tl.play()
       );
     };
-  }, []);
+  }, [isPageLoaded]);
 
   const onFlowerLogoEnter = () => {
     const flowerLogoSvg = document.querySelector('.flower__logo');
@@ -259,8 +264,8 @@ const Wrapper = styled.section`
 
   .context__dynamic__container {
     display: block;
-    /* overflow: hidden; */
     position: relative;
+    will-change: opacity, width;
 
     &:hover {
       &::after {
@@ -289,5 +294,10 @@ const Wrapper = styled.section`
     position: absolute;
     left: 50%;
     transform: translate(-50%, 10px);
+  }
+
+  .context__hero__title--inner {
+    transform: translateY(100%);
+    will-change: transform;
   }
 `;

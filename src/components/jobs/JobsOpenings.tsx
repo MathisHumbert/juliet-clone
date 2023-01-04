@@ -3,16 +3,21 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
+
 gsap.registerPlugin(CustomEase);
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function JobsOpenings() {
+  const { isPageLoaded } = usePage();
   const firstTitleRef = useRef(null);
   const secondTitleRef = useRef(null);
   const textRef = useRef(null);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const tl = gsap.timeline();
 
     tl.fromTo(
@@ -25,7 +30,7 @@ export default function JobsOpenings() {
       { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
       0.6
     );
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>

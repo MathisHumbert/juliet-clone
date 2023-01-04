@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 
 import useOnScreen from '../../utils/useOnScreen';
+import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 
@@ -12,6 +13,7 @@ CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 export default function HomeBlogSocial() {
+  const { isPageLoaded } = usePage();
   const [animationDone, setAnimationDone] = useState(false);
   const [text, setText] = useState<HTMLElement[]>([]);
 
@@ -21,6 +23,8 @@ export default function HomeBlogSocial() {
   const onScreen = useOnScreen(blogSocialRef, 0.5);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const scrollBlogContainer = document.querySelector(
       '.home__blog__scroll__item__container'
     );
@@ -28,7 +32,7 @@ export default function HomeBlogSocial() {
 
     const blogHeadingButton = document.querySelector('.blog__heading__button');
 
-    const title = new SplitType(blogSocialMainTitleRef.current!, {
+    const title = new SplitType(blogSocialMainTitleRef?.current!, {
       types: 'chars',
       tagName: 'span',
     });
@@ -49,7 +53,7 @@ export default function HomeBlogSocial() {
     );
 
     ScrollTrigger.create({
-      trigger: blogSocialRef.current,
+      trigger: blogSocialRef?.current,
       start: () =>
         `+=${
           scrollBlogContainer!.getBoundingClientRect().width! +
@@ -59,9 +63,10 @@ export default function HomeBlogSocial() {
       scrub: true,
       animation: tl,
     });
-  }, []);
+  }, [isPageLoaded]);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
     if (animationDone || !onScreen) return;
 
     const blogSocialImages = document.querySelectorAll('.blog__social__img');
@@ -81,7 +86,7 @@ export default function HomeBlogSocial() {
       },
       1
     );
-  }, [onScreen]);
+  }, [onScreen, isPageLoaded]);
 
   return (
     <Wrapper ref={blogSocialRef}>

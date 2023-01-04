@@ -2,12 +2,14 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 
+import usePage from '../../context/PageContext';
 import { homeBlogScrollItems } from '../../utils/mockData';
 import HomeBlogScrollItem from './HomeBlogItem';
 import HomeBlogScrollSocial from './HomeBlogSocial';
 import HomeBlogHeading from './HomeBlogHeading';
 
 export default function HomeBlogScroll() {
+  const { isPageLoaded } = usePage();
   const homeBlogRef = useRef(null);
   const homeBlogContainerRef = useRef(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -15,21 +17,23 @@ export default function HomeBlogScroll() {
   const scrollBlogContainerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    gsap.to(scrollContainerRef.current, {
+    if (!isPageLoaded) return;
+
+    gsap.to(scrollContainerRef?.current, {
       xPercent: -100,
       duration: 3,
       x: () =>
-        (scrollBlogContainerRef.current?.getBoundingClientRect().width! +
+        (scrollBlogContainerRef?.current?.getBoundingClientRect().width! +
           window.innerWidth) /
           5 -
         window.innerWidth,
       ease: 'none',
       scrollTrigger: {
-        trigger: homeBlogContainerRef.current,
+        trigger: homeBlogContainerRef?.current,
         start: 'top top',
         end: () =>
           `+=${
-            scrollBlogContainerRef.current?.getBoundingClientRect().width! +
+            scrollBlogContainerRef?.current?.getBoundingClientRect().width! +
             window.innerWidth +
             window.innerWidth
           }`,
@@ -41,20 +45,20 @@ export default function HomeBlogScroll() {
     });
 
     gsap.fromTo(
-      scrollRef.current,
+      scrollRef?.current,
       { xPercent: 10 },
       {
         xPercent: 0,
         ease: 'none',
         scrollTrigger: {
-          trigger: homeBlogRef.current,
+          trigger: homeBlogRef?.current,
           start: 'top bottom',
           end: () => `+=${window.innerHeight}`,
           scrub: true,
         },
       }
     );
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper ref={homeBlogRef}>

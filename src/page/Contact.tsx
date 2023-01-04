@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
+import LoaderLayout from '../components/layout/LoaderLayout';
 import ContactLocations from '../components/contact/ContactLocations';
 import ContactHero from '../components/contact/ContactHero';
 import ContactConnect from '../components/contact/ContactConnect';
 import ContactSocial from '../components/contact/ContactSocial';
-import LoaderLayout from '../components/layout/LoaderLayout';
 
 export default function Contact() {
   useEffect(() => {

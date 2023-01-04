@@ -3,53 +3,54 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
+
 gsap.registerPlugin(CustomEase);
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function HomeBlogHeading({ isDesktop }: { isDesktop: boolean }) {
+  const { isPageLoaded } = usePage();
   const blogHeadingRef = useRef(null);
   const trackingBarContainerRef = useRef(null);
   const trackingBarRef = useRef(null);
 
   useEffect(() => {
-    gsap.killTweensOf(trackingBarRef.current);
-    gsap.killTweensOf(blogHeadingRef.current);
+    if (!isPageLoaded) return;
+
+    gsap.killTweensOf(trackingBarRef?.current);
+    gsap.killTweensOf(blogHeadingRef?.current);
 
     if (isDesktop) {
       const blogScroll = document.querySelector(
         '.home__blog__scroll__container'
       );
 
-      gsap.to(trackingBarRef.current, {
+      gsap.to(trackingBarRef?.current, {
         height: '100%',
         ease: 'linear',
         scrollTrigger: {
-          trigger: trackingBarContainerRef.current,
+          trigger: trackingBarContainerRef?.current,
           start: 'top bottom-=80px',
           end: 'bottom+=80px bottom',
           scrub: 1,
         },
         onComplete: () => {
-          gsap.killTweensOf(trackingBarRef.current);
+          gsap.killTweensOf(trackingBarRef?.current);
         },
       });
 
-      gsap.fromTo(
-        blogHeadingRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.8,
-          ease: 'fade-in',
-          scrollTrigger: {
-            trigger: blogScroll,
-            start: 'top bottom',
-            end: 'bottom bottom',
-          },
-        }
-      );
+      gsap.to(blogHeadingRef?.current, {
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        scrollTrigger: {
+          trigger: blogScroll,
+          start: 'top bottom',
+          end: 'bottom bottom',
+        },
+      });
     }
-  }, [isDesktop]);
+  }, [isDesktop, isPageLoaded]);
 
   return (
     <Wrapper ref={blogHeadingRef} className='home__blog__heading'>
@@ -81,6 +82,7 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 60px;
   padding-left: var(--margin);
+  opacity: 0;
 
   @media (min-width: 768px) {
     padding-left: var(--col1);

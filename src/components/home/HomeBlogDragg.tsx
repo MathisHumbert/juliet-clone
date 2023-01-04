@@ -3,37 +3,39 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/all';
 
-import HomeBlogHeading from './HomeBlogHeading';
+import usePage from '../../context/PageContext';
 import { homeBlogScrollItems } from '../../utils/mockData';
+import HomeBlogHeading from './HomeBlogHeading';
 import HomeBlogItem from './HomeBlogItem';
 
 gsap.registerPlugin(Draggable);
 
 export default function HomeBlogDragg() {
+  const { isPageLoaded } = usePage();
+
   const blogDragRef = useRef(null);
   const blogDragItemContainerRef = useRef(null);
   let startX = 0;
 
   useEffect(() => {
-    const draggableInstance = Draggable.create(
-      blogDragItemContainerRef.current,
-      {
-        type: 'x',
-        bounds: blogDragRef.current,
-        edgeResistance: 0.65,
-        autoScroll: 1.5,
-        lockAxis: true,
-        throwProps: true,
-        onDragStart: function () {
-          startX = this.x;
-        },
-        onDragEnd: function () {
-          const smooth = (this.x - startX) * 0.8;
-          gsap.to(blogDragItemContainerRef.current, { x: this.x + smooth });
-        },
-      }
-    );
-  }, []);
+    if (!isPageLoaded) return;
+
+    Draggable.create(blogDragItemContainerRef?.current, {
+      type: 'x',
+      bounds: blogDragRef?.current,
+      edgeResistance: 0.65,
+      autoScroll: 1.5,
+      lockAxis: true,
+      throwProps: true,
+      onDragStart: function () {
+        startX = this.x;
+      },
+      onDragEnd: function () {
+        const smooth = (this.x - startX) * 0.8;
+        gsap.to(blogDragItemContainerRef?.current, { x: this.x + smooth });
+      },
+    });
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>

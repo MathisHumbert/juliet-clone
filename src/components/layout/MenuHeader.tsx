@@ -4,10 +4,10 @@ import { CustomEase } from 'gsap/all';
 import styled from 'styled-components';
 import { Player } from '@lottiefiles/react-lottie-player';
 
+import usePage from '../../context/PageContext';
 import { links } from '../../utils/mockData';
 import menuBackgroundLottie from '../../lottie/menu-background.json';
 import MenuHeaderItem from './MenuHeaderItem';
-import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic', '0.76, 0, 0.24, 1');
@@ -26,27 +26,27 @@ const MenuHeader = React.forwardRef(
         defaults: { duration: 1, ease: 'cubic' },
         onStart: () => {
           // @ts-ignore
-          ref.current.pause();
+          ref?.current.pause();
         },
         onComplete: () => {
-          menuRef.current?.classList.remove('menu--open');
+          menuRef?.current?.classList.remove('menu--open');
           lenis?.start();
         },
       });
 
       tl.to(
         [
-          menuBackgroundRef.current,
-          menuButtonCloseRef.current,
-          menuVideoRef.current,
+          menuBackgroundRef?.current,
+          menuButtonCloseRef?.current,
+          menuVideoRef?.current,
         ],
         {
           opacity: 0,
           duration: 1,
         }
       )
-        .to(menuRef.current, { background: 'transparent' }, 0)
-        .to(menuNavRef.current, { opacity: 0 }, 0);
+        .to(menuRef?.current, { background: 'transparent' }, 0)
+        .to(menuNavRef?.current, { opacity: 0 }, 0);
     };
 
     return (
@@ -111,6 +111,7 @@ const Wrapper = styled.div`
   justify-content: center;
   opacity: 0;
   pointer-events: none;
+  will-change: background;
 
   &.menu--open {
     opacity: 1;
@@ -145,6 +146,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     z-index: 2;
+    will-change: opacity;
   }
 
   .menu__background__lootie {
@@ -164,6 +166,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     color: var(--white);
+    will-change: opacity;
   }
 
   .menu__button__close {
@@ -178,6 +181,7 @@ const Wrapper = styled.div`
     border: 1px solid var(--white);
     border-radius: 1000px;
     pointer-events: none;
+    will-change: opacity;
 
     &:hover svg {
       animation: 1s cubic-bezier(0.76, 0, 0.24, 1) forwards rotateSvg;
@@ -229,6 +233,7 @@ const Wrapper = styled.div`
     mask-position: center;
     mask-repeat: no-repeat;
     pointer-events: none;
+    will-change: opacity;
 
     iframe {
       height: 100%;

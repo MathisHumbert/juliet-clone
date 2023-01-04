@@ -3,9 +3,9 @@ import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 import styled from 'styled-components';
 
+import usePage from '../../context/PageContext';
 import { homeWorkItems } from '../../utils/mockData';
 import HomeWorkItem from './HomeWorkItem';
-import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create('cubic-opacity', '0.5, 1, 0.89, 1');
@@ -19,23 +19,25 @@ export default function HomeWork() {
   const workTitleRef = useRef(null);
 
   useEffect(() => {
-    gsap.to(trackingBarRef.current, {
+    if (!isPageLoaded) return;
+
+    gsap.to(trackingBarRef?.current, {
       height: '100%',
       ease: 'linear',
       scrollTrigger: {
-        trigger: trackingBarContainerRef.current,
+        trigger: trackingBarContainerRef?.current,
         start: 'top bottom-=80px',
         end: 'bottom+=80px bottom',
         scrub: 1,
         toggleActions: 'play none none none',
       },
       onComplete: () => {
-        gsap.killTweensOf(trackingBarRef.current);
+        gsap.killTweensOf(trackingBarRef?.current);
       },
     });
 
     gsap.fromTo(
-      workButtonRef.current,
+      workButtonRef?.current,
       {
         opacity: 0,
         y: 40,
@@ -46,7 +48,7 @@ export default function HomeWork() {
         duration: 0.8,
         ease: 'cubic-opacity',
         scrollTrigger: {
-          trigger: workButtonContainerRef.current,
+          trigger: workButtonContainerRef?.current,
           start: 'top bottom',
           end: 'bottom bottom',
         },
@@ -57,7 +59,7 @@ export default function HomeWork() {
   useEffect(() => {
     if (!isPageLoaded) return;
 
-    gsap.to([workTitleRef.current, trackingBarRef.current], {
+    gsap.to([workTitleRef?.current, trackingBarRef?.current], {
       opacity: 1,
       duration: 0.8,
       ease: 'cubic-opacity',
@@ -210,6 +212,7 @@ const Wrapper = styled.section`
     text-transform: uppercase;
     border: 1px solid var(--black);
     border-radius: 200px;
+    position: relative;
 
     .looped__text div {
       margin-top: 3px;

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
+
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
@@ -10,23 +12,26 @@ CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('image-in', '0.12, 0, 0.39, 0');
 
 export default function ContactLocations() {
+  const { isPageLoaded } = usePage();
   const separatorBar = useRef(null);
 
-  gsap.fromTo(
-    separatorBar.current,
-    { width: 0 },
-    {
-      width: '100%',
-      duration: 0.6,
-      ease: 'power1.easeOut',
-      scrollTrigger: {
-        trigger: separatorBar.current,
-        start: 'top bottom',
-      },
-    }
-  );
-
   useEffect(() => {
+    if (!isPageLoaded) return;
+
+    gsap.fromTo(
+      separatorBar?.current,
+      { width: 0 },
+      {
+        width: '100%',
+        duration: 0.6,
+        ease: 'power1.easeOut',
+        scrollTrigger: {
+          trigger: separatorBar?.current,
+          start: 'top bottom',
+        },
+      }
+    );
+
     const locationsItems = document.querySelectorAll(
       '.contact__locations__item'
     );
@@ -43,32 +48,16 @@ export default function ContactLocations() {
         scrollTrigger: { trigger: item, start: 'top bottom' },
       });
 
-      tl.fromTo(
-        title,
-        { yPercent: 100 },
-        { yPercent: 0, duration: 1, ease: 'text-in' }
-      )
-        .fromTo(
-          text,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, ease: 'fade-in', duration: 0.8 },
-          0.3
-        )
-        .fromTo(
+      tl.to(title, { y: 0, duration: 1, ease: 'text-in' })
+        .to(text, { y: 0, opacity: 1, ease: 'fade-in', duration: 0.8 }, 0.3)
+        .to(
           button,
-          { x: 40, opacity: 0 },
           { x: 0, opacity: 1, duration: 1, ease: 'power1.easeOut' },
           0.6
         )
-        .fromTo(
-          bar,
-          { width: 0 },
-          { width: '100%', duration: 0.6, ease: 'power1.easeOut' },
-          0.9
-        )
-        .fromTo(
+        .to(bar, { width: '100%', duration: 0.6, ease: 'power1.easeOut' }, 0.9)
+        .to(
           img,
-          { clipPath: 'polygon(0 0,100% 0,100% 0,0 0)' },
           {
             clipPath: 'polygon(0 0,100% 0,100% 100%,0 100%)',
             duration: 0.8,
@@ -76,9 +65,9 @@ export default function ContactLocations() {
           },
           0.3
         )
-        .fromTo(
+        .to(
           img,
-          { scale: 1.1 },
+
           {
             scale: 1,
             duration: 1.6,
@@ -93,7 +82,7 @@ export default function ContactLocations() {
         animation: tl,
       });
     });
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>
@@ -172,6 +161,8 @@ const Wrapper = styled.section`
   margin-bottom: 90px;
   pointer-events: auto;
   min-height: 100%;
+  max-width: 100vw;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     margin-bottom: 120px;
@@ -250,6 +241,8 @@ const Wrapper = styled.section`
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    transform: translateY(100%);
+    will-change: transform;
   }
 
   .locations__item__header {
@@ -270,6 +263,9 @@ const Wrapper = styled.section`
   .locations__item__text {
     font-size: 16px;
     line-height: 22px;
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
   }
 
   @media (min-width: 1024px) {
@@ -290,6 +286,9 @@ const Wrapper = styled.section`
     border: 1px solid var(--black);
     border-radius: 200px;
     overflow: hidden;
+    transform: translateX(40px);
+    opacity: 0;
+    will-change: transform, opacity;
 
     &:hover .looped__text div {
       animation-play-state: paused;
@@ -318,10 +317,11 @@ const Wrapper = styled.section`
   .locations__item__bar {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 0;
     left: 0;
     border-bottom: 1px solid var(--black);
     display: none;
+    will-change: width;
   }
 
   @media (min-width: 768px) {
@@ -340,6 +340,9 @@ const Wrapper = styled.section`
     display: block;
     object-fit: cover;
     width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transform: scale(1.1);
+    will-change: transform, clip-path;
   }
 
   .locations__item__separator {

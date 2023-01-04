@@ -1,14 +1,9 @@
-import * as React from 'react';
-
 export default function MaskFlowerLogo() {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       xmlnsXlink='http://www.w3.org/1999/xlink'
       viewBox='-528 708 82 84.9'
-      style={{
-        enableBackground: 'new -528 708 82 84.9',
-      }}
       xmlSpace='preserve'
     >
       <defs>

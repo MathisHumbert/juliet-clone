@@ -3,22 +3,27 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import styled from 'styled-components';
 
+import usePage from '../../context/PageContext';
+
 export default function HomeAboutImage() {
+  const { isPageLoaded } = usePage();
   const homeAboutBackgroundRef = useRef(null);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     ScrollTrigger.create({
-      trigger: homeAboutBackgroundRef.current,
+      trigger: homeAboutBackgroundRef?.current,
       start: 'top botoom',
       endTrigger: 'html',
       onEnter: () => {
-        gsap.set(homeAboutBackgroundRef.current, { position: 'fixed' });
+        gsap.set(homeAboutBackgroundRef?.current, { position: 'fixed' });
       },
       onLeaveBack: () => {
-        gsap.set(homeAboutBackgroundRef.current, { position: 'absolute' });
+        gsap.set(homeAboutBackgroundRef?.current, { position: 'absolute' });
       },
     });
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper ref={homeAboutBackgroundRef}>

@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
+
 gsap.registerPlugin(CustomEase);
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function JobsHero() {
+  const { isPageLoaded } = usePage();
   const smallTitleRef = useRef(null);
   const textRef = useRef(null);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const container = document.querySelector(
       '.section__container'
     )! as HTMLDivElement;
@@ -21,25 +26,19 @@ export default function JobsHero() {
 
     const tl = gsap.timeline();
 
-    tl.fromTo(
-      titles,
-      { yPercent: 100 },
-      { yPercent: 0, duration: 1, ease: 'text-in', stagger: 0.08 }
-    )
-      .fromTo(
-        smallTitleRef.current,
-        { y: 20, opacity: 0 },
+    tl.to(titles, { y: 0, duration: 1, ease: 'text-in', stagger: 0.08 })
+      .to(
+        smallTitleRef?.current,
         { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
         0.3
       )
-      .fromTo(
-        textRef.current,
-        { y: 40, opacity: 0 },
+      .to(
+        textRef?.current,
         { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
         0.6
       );
 
-    gsap.to(smallTitleRef.current, {
+    gsap.to(smallTitleRef?.current, {
       rotate: height * 0.1,
       scrollTrigger: {
         trigger: container,
@@ -48,7 +47,7 @@ export default function JobsHero() {
         scrub: 1,
       },
     });
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>
@@ -144,6 +143,7 @@ const Wrapper = styled.section`
     display: block;
     padding-top: 22px;
     padding-bottom: 6px;
+    transform: translateY(100%);
     will-change: transform;
   }
 
@@ -154,7 +154,8 @@ const Wrapper = styled.section`
     display: block;
     padding: 4px;
     background: var(--orange);
-    transform: rotate(-5.3deg);
+    transform: translateY(20px), rotate(-5.3deg);
+    opacity: 0;
     will-change: transform, opacity;
 
     p {
@@ -181,6 +182,9 @@ const Wrapper = styled.section`
     padding: 0 24px;
     text-align: center;
     z-index: 3;
+    transform: translateY(40px);
+    opacity: 0;
+    will-change: transform, opacity;
 
     p {
       font-size: 24px;

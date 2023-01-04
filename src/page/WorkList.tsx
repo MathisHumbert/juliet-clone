@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 
+import usePage from '../context/PageContext';
+import LoaderLayout from '../components/layout/LoaderLayout';
 import WorkListItem from '../components/workList/WorkListItem';
 import { workListItem } from '../utils/mockData';
 
@@ -11,6 +13,7 @@ CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 export default function WorkList() {
+  const { isPageLoaded } = usePage();
   const workListRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +23,8 @@ export default function WorkList() {
   }, []);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const workListItems = gsap.utils.toArray(
       '.work__list__item'
     ) as HTMLLIElement[];
@@ -177,18 +182,20 @@ export default function WorkList() {
         button.removeEventListener('click', onClick);
       });
     };
-  }, []);
+  }, [isPageLoaded]);
 
   return (
-    <Wrapper ref={workListRef}>
-      <div className='work__list__container'>
-        <ul className='work__list'>
-          {workListItem.map((item) => (
-            <WorkListItem key={item.id} {...item} />
-          ))}
-        </ul>
-      </div>
-    </Wrapper>
+    <LoaderLayout>
+      <Wrapper ref={workListRef}>
+        <div className='work__list__container'>
+          <ul className='work__list'>
+            {workListItem.map((item) => (
+              <WorkListItem key={item.id} {...item} />
+            ))}
+          </ul>
+        </div>
+      </Wrapper>
+    </LoaderLayout>
   );
 }
 

@@ -3,39 +3,44 @@ import gsap from 'gsap';
 import styled from 'styled-components';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
+
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
 export default function ContactConnect() {
+  const { isPageLoaded } = usePage();
   const contactConnectRef = useRef(null);
   const leftTitleRef = useRef(null);
   const rightTitleRef = useRef(null);
   const textRef = useRef(null);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const tl = gsap.timeline();
 
     tl.fromTo(
-      [leftTitleRef.current, rightTitleRef.current],
+      [leftTitleRef?.current, rightTitleRef?.current],
       {
         x: gsap.utils.wrap([-40, 40]),
         opacity: 0,
       },
       { x: 0, opacity: 1, duration: 1, ease: 'power1.easeOut' }
     ).fromTo(
-      textRef.current,
+      textRef?.current,
       { y: 40, opacity: 0 },
       { y: 1, opacity: 1, duration: 0.8, ease: 'fade-in' },
       0.3
     );
 
     ScrollTrigger.create({
-      trigger: contactConnectRef.current,
+      trigger: contactConnectRef?.current,
       start: 'center bottom',
       animation: tl,
     });
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>
@@ -76,6 +81,7 @@ const Wrapper = styled.section`
   .contact__connect__title {
     position: relative;
     text-transform: uppercase;
+    will-change: transform, opacity;
   }
 
   .contact__connect__title:first-child {
@@ -130,6 +136,7 @@ const Wrapper = styled.section`
     font-size: 24px;
     line-height: 32px;
     font-weight: 300;
+    will-change: transform, opacity;
   }
 
   @media (min-width: 1024px) {

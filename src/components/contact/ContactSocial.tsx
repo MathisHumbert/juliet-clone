@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 import { Player } from '@lottiefiles/react-lottie-player';
 
+import usePage from '../../context/PageContext';
 import SocialLottie from '../../lottie/dark-footer.json';
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
@@ -13,12 +14,15 @@ CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 
 export default function HomeBlogSocial() {
+  const { isPageLoaded } = usePage();
+  const blogSocialContainerRef = useRef(null);
   const blogSocialRef = useRef(null);
   const blogSocialMainTitleRef = useRef(null);
   const liLottieRef = useRef(null);
   const inLottieRef = useRef(null);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
     const socialImages = document.querySelectorAll('.contact__social__img');
 
     const title = new SplitType(blogSocialMainTitleRef.current!, {
@@ -50,13 +54,14 @@ export default function HomeBlogSocial() {
     );
 
     ScrollTrigger.create({
-      trigger: blogSocialRef.current,
+      trigger: blogSocialContainerRef?.current,
       start: 'center bottom',
+      end: 'bottom bottom',
       animation: tl,
       onEnter: () => document.body.classList.add('dark'),
       onLeaveBack: () => document.body.classList.remove('dark'),
     });
-  }, []);
+  }, [isPageLoaded]);
 
   const onLinkEnter = (lottieRef: MutableRefObject<Player | null>) => {
     lottieRef.current?.setPlayerDirection(1);
@@ -69,8 +74,8 @@ export default function HomeBlogSocial() {
   };
 
   return (
-    <Wrapper ref={blogSocialRef}>
-      <div className='contact__social__container'>
+    <Wrapper ref={blogSocialRef} className='contact__social'>
+      <div className='contact__social__container' ref={blogSocialContainerRef}>
         <h5 className='contact__social__title--sub'>
           <span>Follow us</span>
         </h5>

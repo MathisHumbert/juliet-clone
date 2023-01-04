@@ -2,7 +2,7 @@ export const links = [
   {
     id: 1,
     text: 'Work',
-    href: '/',
+    href: '/work',
     infiniteText: [
       'Work ',
       'Work ',
@@ -27,7 +27,7 @@ export const links = [
   {
     id: 2,
     text: 'About',
-    href: '/',
+    href: '/about',
     infiniteText: [
       'About ',
       'About ',
@@ -52,9 +52,8 @@ export const links = [
   {
     id: 3,
     text: 'Community',
-    href: '/',
+    href: '/community',
     infiniteText: [
-      'Community ',
       'Community ',
       'Community ',
       'Community ',
@@ -69,7 +68,7 @@ export const links = [
   {
     id: 4,
     text: 'Jobs',
-    href: '/',
+    href: '/jobs',
     infiniteText: [
       'Jobs ',
       'Jobs ',
@@ -90,15 +89,15 @@ export const links = [
       'Jobs ',
       'Jobs ',
       'Jobs ',
-      'Jobs',
-      'Jobs',
+      'Jobs ',
+      'Jobs ',
       'Jobs',
     ],
   },
   {
     id: 5,
     text: 'Contact',
-    href: '/',
+    href: '/contact',
     infiniteText: [
       'Contact ',
       'Contact ',

@@ -34,35 +34,35 @@ export default function WorkListItem({
   const workItemButtonRef = useRef(null);
 
   useEffect(() => {
-    new SplitType(workItemTextRef.current!, {
+    new SplitType(workItemTextRef?.current!, {
       types: 'words',
       tagName: 'span',
     });
   }, []);
 
   const onMouseEnter = () => {
-    const color = workItemRef.current?.getAttribute('data-color');
+    const color = workItemRef?.current?.getAttribute('data-color');
 
     const nextColor = color === '#8566f6' ? '#ed7c50' : '#8566f6';
 
-    gsap.set([workItemButtonRef.current, workItemSubTitleRef.current], {
+    gsap.set([workItemButtonRef?.current, workItemSubTitleRef?.current], {
       color: nextColor,
     });
-    gsap.to(workItemSpanImgRef.current, {
+    gsap.to(workItemSpanImgRef?.current, {
       scale: 1.05,
       duration: 1.6,
       ease: 'fade-in',
     });
 
-    workItemRef.current?.setAttribute('data-color', nextColor);
+    workItemRef?.current?.setAttribute('data-color', nextColor);
   };
 
   const onMouseLeave = () => {
-    gsap.set([workItemButtonRef.current, workItemSubTitleRef.current], {
+    gsap.set([workItemButtonRef?.current, workItemSubTitleRef?.current], {
       color: '#282829',
     });
 
-    gsap.to(workItemSpanImgRef.current, {
+    gsap.to(workItemSpanImgRef?.current, {
       scale: 1,
       duration: 1.6,
       ease: 'fade-in',
@@ -180,6 +180,7 @@ const Wrapper = styled.li`
     padding-top: 22px;
     padding-bottom: 6px;
     transform: translateY(100%);
+    will-change: transform;
   }
 
   .list__item__header__button {
@@ -239,10 +240,12 @@ const Wrapper = styled.li`
     position: relative;
     height: 0;
     overflow: hidden;
+    will-change: height;
   }
 
   .list__item__content__inner {
     padding-bottom: 30px;
+    will-change: height;
   }
 
   .list__item__content__link {
@@ -270,12 +273,11 @@ const Wrapper = styled.li`
     margin-bottom: 30px;
     overflow: hidden;
     pointer-events: auto;
-    will-change: clip-path, transform;
 
     span {
       display: block;
       transform: scale(1);
-      will-change: transform;
+      will-change: clip-path, transform;
     }
   }
 
@@ -284,8 +286,8 @@ const Wrapper = styled.li`
     width: 100%;
     object-fit: cover;
     height: calc(var(--grid) * 0.55);
-    will-change: clip-path, transform;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    will-change: clip-path, transform;
   }
 
   @media (min-width: 990px) {
@@ -314,6 +316,7 @@ const Wrapper = styled.li`
     font-family: 'Apoc';
     font-weight: 400;
     pointer-events: auto;
+    will-change: opacity, transform;
   }
 
   @media (min-width: 1024px) {
@@ -331,6 +334,7 @@ const Wrapper = styled.li`
     border-radius: 136px;
     line-height: 30px;
     pointer-events: auto;
+    will-change: opacity, transform;
 
     span {
       display: inline-block;
@@ -367,6 +371,7 @@ const Wrapper = styled.li`
     line-height: 16px;
     text-transform: uppercase;
     font-weight: 400;
+    will-change: opacity, transform;
 
     span:not(:last-child) {
       &::after {

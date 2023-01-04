@@ -5,9 +5,8 @@ import { CustomEase } from 'gsap/all';
 import { Player } from '@lottiefiles/react-lottie-player';
 
 import MenuHeader from './MenuHeader';
-import MainLogo from '../shared/logo/MainLogo';
 import usePage from '../../context/PageContext';
-import Transition from './Transition';
+import MainLogo from '../shared/logo/MainLogo';
 import TransitionLink from '../shared/TransitionLink';
 
 gsap.registerPlugin(CustomEase);
@@ -21,8 +20,8 @@ export default function Header() {
   const menuBackgroundLottieRef = useRef<Player | null>(null);
 
   const onMainLogoEnter = () => {
-    const color = mainLogoRef.current?.getAttribute('data-color');
-    const mainLogoSvg = mainLogoRef.current?.firstChild?.firstChild;
+    const color = mainLogoRef?.current?.getAttribute('data-color');
+    const mainLogoSvg = mainLogoRef?.current?.firstChild?.firstChild;
 
     const nextColor =
       color === '#a6e2e3'
@@ -31,12 +30,12 @@ export default function Header() {
         ? '#ed7c50'
         : '#a6e2e3';
 
-    mainLogoRef.current?.setAttribute('data-color', nextColor);
+    mainLogoRef?.current?.setAttribute('data-color', nextColor);
     gsap.to(mainLogoSvg!, { fill: color!, duration: 0.2, ease: 'power1.out' });
   };
 
   const onMainLogoLeave = () => {
-    const mainLogoSvg = mainLogoRef.current?.firstChild?.firstChild;
+    const mainLogoSvg = mainLogoRef?.current?.firstChild?.firstChild;
 
     gsap.to(mainLogoSvg!, {
       fill: '#282829',
@@ -62,7 +61,7 @@ export default function Header() {
         gsap.set([headerMenuBackground, headerMenuCloseButton], { opacity: 0 });
         gsap.set(headerMenuTitles, { yPercent: 120 });
         gsap.set(headerMenuNav, { opacity: 1 });
-        menuBackgroundLottieRef.current!.play();
+        menuBackgroundLottieRef?.current!.play();
         lenis?.stop();
       },
     });

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import LoaderLayout from '../components/layout/LoaderLayout';
 import JobsHero from '../components/jobs/JobsHero';
 import JobsImages from '../components/jobs/JobsImages';
 import JobsOpenings from '../components/jobs/JobsOpenings';
@@ -13,11 +14,13 @@ export default function Jobs() {
   }, []);
 
   return (
-    <div className='section__container'>
-      <JobsHero />
-      <JobsImages />
-      <JobsOpenings />
-      <ImageCarousel />
-    </div>
+    <LoaderLayout>
+      <div className='section__container'>
+        <JobsHero />
+        <JobsImages />
+        <JobsOpenings />
+        <ImageCarousel />
+      </div>
+    </LoaderLayout>
   );
 }

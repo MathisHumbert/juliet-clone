@@ -4,9 +4,9 @@ import { CustomEase } from 'gsap/all';
 import styled from 'styled-components';
 import { Player } from '@lottiefiles/react-lottie-player';
 
+import usePage from '../../context/PageContext';
 import FlowerLogo from '../shared/logo/FlowerLogo';
 import likeCrazyLottie from '../../lottie/like-cray.json';
-import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('cubic-text', '0.25, 1, 0.5, 1');
@@ -39,8 +39,8 @@ export default function HomeHero() {
       );
     });
 
-    tl.add(() => likeCrazyLottieRef.current!.play(), 0.8).to(
-      heroButtonRef.current,
+    tl.add(() => likeCrazyLottieRef?.current?.play(), 0.8).to(
+      heroButtonRef?.current,
       {
         marginLeft: 0,
         marginRight: 0,
@@ -137,6 +137,7 @@ export default function HomeHero() {
 
 const Wrapper = styled.section`
   padding: var(--padding-top) 0 90px;
+  min-height: 100vh;
 
   @media (min-width: 1024px) {
     padding: 180px 0;

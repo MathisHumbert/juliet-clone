@@ -1,15 +1,10 @@
-import React from 'react';
 import styled from 'styled-components';
-import usePage from '../../context/PageContext';
+
 import FlowerLogo from '../shared/logo/FlowerLogo';
 
 export default function Transition() {
-  const { isPageTransition } = usePage();
-
-  console.log(isPageTransition);
-
   return (
-    <Wrapper active={isPageTransition}>
+    <Wrapper className='transition__container'>
       <span>
         <FlowerLogo />
       </span>
@@ -17,7 +12,7 @@ export default function Transition() {
   );
 }
 
-const Wrapper = styled.div<{ active: boolean }>`
+const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -28,8 +23,8 @@ const Wrapper = styled.div<{ active: boolean }>`
   justify-content: center;
   background: var(--black);
   z-index: 1000;
-  opacity: ${(props) => (props.active ? 1 : 0)};
-  pointer-events: ${(props) => (props.active ? 'auto' : 'none')};
+  opacity: 0;
+  pointer-events: 'none';
 
   span {
     display: block;

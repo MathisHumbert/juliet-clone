@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/all';
@@ -7,10 +7,15 @@ gsap.registerPlugin(CustomEase);
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
 CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 
+import usePage from '../../context/PageContext';
 import MaskFlowerLogo from '../shared/logo/MaskFlowerLogo';
 
 export default function JobsImages() {
+  const { isPageLoaded } = usePage();
+
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const container = document.querySelector(
       '.section__container'
     )! as HTMLDivElement;
@@ -20,18 +25,21 @@ export default function JobsImages() {
     const height = container.offsetHeight;
     const parallax = [0.05, 0.1, 0.15, 0.1, 0.12, 0.05];
 
-    gsap.fromTo(
-      images,
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'fade-in',
-        delay: 0.6,
-        stagger: 0.2,
-      }
-    );
+    gsap.to(images, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'fade-in',
+      delay: 0.6,
+      stagger: 0.2,
+    });
+
+    gsap.to('.jobs__images__container svg', {
+      opacity: 1,
+      ease: 'fade-in',
+      delay: 1.2,
+      stagger: 0.6,
+    });
 
     figures.forEach((figure, index) => {
       gsap.to(figure, {
@@ -44,7 +52,7 @@ export default function JobsImages() {
         },
       });
     });
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <Wrapper>
@@ -99,12 +107,16 @@ const Wrapper = styled.section`
   .job__images__visual {
     position: absolute;
     margin-bottom: 1rem;
+    will-change: transform;
 
     img {
       position: relative;
       display: block;
       object-fit: cover;
       width: 100%;
+      transform: translateY(40px);
+      opacity: 0;
+      will-change: transform, opacity;
     }
 
     &:nth-child(1) {
@@ -259,6 +271,8 @@ const Wrapper = styled.section`
   svg {
     position: absolute;
     width: 39px;
+    opacity: 0;
+    will-change: opacity;
   }
 
   @media (min-width: 768px) {

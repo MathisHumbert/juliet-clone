@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger, CustomEase } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
 import torontoLottie from '../../lottie/toronto.json';
 import losAngelesLottie from '../../lottie/los-angeles.json';
 import julietLottie from '../../lottie/juliet.json';
@@ -14,6 +15,7 @@ CustomEase.create('fade-in', '0.5, 1, 0.89, 1');
 CustomEase.create('animate-in', '0.25, 1, 0.5, 1');
 
 export default function HomeAbout() {
+  const { isPageLoaded } = usePage();
   const homeAboutRef = useRef(null);
   const homeAboutHeaderRef = useRef(null);
   const julietLottieRef = useRef<Player | null>(null);
@@ -21,25 +23,15 @@ export default function HomeAbout() {
   const losAngelesLottieRef = useRef<Player | null>(null);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     const homeAboutTitle = document.querySelectorAll('.animate--in');
     const homeAboutButton = document.querySelectorAll('.fade--in');
-
-    ScrollTrigger.create({
-      trigger: homeAboutRef.current,
-      start: 'center bottom',
-      end: 'bottom bottom',
-      onEnter: () => {
-        document.body.classList.add('dark');
-      },
-      onLeaveBack: () => {
-        document.body.classList.remove('dark');
-      },
-    });
 
     const tl = gsap.timeline();
 
     tl.fromTo(
-      homeAboutHeaderRef.current,
+      homeAboutHeaderRef?.current,
       { opacity: 0 },
       { opacity: 1, duration: 0.8, ease: 'fade-in' }
     )
@@ -50,9 +42,9 @@ export default function HomeAbout() {
         0
       )
       .add(() => {
-        julietLottieRef.current?.play();
-        torontoLottieRef.current?.play();
-        losAngelesLottieRef.current?.play();
+        julietLottieRef?.current?.play();
+        torontoLottieRef?.current?.play();
+        losAngelesLottieRef?.current?.play();
       })
       .fromTo(
         homeAboutButton,
@@ -68,12 +60,21 @@ export default function HomeAbout() {
       );
 
     ScrollTrigger.create({
-      trigger: homeAboutRef.current,
+      trigger: homeAboutRef?.current,
       start: 'top bottom',
       end: 'bottom bottom',
       animation: tl,
     });
-  }, []);
+
+    ScrollTrigger.create({
+      trigger: homeAboutRef?.current,
+      start: 'center bottom',
+      endTrigger: '.home__about__container',
+      end: 'bottom bottom',
+      onEnter: () => document.body.classList.add('dark'),
+      onLeaveBack: () => document.body.classList.remove('dark'),
+    });
+  }, [isPageLoaded]);
 
   const onEnter = (className: string) => {
     const torontoImg = document.querySelector(className);
@@ -88,7 +89,7 @@ export default function HomeAbout() {
   };
 
   return (
-    <Wrapper ref={homeAboutRef}>
+    <Wrapper ref={homeAboutRef} className='home__about'>
       <div className='home__about__container'>
         <h2 className='home__about__header' ref={homeAboutHeaderRef}>
           <span>
@@ -230,6 +231,8 @@ const Wrapper = styled.section`
   color: var(--color);
   position: relative;
   z-index: 4;
+  max-width: 100vw;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     padding-top: 50px;

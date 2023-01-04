@@ -23,7 +23,7 @@ export default function Footer() {
 
   useEffect(() => {
     setLottieSrc(
-      footerRef.current?.classList.contains('light')
+      footerRef?.current?.classList.contains('light')
         ? lightFooterLottie
         : darkFooterLottie
     );
@@ -40,15 +40,15 @@ export default function Footer() {
           ];
         dynamicTextRef.current!.innerHTML = name;
 
-        gsap.to(dynamicContainerRef.current, {
+        gsap.to(dynamicContainerRef?.current, {
           opacity: 1,
-          width: dynamicTextRef.current!.offsetWidth,
+          width: dynamicTextRef?.current!.offsetWidth,
           duration: 0.6,
           ease: 'fade-in',
         });
       },
       onRepeat: () => {
-        gsap.to(dynamicContainerRef.current, {
+        gsap.to(dynamicContainerRef?.current, {
           opacity: 0,
           width: '0px',
           duration: 0.6,
@@ -62,51 +62,51 @@ export default function Footer() {
           },
         });
 
-        gsap.to(dynamicContainerRef.current, {
+        gsap.to(dynamicContainerRef?.current, {
           opacity: 1,
           duration: 0.6,
           delay: 0.6,
           ease: 'fade-in',
           width: () => {
-            return dynamicTextRef.current!.offsetWidth;
+            return dynamicTextRef?.current!.offsetWidth;
           },
         });
       },
     });
 
-    tl.to(dynamicContainerRef.current, {
+    tl.to(dynamicContainerRef?.current, {
       opacity: 0,
       duration: 0.6,
       ease: 'fade-in',
     });
 
-    dynamicContainerRef.current?.addEventListener('mouseenter', () =>
+    dynamicContainerRef?.current?.addEventListener('mouseenter', () =>
       tl.pause()
     );
 
-    dynamicContainerRef.current?.addEventListener('mouseleave', () =>
+    dynamicContainerRef?.current?.addEventListener('mouseleave', () =>
       tl.play()
     );
 
     return () => {
-      dynamicContainerRef.current?.removeEventListener('mouseenter', () =>
+      dynamicContainerRef?.current?.removeEventListener('mouseenter', () =>
         tl.pause()
       );
 
-      dynamicContainerRef.current?.removeEventListener('mouseleave', () =>
+      dynamicContainerRef?.current?.removeEventListener('mouseleave', () =>
         tl.play()
       );
     };
   }, []);
 
   const onLinkEnter = (lottieRef: MutableRefObject<Player | null>) => {
-    lottieRef.current?.setPlayerDirection(1);
-    lottieRef.current?.play();
+    lottieRef?.current?.setPlayerDirection(1);
+    lottieRef?.current?.play();
   };
 
   const onLinkLeave = (lottieRef: MutableRefObject<Player | null>) => {
-    lottieRef.current?.setPlayerDirection(-1);
-    lottieRef.current?.play();
+    lottieRef?.current?.setPlayerDirection(-1);
+    lottieRef?.current?.play();
   };
 
   return (
@@ -350,6 +350,7 @@ const Wrapper = styled.footer`
     display: block;
     overflow: hidden;
     position: relative;
+    will-change: opacity, width;
 
     &:hover {
       &::after {

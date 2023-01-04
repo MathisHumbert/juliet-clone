@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 
 import useOnScreen from '../../utils/useOnScreen';
+import usePage from '../../context/PageContext';
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 
@@ -32,6 +33,7 @@ export default function HomeBlogItem({
   href,
   isDesktop,
 }: Props) {
+  const { isPageLoaded } = usePage();
   const [animationDone, setAnimationDone] = useState(false);
   const [text, setText] = useState<HTMLElement[]>([]);
 
@@ -43,7 +45,9 @@ export default function HomeBlogItem({
   let onScreen = isDesktop ? useOnScreen(blogItemRef, 0.5) : false;
 
   useEffect(() => {
-    const title = new SplitType(blogItemMainTitleRef.current!, {
+    if (!isPageLoaded) return;
+
+    const title = new SplitType(blogItemMainTitleRef?.current!, {
       types: 'words',
       tagName: 'span',
     });
@@ -54,12 +58,14 @@ export default function HomeBlogItem({
     });
 
     setText(subtitle.words!);
-  }, []);
+  }, [isPageLoaded]);
 
   useEffect(() => {
+    if (!isPageLoaded) return;
+
     if (!isDesktop) {
-      gsap.killTweensOf(blogItemSubTitleRef.current);
-      gsap.killTweensOf(blogItemVisualRef.current);
+      gsap.killTweensOf(blogItemSubTitleRef?.current);
+      gsap.killTweensOf(blogItemVisualRef?.current);
       gsap.killTweensOf(text);
     }
 
@@ -69,13 +75,13 @@ export default function HomeBlogItem({
 
     const tl = gsap.timeline();
 
-    tl.to([blogItemSubTitleRef.current, blogItemVisualRef.current], {
+    tl.to([blogItemSubTitleRef?.current, blogItemVisualRef?.current], {
       opacity: 1,
       duration: 0.8,
       stagger: 0.3,
       ease: 'fade-in',
     }).to(text, { y: 0, duration: 1, ease: 'text-in', stagger: 0.08 }, 0);
-  }, [onScreen, isDesktop]);
+  }, [onScreen, isDesktop, isPageLoaded]);
 
   return (
     <Wrapper
