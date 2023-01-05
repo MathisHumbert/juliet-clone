@@ -354,3 +354,46 @@ export const workListItem = [
     href: '/',
   },
 ];
+
+export const communityArticles = [
+  {
+    id: 1,
+    category: 'Do good',
+    img: '/img/for-the-love-of-live.jpg',
+    mask: '/icon/for-the-love-of-live-shape-2.svg',
+    title: 'For the love of live',
+    date: '04-05-2022',
+  },
+  {
+    id: 2,
+    category: 'Social',
+    img: '/img/snowbirds.jpg',
+    mask: '/icon/snowbirds-shape-2.svg',
+    title: 'Snowbirds',
+    date: '22-03-2022',
+  },
+  {
+    id: 3,
+    category: 'Do good',
+    img: '/img/home-page-for-chance.jpg',
+    mask: '/icon/home-page-for-change-shape-2.svg',
+    title: 'Homepage for Change',
+    date: '06-12-2021',
+  },
+  {
+    id: 4,
+    category: 'Do good',
+    img: '/img/little-local-ad.jpg',
+    mask: '/icon/little-local-ad-shape-2.svg',
+    title: 'Little Local Ad',
+    date: '18-07-2021',
+  },
+  {
+    id: 5,
+    category: 'Social',
+    img: '/img/monthly-debate.jpg',
+    mask: '/icon/monthly-debate-shape-2.svg',
+    title: 'The Monthly Debate',
+    date: '01-04-2021',
+  },
+];
