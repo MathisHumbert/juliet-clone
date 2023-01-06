@@ -363,6 +363,7 @@ export const communityArticles = [
     mask: '/icon/for-the-love-of-live-shape-2.svg',
     title: 'For the love of live',
     date: '04-05-2022',
+    size: 'large',
   },
   {
     id: 2,
@@ -371,6 +372,7 @@ export const communityArticles = [
     mask: '/icon/snowbirds-shape-2.svg',
     title: 'Snowbirds',
     date: '22-03-2022',
+    size: 'large',
   },
   {
     id: 3,
@@ -379,6 +381,7 @@ export const communityArticles = [
     mask: '/icon/home-page-for-change-shape-2.svg',
     title: 'Homepage for Change',
     date: '06-12-2021',
+    size: 'large',
   },
   {
     id: 4,
@@ -387,6 +390,7 @@ export const communityArticles = [
     mask: '/icon/little-local-ad-shape-2.svg',
     title: 'Little Local Ad',
     date: '18-07-2021',
+    size: 'small',
   },
   {
     id: 5,
@@ -395,5 +399,15 @@ export const communityArticles = [
     mask: '/icon/monthly-debate-shape-2.svg',
     title: 'The Monthly Debate',
     date: '01-04-2021',
+    size: 'small',
+  },
+  {
+    id: 6,
+    category: '',
+    img: '/img/monthly-debate.jpg',
+    mask: '/icon/monthly-debate-shape-2.svg',
+    title: '',
+    date: '',
+    size: '',
   },
 ];

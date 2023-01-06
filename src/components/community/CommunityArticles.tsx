@@ -9,7 +9,8 @@ export default function CommunityArticles() {
     <Wrapper>
       <div className='community__articles__container'>
         <ul className='community__article__items'>
-          {communityArticles.map((article) => (
+          {[...communityArticles].map((article) => (
+            // @ts-ignore
             <CommunityArticle key={article.id} {...article} />
           ))}
         </ul>
@@ -24,5 +25,16 @@ const Wrapper = styled.section`
 
   .community__articles__container {
     padding: 0 var(--margin);
+  }
+
+  .community__article__items {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .community__article__items {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 `;
