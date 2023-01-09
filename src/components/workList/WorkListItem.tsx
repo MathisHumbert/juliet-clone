@@ -24,7 +24,6 @@ export default function WorkListItem({
   subTitle,
   text,
   img,
-  href,
 }: Props) {
   const workItemRef = useRef<HTMLLIElement>(null);
   const workItemSubTitleRef = useRef(null);
@@ -92,7 +91,6 @@ export default function WorkListItem({
         <div className='list__item__content__wrapper'>
           <div className='list__item__content__inner'>
             <a
-              href={href}
               className='list__item__content__link'
               // @ts-ignore
             >

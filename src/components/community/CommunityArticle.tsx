@@ -34,43 +34,49 @@ export default function CommunityArticle({
   useEffect(() => {
     if (!isPageLoaded) return;
 
-    gsap.to(linkRef?.current, {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'fade-in',
-      delay: id === 1 ? 0 : 0.2,
-      scrollTrigger: {
-        trigger: articleRef.current,
-        start: 'top bottom',
-        end: 'bottom bottom',
-      },
-    });
-
-    gsap.to(articleRef?.current, {
-      '--height': '100%',
-      scrollTrigger: {
-        trigger: articleRef.current,
-        start: 'top bottom-=200px',
-        end: 'bottom+=200px bottom',
-        scrub: 1,
-      },
-      onComplete: () => {
-        if (id === 2 || id === 4) {
-          gsap.to(articleRef?.current, {
-            '--width': `${id === 2 ? 200 : 300}%`,
-            duration: 1.3,
-            delay: 0,
-            ease: 'bar-in',
-            onComplete: () => gsap.killTweensOf(articleRef?.current),
-          });
-        } else {
-          gsap.killTweensOf(articleRef?.current);
-        }
-      },
-    });
-
     if (isDesktop) {
+      gsap.to(linkRef?.current, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        delay: id === 1 ? 0 : 0.2,
+        scrollTrigger: {
+          trigger: articleRef.current,
+          start: 'top bottom',
+          end: 'bottom bottom',
+        },
+      });
+
+      gsap.to(articleRef.current, {
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        delay: id === 1 ? 0 : 0.2,
+      });
+
+      gsap.to(articleRef?.current, {
+        '--height': '100%',
+        scrollTrigger: {
+          trigger: articleRef.current,
+          start: 'top bottom-=200px',
+          end: 'bottom+=200px bottom',
+          scrub: 1,
+        },
+        onComplete: () => {
+          if (id === 2 || id === 4) {
+            gsap.to(articleRef?.current, {
+              '--width': `${id === 2 ? 200 : 300}%`,
+              duration: 1.3,
+              delay: 0,
+              ease: 'bar-in',
+              onComplete: () => gsap.killTweensOf(articleRef?.current),
+            });
+          } else {
+            gsap.killTweensOf(articleRef?.current);
+          }
+        },
+      });
     } else {
       gsap.to(linkRef?.current, {
         y: 0,
@@ -84,6 +90,13 @@ export default function CommunityArticle({
           end: 'bottom bottom',
         },
       });
+
+      gsap.to(articleRef.current, {
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        delay: id === 1 ? 0 : 0.2,
+      });
     }
   }, [isPageLoaded]);
 
@@ -95,7 +108,7 @@ export default function CommunityArticle({
       ref={articleRef}
     >
       <a className='community__article__link' ref={linkRef}>
-        <div>
+        <div className='community__article__top'>
           <figure
             className={
               size === 'large'
@@ -104,7 +117,7 @@ export default function CommunityArticle({
             }
           >
             <img src={img} alt={title} className='communty__article__img' />
-            {/* <div className='looped__text'>
+            <div className='looped__text'>
               <div>Read more -&nbsp;</div>
               <div>Read more -&nbsp;</div>
               <div>Read more -&nbsp;</div>
@@ -112,10 +125,10 @@ export default function CommunityArticle({
               <div>Read more -&nbsp;</div>
               <div>Read more -&nbsp;</div>
               <div>Read more -</div>
-            </div> */}
+            </div>
           </figure>
         </div>
-        <div>
+        <div className='community__article__bottom'>
           <h5 className='category__article__category'>{category}</h5>
           <h4 className='category__article__title'>{title}</h4>
           <h5 className='category__article__juliet'>By: Juliet</h5>
@@ -131,6 +144,17 @@ const Wrapper = styled.li<{ icon: string; pid: number }>`
   color: var(--black);
   background: var(--white);
   position: relative;
+  opacity: 0;
+  will-change: opacity;
+
+  &:hover .community__article__visual::after {
+    opacity: 1;
+  }
+
+  &:hover .looped__text div {
+    opacity: 1;
+    animation-play-state: running !important;
+  }
 
   &:last-child {
     display: none;
@@ -244,7 +268,8 @@ const Wrapper = styled.li<{ icon: string; pid: number }>`
     }
   }
 
-  .community__article__link div {
+  .community__article__top,
+  .community__article__bottom {
     display: flex;
     flex-direction: column;
   }
@@ -257,6 +282,21 @@ const Wrapper = styled.li<{ icon: string; pid: number }>`
     mask-image: ${(props) => `url(${props.icon})`};
     mask-size: contain;
     mask-repeat: no-repeat;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: block;
+      background: rgba(0, 0, 0, 0.6);
+      transition: opacity 0.6s ease-out;
+      opacity: 0;
+      z-index: 1;
+    }
 
     &.large {
       width: var(--grid);
@@ -354,5 +394,40 @@ const Wrapper = styled.li<{ icon: string; pid: number }>`
 
   .category__article__juliet {
     margin-bottom: 15px;
+  }
+
+  .looped__text {
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 2;
+  }
+
+  @media (min-width: 768px) {
+    .looped__text {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .community__article__visual.small .looped__text div {
+    transform: translateY(-100%);
+  }
+
+  .community__article__visual.big .looped__text div {
+    transform: translateY(0);
+  }
+
+  .looped__text div {
+    font-size: 4.375vw;
+    letter-spacing: -0.04em;
+    line-height: 114.29%;
+    font-weight: 300;
+    white-space: nowrap;
+    color: var(--white);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+    animation-play-state: paused !important;
   }
 `;

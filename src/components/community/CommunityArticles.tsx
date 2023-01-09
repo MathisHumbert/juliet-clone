@@ -22,6 +22,8 @@ export default function CommunityArticles() {
 const Wrapper = styled.section`
   pointer-events: auto;
   padding-bottom: 15px;
+  max-width: 100vw;
+  overflow: hidden;
 
   .community__articles__container {
     padding: 0 var(--margin);

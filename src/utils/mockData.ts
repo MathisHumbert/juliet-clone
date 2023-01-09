@@ -118,7 +118,7 @@ export const links = [
   {
     id: 6,
     text: 'Real Talk',
-    href: '/',
+    href: 'https://realtalkinsights.com/',
     infiniteText: [
       'Real Talk ',
       'Real Talk ',
@@ -144,7 +144,6 @@ export const homeWorkItems = [
     type: 'img',
     text_left: 'Meet the World’s Most Positive Battery.',
     text_right: 'Creative Strategy Connections Production',
-    href: '/',
   },
   {
     id: 2,
@@ -153,7 +152,6 @@ export const homeWorkItems = [
     type: 'video',
     text_left: 'Don’t Just Go On A Trip, Go On Your Trip.',
     text_right: 'Strategy Creative Connections Production',
-    href: '/',
   },
   {
     id: 3,
@@ -162,7 +160,6 @@ export const homeWorkItems = [
     type: 'img',
     text_left: 'Taste what Flula means.',
     text_right: 'Creative Production Connections Strategy',
-    href: '/',
   },
 ];
 
@@ -174,7 +171,6 @@ export const homeBlogScrollItems = [
     subTitleDate: '04-04-2022',
     img: '/img/for-the-love-of-live.jpg',
     icon: '/icon/for-the-love-of-live-shape.svg',
-    href: '/',
   },
   {
     id: 2,
@@ -183,7 +179,6 @@ export const homeBlogScrollItems = [
     subTitleDate: '18-07-2021',
     img: '/img/little-local-ad.jpg',
     icon: '/icon/little-local-ad-shape.svg',
-    href: '/',
   },
   {
     id: 3,
@@ -192,7 +187,6 @@ export const homeBlogScrollItems = [
     subTitleDate: '06-12-2021',
     img: '/img/home-page-for-chance.jpg',
     icon: '/icon/home-page-for-change-shape.svg',
-    href: '/',
   },
   {
     id: 4,
@@ -201,7 +195,6 @@ export const homeBlogScrollItems = [
     subTitleDate: '22-03-2022',
     img: '/img/snowbirds.jpg',
     icon: '/icon/snowbirds-shape.svg',
-    href: '/',
   },
   {
     id: 5,
@@ -210,7 +203,6 @@ export const homeBlogScrollItems = [
     subTitleDate: '01-04-2021',
     img: '/img/monthly-debate.jpg',
     icon: '/icon/monthly-debate-shape.svg',
-    href: '/',
   },
 ];
 
@@ -239,7 +231,6 @@ export const workListItem = [
     subTitle: 'WIDER LENS.',
     text: 'Strategy Creative Connections Editorial Production',
     img: '/img/directors-guild.jpg',
-    href: '/',
   },
   {
     id: 2,
@@ -247,7 +238,6 @@ export const workListItem = [
     subTitle: 'WE LET OUR PRICES DO THE TALKING.',
     text: 'Creative Production Strategy',
     img: '/img/freshco.jpg',
-    href: '/',
   },
   {
     id: 3,
@@ -255,7 +245,6 @@ export const workListItem = [
     subTitle: 'MEET THE WORLD’S MOST POSITIVE BATTERY.',
     text: 'Creative Strategy Connections Production',
     img: '/img/better-battery-co.jpeg',
-    href: '/',
   },
   {
     id: 4,
@@ -263,7 +252,6 @@ export const workListItem = [
     subTitle: 'WHERE DOG DREAMS COME TRUE.',
     text: 'Strategy Creative Design',
     img: '/img/redbarn.jpg',
-    href: '/',
   },
   {
     id: 5,
@@ -271,7 +259,6 @@ export const workListItem = [
     subTitle: 'DON’T JUST GO ON A TRIP, GO ON YOUR TRIP.',
     text: 'Strategy Creative Connections Production',
     img: '/img/travel-edge.jpeg',
-    href: '/',
   },
   {
     id: 6,
@@ -279,7 +266,6 @@ export const workListItem = [
     subTitle: 'BODY CARE THAT TAKES YOU THERE.',
     text: 'Creative Production Connections',
     img: '/img/maroccan-oil.jpg',
-    href: '/',
   },
   {
     id: 7,
@@ -287,7 +273,6 @@ export const workListItem = [
     subTitle: 'HAVE FAITH.',
     text: 'Strategy Creative Design',
     img: '/img/the-burgers-priest.jpg',
-    href: '/',
   },
   {
     id: 8,
@@ -295,7 +280,6 @@ export const workListItem = [
     subTitle: 'THE GRAND GOOD RIDDANCE.',
     text: 'Strategy Creative Connections Production',
     img: '/img/grand-marnier.jpg',
-    href: '/',
   },
   {
     id: 9,
@@ -303,7 +287,6 @@ export const workListItem = [
     subTitle: 'MARILYN MONROE.',
     text: 'Creative Connections Production Strategy',
     img: '/img/zales.jpg',
-    href: '/',
   },
   {
     id: 10,
@@ -311,7 +294,6 @@ export const workListItem = [
     subTitle: 'GROWING A COMMUNITY OF PARTNERS.',
     text: 'Strategy Creative Editorial Connections Production',
     img: '/img/mailchimp.jpg',
-    href: '/',
   },
   {
     id: 11,
@@ -319,7 +301,6 @@ export const workListItem = [
     subTitle: 'FUREVER LOVE.',
     text: 'Connections Creative Production Strategy',
     img: '/img/vera-wang.png',
-    href: '/',
   },
   {
     id: 12,
@@ -327,7 +308,6 @@ export const workListItem = [
     subTitle: 'TASTE WHAT FLULA MEANS.',
     text: ' Creative Production Connections Strategy',
     img: '/img/jagermeister.jpg',
-    href: '/',
   },
   {
     id: 13,
@@ -335,7 +315,6 @@ export const workListItem = [
     subTitle: 'IT’S YOUR TURN TO PLAY.',
     text: 'Connections Creative Production Strategy',
     img: '/img/s-by-serena.jpg',
-    href: '/',
   },
   {
     id: 14,
@@ -343,7 +322,6 @@ export const workListItem = [
     subTitle: 'HEART MONTH.',
     text: 'Connections Creative Production',
     img: '/img/sickkids-hospital.jpg',
-    href: '/',
   },
   {
     id: 15,
@@ -351,7 +329,6 @@ export const workListItem = [
     subTitle: 'PARDON PRODUCTS.',
     text: 'Creative Production',
     img: '/img/doja.jpeg',
-    href: '/',
   },
 ];
 

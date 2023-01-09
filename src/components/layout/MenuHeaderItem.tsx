@@ -16,8 +16,8 @@ export default function MenuHeaderItem({
 }: Props) {
   return (
     <Wrapper className='menu__nav__item'>
-      <TransitionLink href={href} hideNav>
-        <a className='menu__nav__link'>
+      {id === 6 ? (
+        <a href={href} target='_blank' className='menu__nav__link'>
           <div className='menu__nav__title'>
             <span className='menu__nav__title--main' data-id={`0${id}`}>
               {text}
@@ -29,7 +29,22 @@ export default function MenuHeaderItem({
             ))}
           </div>
         </a>
-      </TransitionLink>
+      ) : (
+        <TransitionLink href={href} hideNav>
+          <a className='menu__nav__link'>
+            <div className='menu__nav__title'>
+              <span className='menu__nav__title--main' data-id={`0${id}`}>
+                {text}
+              </span>
+            </div>
+            <div className='looped__text'>
+              {infiniteText.map((text, index) => (
+                <div key={index}>{text}</div>
+              ))}
+            </div>
+          </a>
+        </TransitionLink>
+      )}
     </Wrapper>
   );
 }
