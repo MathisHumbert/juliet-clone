@@ -12,7 +12,6 @@ type Props = {
   subTitle: string;
   text: string;
   img: string;
-  href: string;
 };
 
 gsap.registerPlugin(CustomEase);

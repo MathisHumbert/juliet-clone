@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './page/Home';
-import WorkList from './page/WorkList';
-import Jobs from './page/Jobs';
-import Contact from './page/Contact';
-import Community from './page/Community';
+import Home from './pages/Home';
+import WorkList from './pages/WorkList';
+import Jobs from './pages/Jobs';
+import Contact from './pages/Contact';
+import Community from './pages/Community';
+import About from './pages/About';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -20,6 +21,7 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/community' element={<Community />} />
+        <Route path='/about' element={<About />} />
       </Routes>
       <Footer />
       <Transition />
