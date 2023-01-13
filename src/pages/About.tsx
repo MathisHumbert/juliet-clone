@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import LoaderLayout from '../components/layout/LoaderLayout';
 import AboutHero from '../components/about/AboutHero';
+import AboutImages from '../components/about/AboutImages';
 
 export default function About() {
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function About() {
     <LoaderLayout>
       <div className='section__container'>
         <AboutHero />
+        <AboutImages />
       </div>
     </LoaderLayout>
   );

@@ -1,9 +1,42 @@
-import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/all';
 
+import usePage from '../../context/PageContext';
 import FlowerLogo from '../shared/logo/FlowerLogo';
 
+gsap.registerPlugin(CustomEase);
+CustomEase.create('text-in', '0.25, 1, 0.5, 1');
+
 export default function AboutHero() {
+  const { isPageLoaded } = usePage();
+
+  useEffect(() => {
+    if (!isPageLoaded) return;
+    const titles = document.querySelectorAll('.about__hero__title');
+    const buttons = document.querySelectorAll('button');
+
+    titles.forEach((title, index) => {
+      const subTitle = title.querySelectorAll('span span');
+
+      gsap.to(subTitle, {
+        y: 0,
+        delay: index * 0.08,
+        duration: 1,
+        ease: 'text-in',
+      });
+    });
+
+    gsap.to(buttons, {
+      x: 0,
+      opacity: 1,
+      duration: 1,
+      ease: 'power1.easeOut',
+      delay: 0.6,
+    });
+  }, [isPageLoaded]);
+
   return (
     <Wrapper>
       <div className='about__hero__container'>
@@ -45,7 +78,13 @@ export default function AboutHero() {
               </span>
             </span>
             <div>
-              <button>Show Reel 2022©</button>
+              <button className='top__button'>
+                <div className='looped__text'>
+                  <div>Show Reel 2022©&nbsp;</div>
+                  <div>Show Reel 2022©&nbsp;</div>
+                  <div>Show Reel 2022©</div>
+                </div>
+              </button>
               <span>
                 <span>Advertising</span>
               </span>
@@ -58,7 +97,15 @@ export default function AboutHero() {
           </span>
         </h1>
         <h1 className='about__hero__title'>
-          <button>Show Reel 2022©</button>
+          <button className='bottom__button'>
+            <div className='looped__text'>
+              <div>Show Reel 2022©&nbsp;</div>
+              <div>Show Reel 2022©&nbsp;</div>
+              <div>Show Reel 2022©&nbsp;</div>
+              <div>Show Reel 2022©&nbsp;</div>
+              <div>Show Reel 2022©</div>
+            </div>
+          </button>
           <span>
             <span>People</span>
           </span>
@@ -133,6 +180,8 @@ const Wrapper = styled.section`
     padding-top: 24px;
     padding-bottom: 6px;
     white-space: pre;
+    transform: translateY(100%);
+    will-change: transform;
   }
 
   @media (min-width: 1024px) {
@@ -183,6 +232,17 @@ const Wrapper = styled.section`
       padding-left: 9.4vw;
       text-align: left;
     }
+
+    .about__hero__title:nth-child(4) > span {
+      width: 100%;
+      text-align: left;
+      padding-right: 0;
+      padding-left: 22.98vw;
+    }
+
+    .about__hero__title:last-child > span {
+      padding-right: 18.3vw;
+    }
   }
 
   .about__hero__title svg {
@@ -201,19 +261,56 @@ const Wrapper = styled.section`
 
   .about__hero__title button {
     position: absolute;
-    left: 8.8vw;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 29.87vw;
-    height: 30px;
+    transform: translate(-20%, -50%);
     border: 1px solid var(--black);
     border-radius: 200px;
-    font-size: 12px;
-    line-height: 30px;
     text-transform: uppercase;
-    display: inline-block;
     font-family: Aeonik;
     font-weight: 400;
+    z-index: 2;
+    overflow: hidden;
+    color: var(--black);
+    opacity: 0;
+    will-change: transform, opacity;
+
+    .looped__text div {
+      margin-top: 3px;
+      display: inline-block;
+    }
+
+    &:hover .looped__text div {
+      animation-play-state: paused;
+    }
+  }
+
+  .top__button {
+    display: none;
+    top: 75%;
+    left: 18.26vw;
+    width: 14.4vw;
+    height: 40px;
+    line-height: 40px;
+    font-size: 21px;
+  }
+
+  .bottom__button {
+    display: inline-block;
+    top: 50%;
+    left: 8.8vw;
+    width: 29.87vw;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    .top__button {
+      display: inline-block;
+    }
+
+    .bottom__button {
+      display: none;
+    }
   }
 
   .spacer {
