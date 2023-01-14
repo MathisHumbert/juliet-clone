@@ -125,14 +125,14 @@ export default function Header() {
 const Wrapper = styled.header`
   position: fixed;
   top: 0;
-  width: 100vw;
+  max-width: 100vw;
+  min-width: 100vw;
   z-index: 100;
   transition: transform 0.4s ease-out, background 0.4s ease-out,
     padding 0.4s ease-out;
 
   .header__wrapper {
     background: none;
-    width: 100vw;
     overflow: hidden;
   }
 
