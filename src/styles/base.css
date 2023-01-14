@@ -139,6 +139,7 @@ a {
 .looped__text div {
   position: relative;
   display: inline-flex;
+  will-change: transform;
   animation: loopTextLeft 3s steps(100, jump-end);
   animation-iteration-count: infinite;
 }
