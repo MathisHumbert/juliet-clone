@@ -117,8 +117,12 @@ export default function AboutHero() {
 
 const Wrapper = styled.section`
   padding-top: var(--padding-top);
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   pointer-events: auto;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+  }
 
   .about__hero__container {
     padding: 0 var(--margin);
@@ -182,6 +186,7 @@ const Wrapper = styled.section`
     white-space: pre;
     transform: translateY(100%);
     will-change: transform;
+    z-index: 2;
   }
 
   @media (min-width: 1024px) {
