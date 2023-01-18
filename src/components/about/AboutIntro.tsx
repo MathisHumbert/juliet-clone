@@ -46,19 +46,12 @@ export default function AboutIntro() {
       subtitleTop.words,
       { yPercent: 100 },
       { yPercent: 0, duration: 1, stagger: 0.08, ease: '' }
-    )
-      .fromTo(
-        textRef?.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'fade-in' },
-        0.2
-      )
-      .fromTo(
-        subtitleBottom.words,
-        { yPercent: 100 },
-        { yPercent: 0, duration: 1, stagger: 0.08, ease: 'text-in' },
-        0.3
-      );
+    ).fromTo(
+      subtitleBottom.words,
+      { yPercent: 100 },
+      { yPercent: 0, duration: 1, stagger: 0.08, ease: 'text-in' },
+      0.3
+    );
 
     ScrollTrigger.create({
       trigger: containerRef?.current,
@@ -66,6 +59,22 @@ export default function AboutIntro() {
       start: 'top bottom',
       end: 'bottom bottom',
     });
+
+    gsap.fromTo(
+      textRef?.current,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'fade-in',
+        delay: 0.2,
+        scrollTrigger: {
+          start: 'center bottom',
+          end: 'bottom bottom',
+        },
+      }
+    );
   }, [isPageLoaded]);
 
   return (
@@ -81,7 +90,7 @@ export default function AboutIntro() {
         </div>
         <div className='about__intro__text' ref={textRef}>
           <h3 className='about__intro__text--title'>
-            The chessboard has flipped.{' '}
+            The chessboard has flipped.
             <strong>
               You can only build brands people love by loving your audience like
               crazy

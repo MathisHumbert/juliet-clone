@@ -229,7 +229,7 @@ const Wrapper = styled.div`
     right: 15px;
     width: 49px;
     height: 51px;
-    mask-image: url('/icon/flower.svg');
+    mask-image: url('/icon/shape-flower.svg');
     mask-position: center;
     mask-repeat: no-repeat;
     pointer-events: none;

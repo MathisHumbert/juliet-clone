@@ -19,7 +19,6 @@ type Props = {
   subTitleDate: string;
   img: string;
   icon: string;
-  href: string;
   isDesktop: boolean;
 };
 
@@ -30,7 +29,6 @@ export default function HomeBlogItem({
   subTitleDate,
   img,
   icon,
-  href,
   isDesktop,
 }: Props) {
   const { isPageLoaded } = usePage();
@@ -90,7 +88,7 @@ export default function HomeBlogItem({
       placeBot={id % 2 === 1}
       ref={blogItemRef}
     >
-      <a href={href}>
+      <a>
         <h6 className='blog__item__title--sub' ref={blogItemSubTitleRef}>
           <span>{subTitleText}</span>
           <span>{subTitleDate}</span>
