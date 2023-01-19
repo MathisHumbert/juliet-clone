@@ -5,6 +5,8 @@ import gsap from 'gsap';
 import { CustomEase, ScrollTrigger } from 'gsap/all';
 
 import usePage from '../../context/PageContext';
+import AboutTeamItem from './AboutTeamItem';
+import { aboutTeam } from '../../utils/mockData';
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 CustomEase.create('text-in', '0.25, 1, 0.5, 1');
@@ -77,6 +79,11 @@ export default function AboutTeam() {
         <h2 className='about__team__title' ref={titleRef}>
           Juliet
         </h2>
+        <ul>
+          {aboutTeam.map((team) => (
+            <AboutTeamItem key={team.id} {...team} />
+          ))}
+        </ul>
       </div>
     </Wrapper>
   );

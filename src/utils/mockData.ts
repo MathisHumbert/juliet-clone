@@ -388,3 +388,62 @@ export const communityArticles = [
     size: '',
   },
 ];
+
+export const aboutTeam = [
+  {
+    id: 1,
+    firstName: 'Leanne',
+    lastName: 'Goldstein',
+    role: 'Partner, President',
+    img: '/img/team-1.jpg',
+    shape: '/img/icon/shape-3.svg',
+  },
+  {
+    id: 2,
+    firstName: 'Ryan',
+    lastName: 'Spelliscy',
+    role: 'Co-Founder, CEO, Chief Creative Officer',
+    img: '/img/team-2.jpg',
+    shape: '/img/icon/shape-6.svg',
+  },
+  {
+    id: 3,
+    firstName: 'Laurent',
+    lastName: 'Abesdris',
+    role: 'Partner Creative Director',
+    img: '/img/team-3.jpg',
+    shape: '/img/icon/shape-1.svg',
+  },
+  {
+    id: 4,
+    firstName: 'Susan',
+    lastName: 'Holden',
+    role: 'Chief Financial Officer',
+    img: '/img/team-4.jpg',
+    shape: '/img/icon/shape-5.svg',
+  },
+  {
+    id: 5,
+    firstName: 'Kaiti',
+    lastName: 'Snell',
+    role: 'Partner, Co-Head of Strategy',
+    img: '/img/team-5.jpg',
+    shape: '/img/icon/shape-8.svg',
+  },
+  {
+    id: 6,
+    firstName: 'Andrew',
+    lastName: 'Schulze',
+    role: 'Head of Production',
+    img: '/img/team-6.jpg',
+    shape: '/img/icon/shape-7.svg',
+  },
+  {
+    id: 7,
+    firstName: 'Marc',
+    lastName: 'Pardy',
+    role: 'Partner, Co-Head of Strategy',
+    img: '/img/team-7.jpg',
+    shape: '/img/icon/shape-5.svg',
+  },
+];
