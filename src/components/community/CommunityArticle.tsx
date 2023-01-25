@@ -175,6 +175,10 @@ const Wrapper = styled.li<{ icon: string; pid: number }>`
       width: 100%;
     }
 
+    &:nth-child(2) {
+      z-index: 2;
+    }
+
     &:nth-child(2),
     &:nth-child(3) {
       flex: 1;
@@ -217,7 +221,10 @@ const Wrapper = styled.li<{ icon: string; pid: number }>`
       left: 0;
       width: var(--width);
       border-top: 1px solid var(--black);
-      z-index: 10;
+    }
+
+    &:nth-child(2)::after {
+      bottom: 0;
     }
   }
 

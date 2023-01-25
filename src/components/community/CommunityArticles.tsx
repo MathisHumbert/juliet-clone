@@ -9,7 +9,7 @@ export default function CommunityArticles() {
     <Wrapper>
       <div className='community__articles__container'>
         <ul className='community__article__items'>
-          {[...communityArticles].map((article) => (
+          {communityArticles.map((article) => (
             // @ts-ignore
             <CommunityArticle key={article.id} {...article} />
           ))}

@@ -40,6 +40,7 @@ export default function LoaderLayout({
               opacity: 1,
               pointerEvents: 'auto',
             });
+            document.body.classList.remove('.dark');
           },
         });
 

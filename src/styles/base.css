@@ -197,6 +197,11 @@ body.dark .contact__social__container {
   color: var(--white);
 }
 
+body.dark .about__what__bar--horizontal,
+body.dark .about__what__bar--vertical {
+  background: var(--white);
+}
+
 /* keyframes */
 @keyframes loopTextLeft {
   0% {

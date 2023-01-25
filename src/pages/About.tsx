@@ -7,6 +7,8 @@ import AboutIntro from '../components/about/AboutIntro';
 import AboutScrollers from '../components/about/AboutScrollers';
 import AboutWho from '../components/about/AboutWho';
 import AboutTeam from '../components/about/AboutTeam';
+import AboutWhat from '../components/about/AboutWhat';
+import AboutClients from '../components/about/AboutClients';
 
 export default function About() {
   useEffect(() => {
@@ -24,6 +26,8 @@ export default function About() {
         <AboutScrollers />
         <AboutWho />
         <AboutTeam />
+        <AboutWhat />
+        <AboutClients />
       </div>
     </LoaderLayout>
   );

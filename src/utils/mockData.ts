@@ -396,7 +396,7 @@ export const aboutTeam = [
     lastName: 'Goldstein',
     role: 'Partner, President',
     img: '/img/team-1.jpg',
-    shape: '/img/icon/shape-3.svg',
+    shape: '/icon/shape-3.svg',
   },
   {
     id: 2,
@@ -404,7 +404,7 @@ export const aboutTeam = [
     lastName: 'Spelliscy',
     role: 'Co-Founder, CEO, Chief Creative Officer',
     img: '/img/team-2.jpg',
-    shape: '/img/icon/shape-6.svg',
+    shape: '/icon/shape-6.svg',
   },
   {
     id: 3,
@@ -412,7 +412,7 @@ export const aboutTeam = [
     lastName: 'Abesdris',
     role: 'Partner Creative Director',
     img: '/img/team-3.jpg',
-    shape: '/img/icon/shape-1.svg',
+    shape: '/icon/shape-1.svg',
   },
   {
     id: 4,
@@ -420,7 +420,7 @@ export const aboutTeam = [
     lastName: 'Holden',
     role: 'Chief Financial Officer',
     img: '/img/team-4.jpg',
-    shape: '/img/icon/shape-5.svg',
+    shape: '/icon/shape-5.svg',
   },
   {
     id: 5,
@@ -428,7 +428,7 @@ export const aboutTeam = [
     lastName: 'Snell',
     role: 'Partner, Co-Head of Strategy',
     img: '/img/team-5.jpg',
-    shape: '/img/icon/shape-8.svg',
+    shape: '/icon/shape-8.svg',
   },
   {
     id: 6,
@@ -436,7 +436,7 @@ export const aboutTeam = [
     lastName: 'Schulze',
     role: 'Head of Production',
     img: '/img/team-6.jpg',
-    shape: '/img/icon/shape-7.svg',
+    shape: '/icon/shape-7.svg',
   },
   {
     id: 7,
@@ -444,6 +444,34 @@ export const aboutTeam = [
     lastName: 'Pardy',
     role: 'Partner, Co-Head of Strategy',
     img: '/img/team-7.jpg',
-    shape: '/img/icon/shape-5.svg',
+    shape: '/icon/shape-5.svg',
+  },
+];
+
+export const aboutWhat = [
+  {
+    id: 1,
+    title: 'Design',
+    text: 'From logo refreshes to complete visual systems, our design team ensures your brand is saying the right things visually.',
+  },
+  {
+    id: 2,
+    title: 'Digital',
+    text: 'Digital advertising. Visual, UX design and optimization. Complete site development to Shopify storefronts.    ',
+  },
+  {
+    id: 3,
+    title: 'Real Talk',
+    text: 'Fast company calls it the focus group of the future. It’s more than research. It’s a way to have ongoing conversations with the audiences you need to love to win. ',
+  },
+  {
+    id: 4,
+    title: 'Studioland',
+    text: 'High quality production facility out of Los Angeles. Post production capabilities, editing suites. ',
+  },
+  {
+    id: 5,
+    title: 'Social',
+    text: 'Social solutions, including day-to-day community management. Powered by an editorial team made up of designers, former journalists, creatives, and mid-to-long-form writers.',
   },
 ];

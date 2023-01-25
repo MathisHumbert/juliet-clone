@@ -70,7 +70,7 @@ export default function AboutIntro() {
         ease: 'fade-in',
         delay: 0.2,
         scrollTrigger: {
-          start: 'center bottom',
+          start: 'top bottom',
           end: 'bottom bottom',
         },
       }

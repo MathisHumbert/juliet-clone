@@ -18,7 +18,6 @@ type Props = {
   type: string;
   text_left: string;
   text_right: string;
-  href: string;
   last: boolean;
 };
 
@@ -29,7 +28,6 @@ export default function HomeWorkItem({
   type,
   text_left,
   text_right,
-  href,
   last,
 }: Props) {
   const { isPageLoaded } = usePage();
@@ -89,7 +87,7 @@ export default function HomeWorkItem({
 
   return (
     <Wrapper>
-      <a href={href}>
+      <a>
         <header className='work__item__header'>
           <h3
             className='work__item__title'
