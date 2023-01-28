@@ -89,6 +89,8 @@ const Wrapper = styled.section`
   z-index: 1;
   pointer-events: auto;
   position: relative;
+  max-width: 100vw;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     height: var(--col6);

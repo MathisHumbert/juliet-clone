@@ -72,6 +72,8 @@ export default function AboutScrollers() {
 
 const Wrapper = styled.section`
   pointer-events: auto;
+  max-width: 100vw;
+  overflow: hidden;
 
   .about__scrollers__scrolling {
     position: relative;

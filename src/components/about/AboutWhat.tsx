@@ -124,12 +124,17 @@ export default function AboutWhat() {
         toggleActions: 'play none none none',
       },
       onComplete: () => {
-        gsap.to(horizontalBarRef?.current, {
-          width: 'calc(100% - var(--margin) * 2)',
-          duration: 0.6,
-          ease: 'power1.easeOut',
-        });
         gsap.killTweensOf(verticalBarRef?.current);
+      },
+    });
+
+    gsap.to(horizontalBarRef?.current, {
+      width: 'calc(100% - var(--margin) * 2)',
+      duration: 0.6,
+      ease: 'power1.easeOut',
+      scrollTrigger: {
+        trigger: wrapperRef?.current,
+        start: 'bottom bottom',
       },
     });
   }, [isPageLoaded]);
@@ -356,9 +361,18 @@ const Wrapper = styled.section`
     transition: background 0.6s ease-out;
   }
 
+  .about__what__bar--horizontal {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--black);
+    will-change: width;
+  }
+
   @media (min-width: 1024px) {
-    .about__what__bar--vertical,
-    .about__what__bar--horizontal {
+    .about__what__bar--vertical {
       display: block;
       position: absolute;
     }

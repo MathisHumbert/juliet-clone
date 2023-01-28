@@ -382,7 +382,7 @@ export const communityArticles = [
     id: 6,
     category: '',
     img: '/img/monthly-debate.jpg',
-    mask: '/icon/icon/shape-3.svg',
+    mask: '/icon/shape-3.svg',
     title: '',
     date: '',
     size: '',
@@ -473,5 +473,72 @@ export const aboutWhat = [
     id: 5,
     title: 'Social',
     text: 'Social solutions, including day-to-day community management. Powered by an editorial team made up of designers, former journalists, creatives, and mid-to-long-form writers.',
+  },
+];
+
+export const aboutClients = [
+  {
+    id: 1,
+    img: '/icon/client-mailchimp.png',
+  },
+  {
+    id: 2,
+    img: '/icon/client-GCE.png',
+  },
+  {
+    id: 3,
+    img: '/icon/client-smirnoff.png',
+  },
+  {
+    id: 4,
+    img: '/icon/client-jager.png',
+  },
+  {
+    id: 5,
+    img: '/icon/client-moroccanoil.png',
+  },
+  {
+    id: 6,
+    img: '/icon/client-redbarn.png',
+  },
+  {
+    id: 7,
+    img: '/icon/client-CCS.png',
+  },
+  {
+    id: 8,
+    img: '/icon/client-traveledge.png',
+  },
+  {
+    id: 9,
+    img: '/icon/client-podium.png',
+  },
+  {
+    id: 10,
+    img: '/icon/client-DGC.png',
+  },
+  {
+    id: 11,
+    img: '/icon/client-theburgerspriest.png',
+  },
+  {
+    id: 12,
+    img: '/icon/client-BBCO.png',
+  },
+  {
+    id: 13,
+    img: '/icon/client-goodleaf.png',
+  },
+  {
+    id: 14,
+    img: '/icon/client-freshco.png',
+  },
+  {
+    id: 15,
+    img: '/icon/client-culina.png',
+  },
+  {
+    id: 16,
+    img: '/icon/client-lawtons.png',
   },
 ];

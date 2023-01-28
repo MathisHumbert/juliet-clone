@@ -9,6 +9,8 @@ import AboutWho from '../components/about/AboutWho';
 import AboutTeam from '../components/about/AboutTeam';
 import AboutWhat from '../components/about/AboutWhat';
 import AboutClients from '../components/about/AboutClients';
+import ImageCarousel from '../components/shared/ImageCarousel';
+import AboutJoin from '../components/about/AboutJoin';
 
 export default function About() {
   useEffect(() => {
@@ -28,6 +30,8 @@ export default function About() {
         <AboutTeam />
         <AboutWhat />
         <AboutClients />
+        <ImageCarousel />
+        <AboutJoin />
       </div>
     </LoaderLayout>
   );
