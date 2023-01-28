@@ -41,7 +41,9 @@ export default function ContactHero() {
 
         gsap.to(dynamicContainerRef?.current, {
           opacity: 1,
-          width: dynamicTextRef?.current!.offsetWidth,
+          width: dynamicTextRef?.current
+            ? dynamicTextRef?.current.offsetWidth
+            : 200,
           duration: 0.6,
           ease: 'fade-in',
         });

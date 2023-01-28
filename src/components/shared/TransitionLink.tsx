@@ -27,6 +27,8 @@ export default function TransitionLink({
     resetPageLoaded();
     activePageTransition();
     gsap.killTweensOf('*');
+    lenis?.start();
+    lenis?.scrollTo(1, { immediate: true });
     lenis?.stop();
 
     gsap.to('.transition__container', {

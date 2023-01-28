@@ -33,7 +33,8 @@ const PageContext = createContext<IPage>({
 
 const lenis = new Lenis({
   // @ts-ignore
-  lerp: 0.1,
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smooth: true,
 });
 
@@ -92,6 +93,18 @@ export const PageProvider = ({ children }: PageProviderProps) => {
     window.addEventListener('resize', onWindowResize);
 
     return () => window.removeEventListener('resize', onWindowResize);
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      lenis?.scrollTo(1, { immediate: true });
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
 
   const memoedValue = useMemo(

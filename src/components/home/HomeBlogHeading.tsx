@@ -61,7 +61,7 @@ export default function HomeBlogHeading({ isDesktop }: { isDesktop: boolean }) {
       <span className='tracking__bar__container' ref={trackingBarContainerRef}>
         <div className='tracking__bar' ref={trackingBarRef}></div>
       </span>
-      <a href='/' className='blog__heading__button'>
+      <a className='blog__heading__button'>
         <div className='looped__text'>
           <div>VIEW ALL +&nbsp;</div>
           <div>VIEW ALL +&nbsp;</div>
