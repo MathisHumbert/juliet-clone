@@ -96,6 +96,7 @@ const Wrapper = styled.section`
     height: 100vh;
     display: flex;
     align-items: center;
+    will-change: transform;
   }
 
   .home__blog__scroll {

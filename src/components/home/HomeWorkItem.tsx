@@ -202,6 +202,7 @@ const Wrapper = styled.li`
     overflow: hidden;
     position: relative;
     vertical-align: bottom;
+    will-change: transform;
 
     span {
       padding-top: 22px;
@@ -214,6 +215,7 @@ const Wrapper = styled.li`
     margin-bottom: 15px;
     position: relative;
     pointer-events: auto;
+    overflow: hidden;
 
     &::after {
       content: '';
@@ -264,6 +266,7 @@ const Wrapper = styled.li`
     text-transform: uppercase;
     font-weight: 400;
     pointer-events: auto;
+    will-change: opacity;
   }
 
   @media (min-width: 1024px) {
@@ -280,6 +283,7 @@ const Wrapper = styled.li`
     text-transform: uppercase;
     font-weight: 400;
     pointer-events: auto;
+    will-change: opacity;
 
     span:not(:last-child) {
       &::after {

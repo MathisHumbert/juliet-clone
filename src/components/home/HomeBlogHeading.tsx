@@ -83,6 +83,7 @@ const Wrapper = styled.div`
   margin-bottom: 60px;
   padding-left: var(--margin);
   opacity: 0;
+  will-change: opacity;
 
   @media (min-width: 768px) {
     padding-left: var(--col1);
@@ -144,6 +145,7 @@ const Wrapper = styled.div`
     height: 100%;
     width: 1px;
     background: var(--white);
+    will-change: height;
   }
 
   @media (min-width: 1024px) {

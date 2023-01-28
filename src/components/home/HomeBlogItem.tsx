@@ -165,6 +165,7 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     font-weight: 400;
     opacity: 1;
     padding-left: 45px;
+    will-change: opacity;
   }
 
   @media (min-width: 768px) {
@@ -226,6 +227,7 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     padding-top: 22px;
     padding-bottom: 6px;
     transform: translateY(0);
+    will-change: transform;
   }
 
   @media (min-width: 768px) {
@@ -283,6 +285,7 @@ const Wrapper = styled.li<{ icon: string; placeBot: boolean }>`
     mask-repeat: no-repeat;
     mask-size: contain;
     opacity: 1;
+    will-change: opacity;
   }
 
   @media (min-width: 768px) {

@@ -245,6 +245,7 @@ const Wrapper = styled.section`
     margin-right: -40px;
     opacity: 0;
     pointer-events: auto;
+    will-change: margin, opacity;
 
     .looped__text div {
       margin-top: 3px;

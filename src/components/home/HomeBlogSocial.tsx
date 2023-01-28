@@ -203,12 +203,14 @@ const Wrapper = styled.div`
     padding-top: 22px;
     padding-bottom: 6px;
     transform: translateY(100%);
+    will-change: transform;
   }
 
   .blog__social__visual {
     position: absolute;
     margin-bottom: 1rem;
     transition: transform 5.5s cubic-bezier(0.07, 0.84, 0, 0.99);
+    will-change: transform, top, opacity;
   }
 
   .blog__social__visual {

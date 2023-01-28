@@ -54,7 +54,7 @@ export default function HomeWork() {
         },
       }
     );
-  }, []);
+  }, [isPageLoaded]);
 
   useEffect(() => {
     if (!isPageLoaded) return;
@@ -105,6 +105,7 @@ export default function HomeWork() {
 
 const Wrapper = styled.section`
   padding-bottom: 50px;
+  pointer-events: auto;
 
   @media (min-width: 1024px) {
     padding-bottom: 120px;
@@ -122,6 +123,7 @@ const Wrapper = styled.section`
     text-transform: uppercase;
     font-weight: 400;
     opacity: 0;
+    will-change: opacity;
   }
 
   @media (min-width: 768px) {
@@ -184,6 +186,7 @@ const Wrapper = styled.section`
     opacity: 0;
     width: 1px;
     background: var(--black);
+    will-change: height, opacity;
   }
 
   .work__item__container {
@@ -213,6 +216,7 @@ const Wrapper = styled.section`
     border: 1px solid var(--black);
     border-radius: 200px;
     position: relative;
+    will-change: opacity, transform;
 
     .looped__text div {
       margin-top: 3px;

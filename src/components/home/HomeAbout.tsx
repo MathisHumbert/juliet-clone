@@ -37,7 +37,7 @@ export default function HomeAbout() {
     )
       .fromTo(
         homeAboutTitle,
-        { yPercent: 100 },
+        { yPercent: 110 },
         { yPercent: 0, duration: 1, stagger: 0.08, ease: 'animate-in' },
         0
       )
@@ -276,6 +276,7 @@ const Wrapper = styled.section`
       margin-bottom: 30px;
       font-size: 35px;
       line-height: 42px;
+      will-change: opacity;
 
       &::after {
         top: 21px;
@@ -609,5 +610,13 @@ const Wrapper = styled.section`
 
   .looped__text div {
     margin-top: 3px;
+  }
+
+  .animate--in {
+    will-change: transform;
+  }
+
+  .fade--in {
+    will-change: transform, opacity;
   }
 `;
